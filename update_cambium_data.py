@@ -47,9 +47,9 @@ if True:
         ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88.0"],          # 0
         ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89.0"],          # 1
         ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90.0"],          # 2
-        ["avg_power" , ".1.3.6.1.4.1.161.19.3.2.2.142.0"],      # 3
-        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.2.2.118.0"],  # 4
-        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.2.2.117.0"],  # 5
+        ["avg_power" , ".1.3.6.1.4.1.161.19.3.3.2.23.0"],      # 3
+        ["link_radio_V" , ".1.3.6.1.4.1.161.19.3.2.2.88.0"],  # 4
+        ["link_radio_H" , ".1.3.6.1.4.1.161.19.3.2.2.87.0"],  # 5
         ["inthroughputbytes" , ".1.3.6.1.2.1.2.2.1.10.1"],      # 6
         ["snr_v" , ".1.3.6.1.4.1.161.19.3.2.2.94.0"],           # 7
         ["snr_h" , ".1.3.6.1.4.1.161.19.3.2.2.106.0"]           # 8
@@ -109,6 +109,7 @@ def GetCambiumDataByIP(target_ip, community, cambium_type):
             for line in result.splitlines():
                 #print(f"Split = |{line}|")
                 parts = line.split(" ", 1)  # Dividir en OID y valor
+                print(parts)
                 if len(parts) == 2:
                     oid, value = parts
                     if "No Such Instance" in value:
