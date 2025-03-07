@@ -3,10 +3,17 @@
 ## Author       : HCG-Group, Area de Backend
 ## Contacto     : Anexo 3128
 ## Tables       : ubicacion_gps, cambium_data
+
+testing = True
 import sys
-sys.path.append('/usr/smartlink')
-from api_sql.fastapi.models.cambium_data_models     import CambiumData as Model
-from api_sql.fastapi.models.ubicacion_gps_models    import UbicacionGPS
+if testing:
+    sys.path.append('/usr/smartlink')
+    from api_sql.fastapi.models.cambium_data_models     import CambiumData as Model
+    from api_sql.fastapi.models.ubicacion_gps_models    import UbicacionGPS
+else:
+    sys.path.append('/home/support/testing_repository')
+    from models.cambium_data_models     import CambiumData as Model
+    from models.ubicacion_gps_models    import UbicacionGPS
 from concurrent.futures import ThreadPoolExecutor
 from globalHCG  import *
 from datetime   import datetime
@@ -36,7 +43,18 @@ SNMP_TIMEOUT        = 10
 
 # Diccionario SNMP:
 if True:
-    snmp_cambium = [
+    snmp_cambium_V1 = [
+        ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88.0"],          # 0
+        ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89.0"],          # 1
+        ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90.0"],          # 2
+        ["avg_power" , ".1.3.6.1.4.1.161.19.3.2.2.142.0"],      # 3
+        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.2.2.118.0"],  # 4
+        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.2.2.117.0"],  # 5
+        ["inthroughputbytes" , ".1.3.6.1.2.1.2.2.1.10.1"],      # 6
+        ["snr_v" , ".1.3.6.1.4.1.161.19.3.2.2.94.0"],           # 7
+        ["snr_h" , ".1.3.6.1.4.1.161.19.3.2.2.106.0"]           # 8
+    ]
+    snmp_cambium_V2 = [
         ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88.0"],          # 0
         ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89.0"],          # 1
         ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90.0"],          # 2
@@ -48,7 +66,7 @@ if True:
         ["snr_h" , ".1.3.6.1.4.1.161.19.3.2.2.106.0"]           # 8
     ]
 else:
-    snmp_cambium = [
+    snmp_cambiumV1 = [
         ["GPSLat"    , ".1.3.6.1.4.1.161.19.3.3.2.88.0"],                       # 0
         ["GPSLon"    , ".1.3.6.1.4.1.161.19.3.3.2.89.0"],                       # 1
         ["GPSAlt"    , ".1.3.6.1.4.1.161.19.3.3.2.90.0"],                       # 2
@@ -61,8 +79,16 @@ else:
     ]
 
 ## Funciones personzalidas
-def GetCambiumDataByIP(target_ip, community):
+def GetCambiumDataByIP(target_ip, community, cambium_type):
     snmp_dict = {}
+    snmp_cambium = []
+    if "AP" in cambium_type:
+        #print(f"Evaluando Cambium AP / {target_ip}")
+        snmp_cambium = snmp_cambium_V1
+    elif "SM" in cambium_type:
+        #print(f"Evaluando Cambium SM / {target_ip}")
+        snmp_cambium = snmp_cambium_V2
+
     for oid_name, oid in snmp_cambium:        
         # Constructing the snmpbulkwalk command
         string_timeout = f"{SNMP_TIMEOUT}"
@@ -78,7 +104,7 @@ def GetCambiumDataByIP(target_ip, community):
         try:
             # Running the snmpbulkwalk command
             result = subprocess.run(command, capture_output=True, text=True, check=True, timeout = SNMP_TIMEOUT + 2).stdout
-            print(f"\nOriginal {oid_name}/{oid}:\n|{result}|")
+            #print(f"\nOriginal {oid_name}/{oid}:\n|{result}|")
             
             for line in result.splitlines():
                 #print(f"Split = |{line}|")
@@ -90,8 +116,8 @@ def GetCambiumDataByIP(target_ip, community):
                     else:
                         snmp_dict[oid_name] = value.strip()
         except subprocess.TimeoutExpired:
+            print(f"Timeout occurred while querying {target_ip} for {oid}.")
             break
-            print(f"Timeout occurred while querying {target_ip} for {oid_name}.")
             #snmp_dict[oid_name] = "TIMEOUT"
         except subprocess.CalledProcessError as e:
             break
@@ -104,9 +130,9 @@ def GetCambiumDataByIP(target_ip, community):
     return snmp_dict
 
 
-def async_task(ip_device : str, queue : queue.Queue, optional : dict = None):
+def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, optional : dict = None):
     community   = optional["comunidad"]
-    data_snmp   = GetCambiumDataByIP(ip_device, community)
+    data_snmp   = GetCambiumDataByIP(ip_device, community, tipo_PMP)
 
     if not data_snmp:
         return
@@ -157,14 +183,16 @@ try:
     filter_inventario   = ["marca", MARCA]
     # Example: [ ["192.168.2.63", "public"], ... ]
     raw_inventory   = get_request_to_url_with_filters(DB_INVENTARIO_URL, filtrer_array = filter_inventario)
-    subscribers     = [ [row["ip"], row["snmp_conf"]] for row in raw_inventory if row["tipo"] == "PMP-AP"]
+    subscribers     = [ [row["ip"], row["snmp_conf"], row["tipo"] ] for row in raw_inventory]
+    #subscribers     = [ [row["ip"], row["snmp_conf"]] for row in raw_inventory if row["tipo"] == "PMP-AP"]
 
     # Chequeamos el numero de equipos Cambiumm detectados
     num_cambium = len(subscribers)
-    if num_cambium < 1 :
+    if num_cambium == 0:
         raise Exception("No hay equipos Cambium registrados")
     print(f"Se han detectado un total de {num_cambium} equipos Cambium / PMP-AP en Inventario")
 
+    #raise Exception()
 
     # Obtenemos la configuracion en forma de diccionario:
     config_snmp_unicos  = list(set(device[1] for device in subscribers))
@@ -172,7 +200,11 @@ try:
 
     snmp_config_dict    = get_request_to_url(DB_SNMP_CONF_URL, optional_param = params)
     config_dict         = {cfg.pop("id"): cfg for cfg in snmp_config_dict}
-    subscribers         = [ [_ip, config_dict[_index]] for _ip, _index in subscribers]
+    subscribers         = [ [_ip, _tipo, config_dict.get(_index, {})] for _ip, _index, _tipo in subscribers]
+
+    for suscriptor in subscribers:
+        print(suscriptor)
+
 
     q = queue.Queue()
     max_threads_number = 25
@@ -181,7 +213,7 @@ try:
 
     with ThreadPoolExecutor(max_threads_number) as executor:
         for _group in list_groups_ip_to_request:
-            futures = [executor.submit(async_task, _ip, q, _conf_snmp) for _ip, _conf_snmp in _group]
+            futures = [executor.submit(async_task, _ip, _tipo, q, _conf_snmp) for _ip, _tipo, _conf_snmp in _group]
             
             # Esperar a que todos los hilos del grupo terminen
             for future in futures:
@@ -212,7 +244,7 @@ except Exception as e:
     if str(e):
         print(f" ✘ ✘ ERROR en {script_name}:\n{e}")
     #print(" > Error Details:")
-    #print(traceback.format_exc())
+    print(traceback.format_exc())
 
 
 
