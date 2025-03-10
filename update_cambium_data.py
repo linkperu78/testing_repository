@@ -4,7 +4,7 @@
 ## Contacto     : Anexo 3128
 ## Tables       : ubicacion_gps, cambium_data
 
-testing = True
+testing = False
 import sys
 if testing:
     sys.path.append('/usr/smartlink')
@@ -18,13 +18,10 @@ from concurrent.futures import ThreadPoolExecutor
 from globalHCG  import *
 from datetime   import datetime
 from pprint     import pprint
-import threading
 import subprocess
 import traceback
 import queue
 import re
-import csv
-import requests
 import os
 
 script_path     = os.path.abspath(__file__)
@@ -33,37 +30,37 @@ script_name     = os.path.basename(script_path)
 
 # Direccion de archivos de salida en /usr/smartlink/outputs
 MARCA               = "cambium"
+SNMP_TIMEOUT        = 10
 DB_INVENTARIO_URL   = DB_API_URL + "inventario/get"
 DB_SNMP_CONF_URL    = DB_API_URL + "snmp_conf/get_list_id/"
 URL_POST_MODEL      = DB_API_URL + f"{MARCA}_data/add_list"
 URL_POST_GPS        = DB_API_URL + "ubicacion_gps/add_list"
 
 log_file            = os.path.join(FOLDER_OUTPUT, f"{MARCA}_data.csv")
-SNMP_TIMEOUT        = 10
 
 # Diccionario SNMP:
 if True:
     snmp_cambium_V1 = [
-        ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88.0"],          # 0
-        ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89.0"],          # 1
-        ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90.0"],          # 2
-        ["avg_power" , ".1.3.6.1.4.1.161.19.3.3.2.23.0"],      # 3
-        ["link_radio_V" , ".1.3.6.1.4.1.161.19.3.2.2.88.0"],  # 4
-        ["link_radio_H" , ".1.3.6.1.4.1.161.19.3.2.2.87.0"],  # 5
+        ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88"],            # 0
+        ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89"],            # 1
+        ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90"],            # 2
+        ["avg_power" , ".1.3.6.1.4.1.161.19.3.3.2.23"],         # 3
+        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.1.4.1.88"],   # 4
+        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.1.4.1.87"],   # 5
         ["inthroughputbytes" , ".1.3.6.1.2.1.2.2.1.10.1"],      # 6
-        ["snr_v" , ".1.3.6.1.4.1.161.19.3.2.2.94.0"],           # 7
-        ["snr_h" , ".1.3.6.1.4.1.161.19.3.2.2.106.0"]           # 8
+        ["snr_v" , ".1.3.6.1.4.1.161.19.3.1.4.1.74"],           # 7
+        ["snr_h" , ".1.3.6.1.4.1.161.19.3.1.4.1.84"]            # 8
     ]
     snmp_cambium_V2 = [
-        ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88.0"],          # 0
-        ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89.0"],          # 1
-        ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90.0"],          # 2
-        ["avg_power" , ".1.3.6.1.4.1.161.19.3.2.2.142.0"],      # 3
-        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.2.2.118.0"],  # 4
-        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.2.2.117.0"],  # 5
+        ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88"],            # 0
+        ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89"],            # 1
+        ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90"],            # 2
+        ["avg_power" , ".1.3.6.1.4.1.161.19.3.2.2.142"],        # 3
+        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.2.2.118"],    # 4
+        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.2.2.117"],    # 5
         ["inthroughputbytes" , ".1.3.6.1.2.1.2.2.1.10.1"],      # 6
-        ["snr_v" , ".1.3.6.1.4.1.161.19.3.2.2.94.0"],           # 7
-        ["snr_h" , ".1.3.6.1.4.1.161.19.3.2.2.106.0"]           # 8
+        ["snr_v" , ".1.3.6.1.4.1.161.19.3.2.2.94"],             # 7
+        ["snr_h" , ".1.3.6.1.4.1.161.19.3.2.2.106"]             # 8
     ]
 else:
     snmp_cambiumV1 = [
@@ -78,10 +75,14 @@ else:
         ["signaltonoiseratiohorizontal"  , ".1.3.6.1.4.1.161.19.3.2.2.105.0"]   # 8
     ]
 
-## Funciones personzalidas
-def GetCambiumDataByIP(target_ip, community, cambium_type):
+
+''' Funciones personzalidas '''
+## Obtener datos SNMP a partir de una lista
+def GetCambiumDataByIP(target_ip, dict_snmp, cambium_type):
     snmp_dict = {}
     snmp_cambium = []
+    values_exists = False
+
     if "AP" in cambium_type:
         #print(f"Evaluando Cambium AP / {target_ip}")
         snmp_cambium = snmp_cambium_V1
@@ -91,49 +92,29 @@ def GetCambiumDataByIP(target_ip, community, cambium_type):
 
     for oid_name, oid in snmp_cambium:        
         # Constructing the snmpbulkwalk command
-        string_timeout = f"{SNMP_TIMEOUT}"
-        command = [
-            "snmpwalk",
-            "-v", "2c",  # SNMP version (v2c in this case)
-            "-c", community,  # SNMP community string
-            "-O", "nq",  # Output format options (e.g., numeric OIDs, quiet)
-            "-t", string_timeout,   
-            target_ip,  # Target IP address
-            oid  # The OID to walk
-        ]
-        try:
-            # Running the snmpbulkwalk command
-            result = subprocess.run(command, capture_output=True, text=True, check=True, timeout = SNMP_TIMEOUT + 2).stdout
-            #print(f"\nOriginal {oid_name}/{oid}:\n|{result}|")
-            
-            for line in result.splitlines():
-                #print(f"Split = |{line}|")
-                parts = line.split(" ", 1)  # Dividir en OID y valor
-                print(parts)
-                if len(parts) == 2:
-                    oid, value = parts
-                    if "No Such Instance" in value:
-                        snmp_dict[oid_name] = ""
-                    else:
-                        snmp_dict[oid_name] = value.strip()
-        except subprocess.TimeoutExpired:
-            print(f"Timeout occurred while querying {target_ip} for {oid}.")
+        oid_result = snmp_request(oid, target_ip, dict_snmp, SNMP_TIMEOUT)
+        if oid_result == -1:
             break
-            #snmp_dict[oid_name] = "TIMEOUT"
-        except subprocess.CalledProcessError as e:
-            break
-            print(f"Error performing SNMP walk for {oid_name}: {e.stderr}")
 
-    if snmp_dict:
+        if oid_result is None:
+            snmp_dict[oid_name] = ""
+            continue
+
+        values_exists = True
+        if isinstance(oid_result, dict):
+            snmp_dict[oid_name] = list(oid_result.values())     # Multiple values
+        else:
+            snmp_dict[oid_name] = oid_result    # Single values               
+
+    if values_exists:
         snmp_dict["ip"]     = target_ip
         snmp_dict["fecha"]  = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     return snmp_dict
 
 
-def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, optional : dict = None):
-    community   = optional["comunidad"]
-    data_snmp   = GetCambiumDataByIP(ip_device, community, tipo_PMP)
+def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : dict = None):
+    data_snmp   = GetCambiumDataByIP(ip_device, dict_snmp, tipo_PMP)
 
     if not data_snmp:
         return
@@ -147,14 +128,14 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, optional : d
 
     msg_rx = data_snmp["link_radio_rx"]
     msg_tx = data_snmp["link_radio_tx"]
-    data_snmp["link_radio_rx"]  = float(msg_rx.replace('"', '')) if msg_rx else -1
-    data_snmp["link_radio_tx"]  = float(msg_tx.replace('"', '')) if msg_tx else -1
+    data_snmp["link_radio_rx"]  = float(msg_rx) if msg_rx else -1
+    data_snmp["link_radio_tx"]  = float(msg_tx) if msg_tx else -1
 
     ip_device       = data_snmp["ip"]
     fecha_device    = data_snmp["fecha"]
     # Creamos el diccionario para datos GPS
-    latitud     = float( data_snmp["GPSLat"].replace('"', '').replace('+', '') )
-    longitud    = float( data_snmp["GPSLon"].replace('"', '').replace('+', '') )
+    latitud     = float( data_snmp["GPSLat"].replace('+', '') )
+    longitud    = float( data_snmp["GPSLon"].replace('+', '') )
     altitud     = float( data_snmp["GPSAlt"] )
 
     dictionary_gps = {
@@ -188,8 +169,8 @@ try:
     #subscribers     = [ [row["ip"], row["snmp_conf"]] for row in raw_inventory if row["tipo"] == "PMP-AP"]
 
     # Chequeamos el numero de equipos Cambiumm detectados
-    num_cambium = len(subscribers)
-    if num_cambium == 0:
+    num_cambium     = len( subscribers )
+    if num_cambium  == 0:
         raise Exception("No hay equipos Cambium registrados")
     print(f"Se han detectado un total de {num_cambium} equipos Cambium / PMP-AP en Inventario")
 
@@ -233,19 +214,21 @@ try:
         if model_array_list:
             if once:
                 once = False
+            '''
                 restart_log_file(log_file, Model)
             post_request_to_url_model_array(URL_POST_MODEL, array_model_to_post = model_array_list)
             write_log_files(log_file, model_array_list)
+            '''
 
         if gps_array_list:
-            post_request_to_url_model_array(URL_POST_GPS, array_model_to_post = gps_array_list)
-        
+            #post_request_to_url_model_array(URL_POST_GPS, array_model_to_post = gps_array_list)
+            pass
 
 except Exception as e:
     if str(e):
         print(f" ✘ ✘ ERROR en {script_name}:\n{e}")
     #print(" > Error Details:")
-    print(traceback.format_exc())
+    #print(traceback.format_exc())
 
 
 
