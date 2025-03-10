@@ -1,5 +1,4 @@
 FOLDER_OUTPUT       = "/usr/smartlink/outputs"
-DB_API_URL          = "http://192.168.2.223:8000/"
 _BCUTILS_AUTH_DB    = '/usr/smartlink/authdb.json'
 TIMEOUT_API_REQUEST = 5
 TIMEOUT_SNMP_QUERY  = 5
@@ -9,6 +8,24 @@ PASS_SSH_MIKROTIK   = "HCG"
 import requests
 import subprocess
 import csv
+import psutil
+import socket
+
+def get_ipv4_address(interfaces=("ens192", "eth0")):
+    for interface in interfaces:
+        addrs = psutil.net_if_addrs().get(interface, [])
+        for addr in addrs:
+            if addr.family == socket.AF_INET:  # IPv4 address
+                return addr.address
+    return None  # Return None if no valid IP is found
+
+# Get IPv4 address dynamically
+ip_address = get_ipv4_address()
+if ip_address:
+    DB_API_URL = f"http://{ip_address}:8000/"
+else:
+    DB_API_URL = f"http://localhost:8000/"
+    #raise Exception("Could not determine the IPv4 address for ens192 or eth0.")
 
 ## Funcion para agrupar IP's para tareas en paralelo
 def group_ips(ip_list, max_group_size = 25):
@@ -171,3 +188,7 @@ def snmp_request(oid, ip_host, credentials : dict = {}, _timeout = TIMEOUT_SNMP_
         return next(iter(values.values()))
     
     return values
+
+
+if __name__ == "__main__":
+    print(f"IP obtenida = {ip_address} / {DB_API_URL}")
