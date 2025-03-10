@@ -140,9 +140,9 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : 
     fecha_device    = data_snmp["fecha"]
 
     # Creamos el diccionario para datos GPS
-    latitud     = float( data_snmp["GPSLat"].replace('+', '')) if data_snmp["GPSLat"].strip() else 0
-    longitud    = float( data_snmp["GPSLon"].replace('+', '')) if data_snmp["GPSLon"].strip() else 0
-    altitud     = float( data_snmp["GPSAlt"] )
+    latitud  = float(data_snmp.get("GPSLat", "0").replace('+', '').strip() or 0)
+    longitud = float(data_snmp.get("GPSLon", "0").replace('+', '').strip() or 0)
+    altitud  = float(data_snmp.get("GPSAlt", "0").strip() or 0)
 
     dictionary_gps = {
         "ip"        : ip_device,
@@ -150,7 +150,7 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : 
         "latitud"   : latitud,
         "longitud"  : longitud,
         "altitud"   : altitud
-    } if latitud != 0 and longitud != 0 else {}
+    } if latitud and longitud else {}
 
     for a in ["GPSLat", "GPSLon", "GPSAlt", "avg_power"]:
         data_snmp.pop(a, None)  # Avoids KeyError if key is missing
