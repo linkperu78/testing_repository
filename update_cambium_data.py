@@ -4,7 +4,7 @@
 ## Contacto     : Anexo 3128
 ## Tables       : ubicacion_gps, cambium_data
 
-testing = False
+testing = True
 import sys
 if testing:
     sys.path.append('/usr/smartlink')
@@ -83,10 +83,10 @@ def GetCambiumDataByIP(target_ip, dict_snmp, cambium_type):
     snmp_cambium = []
     values_exists = False
 
-    if "AP" in cambium_type:
+    if "-AP" in cambium_type:
         #print(f"Evaluando Cambium AP / {target_ip}")
         snmp_cambium = snmp_cambium_V1
-    elif "SM" in cambium_type:
+    elif "-SM" in cambium_type:
         #print(f"Evaluando Cambium SM / {target_ip}")
         snmp_cambium = snmp_cambium_V2
 
@@ -122,9 +122,14 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : 
     #print(f"{data_snmp}")
 
     # Avg power rx/tx
-    matches = [float(m) for m in re.findall(r"(-?\d+\.\d+)\s*dBm\s*[VH]", data_snmp["avg_power"])]
-    data_snmp["avg_power_rx"] = matches[0] if len(matches) > 0 else -1
-    data_snmp["avg_power_tx"] = matches[1] if len(matches) > 1 else -1
+    message_avg_power = data_snmp["avg_power"].strip()
+    if "-AP" in tipo_PMP:
+        data_snmp["avg_power_tx"] = message_avg_power
+        data_snmp["avg_power_rx"] = None
+    else:
+        matches = [float(m) for m in re.findall(r"(-?\d+\.\d+)\s*dBm\s*[VH]", message_avg_power)] if message_avg_power else [0,0]
+        data_snmp["avg_power_rx"] = matches[0] if len(matches) > 0 else 0
+        data_snmp["avg_power_tx"] = matches[1] if len(matches) > 1 else 0
 
     msg_rx = data_snmp["link_radio_rx"]
     msg_tx = data_snmp["link_radio_tx"]
@@ -133,9 +138,10 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : 
 
     ip_device       = data_snmp["ip"]
     fecha_device    = data_snmp["fecha"]
+
     # Creamos el diccionario para datos GPS
-    latitud     = float( data_snmp["GPSLat"].replace('+', '') )
-    longitud    = float( data_snmp["GPSLon"].replace('+', '') )
+    latitud     = float( data_snmp["GPSLat"].replace('+', '')) if data_snmp["GPSLat"].strip() else 0
+    longitud    = float( data_snmp["GPSLon"].replace('+', '')) if data_snmp["GPSLon"].strip() else 0
     altitud     = float( data_snmp["GPSAlt"] )
 
     dictionary_gps = {
