@@ -12,11 +12,12 @@ from concurrent.futures import ThreadPoolExecutor
 from globalHCG  import *
 from datetime   import datetime
 from pprint     import pprint
+import subprocess
+import traceback
 import queue
 import re
 import os
 
-testing_mode    = True
 script_path     = os.path.abspath(__file__)
 script_folder   = os.path.dirname(script_path)
 script_name     = os.path.basename(script_path)
@@ -38,11 +39,11 @@ if True:
         ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89"],            # 1
         ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90"],            # 2
         ["avg_power" , ".1.3.6.1.4.1.161.19.3.3.2.23"],         # 3
-        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.1.4.1.88"],   # 4 M
-        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.1.4.1.87"],   # 5 M
-        ["inthroughputbytes" , ".1.3.6.1.2.1.2.2.1.10"],        # 6 M
-        ["snr_v" , ".1.3.6.1.4.1.161.19.3.1.4.1.74"],           # 7 M
-        ["snr_h" , ".1.3.6.1.4.1.161.19.3.1.4.1.84"]            # 8 M
+        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.1.4.1.88"],   # 4
+        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.1.4.1.87"],   # 5
+        ["inthroughputbytes" , ".1.3.6.1.2.1.2.2.1.10.1"],      # 6
+        ["snr_v" , ".1.3.6.1.4.1.161.19.3.1.4.1.74"],           # 7
+        ["snr_h" , ".1.3.6.1.4.1.161.19.3.1.4.1.84"]            # 8
     ]
     snmp_cambium_V2 = [
         ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88"],            # 0
@@ -71,6 +72,16 @@ else:
 
 ''' Funciones personzalidas '''
 ## Obtener datos SNMP a partir de una lista
+def easy_float_array_to_float(data_no_float):
+    if not data_no_float:
+        return None
+    elif isinstance(data_no_float, str):
+        return float(data_no_float)
+        #data_snmp["link_radio_tx"] = float(msg_tx)
+    else:
+        return [float(a) for a in data_no_float]
+
+
 def GetCambiumDataByIP(target_ip, dict_snmp, cambium_type):
     snmp_dict = {}
     snmp_cambium = []
@@ -83,21 +94,21 @@ def GetCambiumDataByIP(target_ip, dict_snmp, cambium_type):
         #print(f"Evaluando Cambium SM / {target_ip}")
         snmp_cambium = snmp_cambium_V2
 
-    for oid_name, oid in snmp_cambium:        
+    for oid_name, oid in snmp_cambium:
         # Constructing the snmpbulkwalk command
         oid_result = snmp_request(oid, target_ip, dict_snmp, SNMP_TIMEOUT)
         if oid_result == -1:
             break
 
         if oid_result is None:
-            snmp_dict[oid_name] = ""
+            snmp_dict[oid_name] = None
             continue
 
         values_exists = True
         if isinstance(oid_result, dict):
             snmp_dict[oid_name] = list(oid_result.values())     # Multiple values
         else:
-            snmp_dict[oid_name] = oid_result    # Single values               
+            snmp_dict[oid_name] = oid_result    # Single values
 
     if values_exists:
         snmp_dict["ip"]     = target_ip
@@ -116,19 +127,20 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : 
 
     # Avg power rx/tx
     message_avg_power = data_snmp["avg_power"].strip()
-    if "dBm" not in message_avg_power:
-        data_snmp["avg_power_tx"] = message_avg_power
+    if "-AP" in tipo_PMP:
+        data_snmp["avg_power_tx"] = float(message_avg_power)
         data_snmp["avg_power_rx"] = None
     else:
         matches = [float(m) for m in re.findall(r"(-?\d+\.\d+)\s*dBm\s*[VH]", message_avg_power)] if message_avg_power else [0,0]
-        data_snmp["avg_power_rx"] = matches[0] if len(matches) > 0 else 0
-        data_snmp["avg_power_tx"] = matches[1] if len(matches) > 1 else 0
+        data_snmp["avg_power_rx"] = matches[0] if len(matches) > 0 else None
+        data_snmp["avg_power_tx"] = matches[1] if len(matches) > 1 else None
 
-    msg_rx = data_snmp["link_radio_rx"]
-    msg_tx = data_snmp["link_radio_tx"]
-    data_snmp["link_radio_rx"]  = float(msg_rx) if msg_rx else -1
-    data_snmp["link_radio_tx"]  = float(msg_tx) if msg_tx else -1
+    data_snmp["link_radio_tx"] = easy_float_array_to_float(data_snmp["link_radio_tx"])
+    data_snmp["link_radio_rx"] = easy_float_array_to_float(data_snmp["link_radio_rx"])
+    data_snmp["snr_h"]         = easy_float_array_to_float(data_snmp["snr_h"])
+    data_snmp["snr_v"]         = easy_float_array_to_float(data_snmp["snr_v"])
 
+    # Agregamos diferenciadores clave
     ip_device       = data_snmp["ip"]
     fecha_device    = data_snmp["fecha"]
 
@@ -143,7 +155,7 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : 
         "latitud"   : latitud,
         "longitud"  : longitud,
         "altitud"   : altitud
-    } if latitud and longitud else {}
+    } if latitud!=0 and longitud!=0 else {}
 
     for a in ["GPSLat", "GPSLon", "GPSAlt", "avg_power"]:
         data_snmp.pop(a, None)  # Avoids KeyError if key is missing
@@ -152,9 +164,13 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : 
     extra_dictionary    = {k: v for k, v in data_snmp.items() if k not in fieldnames}
     data_snmp           = {k: v for k, v in data_snmp.items() if k in fieldnames}
     data_snmp["ifresults_metricas"] = extra_dictionary
-    data_snmp["snr_h"] = data_snmp.get("snr_h", -1) or -1
-    data_snmp["snr_v"] = data_snmp.get("snr_v", -1) or -1
+    #data_snmp["snr_h"] = data_snmp.get("snr_h", None)
+    #data_snmp["snr_v"] = data_snmp.get("snr_v", None)
 
+    pprint(data_snmp)
+    if dictionary_gps:
+        pprint(dictionary_gps)
+   
     queue.put([data_snmp, dictionary_gps])
 
 
@@ -183,9 +199,8 @@ try:
     config_dict         = {cfg.pop("id"): cfg for cfg in snmp_config_dict}
     subscribers         = [ [_ip, _tipo, config_dict.get(_index, {})] for _ip, _index, _tipo in subscribers]
 
-    for suscriptor in subscribers:
-        print(suscriptor)
-
+    #for suscriptor in subscribers:
+        #print(suscriptor)
 
     q = queue.Queue()
     max_threads_number = 25
@@ -204,16 +219,13 @@ try:
             model_array_list, gps_array_list = [], []
 
             while not q.empty():
-                model_dict, gps_dict   = q.get()
-
+                model_dict, gps_dict = q.get()
+                #pprint(model_dict)
+                
                 model_array_list.append( Model(**model_dict) )
                 if gps_dict:
+                    #pprint(gps_dict)
                     gps_array_list.append( UbicacionGPS(**gps_dict) )
-
-        if testing_mode:
-            for model_data in model_array_list:
-                pprint(model_data)
-            raise Exception()
 
         if model_array_list:
             if once:
@@ -221,7 +233,7 @@ try:
                 restart_log_file(log_file, Model)
             post_request_to_url_model_array(URL_POST_MODEL, array_model_to_post = model_array_list)
             write_log_files(log_file, model_array_list)
-            
+
         if gps_array_list:
             post_request_to_url_model_array(URL_POST_GPS, array_model_to_post = gps_array_list)
             pass
