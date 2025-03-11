@@ -4,26 +4,19 @@
 ## Contacto     : Anexo 3128
 ## Tables       : ubicacion_gps, cambium_data
 
-testing = True
 import sys
-if testing:
-    sys.path.append('/usr/smartlink')
-    from api_sql.fastapi.models.cambium_data_models     import CambiumData as Model
-    from api_sql.fastapi.models.ubicacion_gps_models    import UbicacionGPS
-else:
-    sys.path.append('/home/support/testing_repository')
-    from models.cambium_data_models     import CambiumData as Model
-    from models.ubicacion_gps_models    import UbicacionGPS
+sys.path.append('/usr/smartlink')
+from api_sql.fastapi.models.cambium_data_models     import CambiumData as Model
+from api_sql.fastapi.models.ubicacion_gps_models    import UbicacionGPS
 from concurrent.futures import ThreadPoolExecutor
 from globalHCG  import *
 from datetime   import datetime
 from pprint     import pprint
-import subprocess
-import traceback
 import queue
 import re
 import os
 
+testing_mode    = True
 script_path     = os.path.abspath(__file__)
 script_folder   = os.path.dirname(script_path)
 script_name     = os.path.basename(script_path)
@@ -45,11 +38,11 @@ if True:
         ["GPSLon" , ".1.3.6.1.4.1.161.19.3.3.2.89"],            # 1
         ["GPSAlt" , ".1.3.6.1.4.1.161.19.3.3.2.90"],            # 2
         ["avg_power" , ".1.3.6.1.4.1.161.19.3.3.2.23"],         # 3
-        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.1.4.1.88"],   # 4
-        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.1.4.1.87"],   # 5
-        ["inthroughputbytes" , ".1.3.6.1.2.1.2.2.1.10.1"],      # 6
-        ["snr_v" , ".1.3.6.1.4.1.161.19.3.1.4.1.74"],           # 7
-        ["snr_h" , ".1.3.6.1.4.1.161.19.3.1.4.1.84"]            # 8
+        ["link_radio_rx" , ".1.3.6.1.4.1.161.19.3.1.4.1.88"],   # 4 M
+        ["link_radio_tx" , ".1.3.6.1.4.1.161.19.3.1.4.1.87"],   # 5 M
+        ["inthroughputbytes" , ".1.3.6.1.2.1.2.2.1.10"],        # 6 M
+        ["snr_v" , ".1.3.6.1.4.1.161.19.3.1.4.1.74"],           # 7 M
+        ["snr_h" , ".1.3.6.1.4.1.161.19.3.1.4.1.84"]            # 8 M
     ]
     snmp_cambium_V2 = [
         ["GPSLat" , ".1.3.6.1.4.1.161.19.3.3.2.88"],            # 0
@@ -123,7 +116,7 @@ def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : 
 
     # Avg power rx/tx
     message_avg_power = data_snmp["avg_power"].strip()
-    if "-AP" in tipo_PMP:
+    if "dBm" not in message_avg_power:
         data_snmp["avg_power_tx"] = message_avg_power
         data_snmp["avg_power_rx"] = None
     else:
@@ -217,17 +210,20 @@ try:
                 if gps_dict:
                     gps_array_list.append( UbicacionGPS(**gps_dict) )
 
+        if testing_mode:
+            for model_data in model_array_list:
+                pprint(model_data)
+            raise Exception()
+
         if model_array_list:
             if once:
                 once = False
-            '''
                 restart_log_file(log_file, Model)
             post_request_to_url_model_array(URL_POST_MODEL, array_model_to_post = model_array_list)
             write_log_files(log_file, model_array_list)
-            '''
-
+            
         if gps_array_list:
-            #post_request_to_url_model_array(URL_POST_GPS, array_model_to_post = gps_array_list)
+            post_request_to_url_model_array(URL_POST_GPS, array_model_to_post = gps_array_list)
             pass
 
 except Exception as e:

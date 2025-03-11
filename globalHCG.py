@@ -24,8 +24,8 @@ ip_address = get_ipv4_address()
 if ip_address:
     DB_API_URL = f"http://{ip_address}:8000/"
 else:
-    DB_API_URL = f"http://localhost:8000/"
-    #raise Exception("Could not determine the IPv4 address for ens192 or eth0.")
+    DB_API_URL = f"http://localhost:8000/"      # Set the correct server static IP
+
 
 ## Funcion para agrupar IP's para tareas en paralelo
 def group_ips(ip_list, max_group_size = 25):
@@ -191,4 +191,4 @@ def snmp_request(oid, ip_host, credentials : dict = {}, _timeout = TIMEOUT_SNMP_
 
 
 if __name__ == "__main__":
-    print(f"IP obtenida = {ip_address} / {DB_API_URL}")
+    print(f"IP obtenida = {ip_address} | {DB_API_URL}")
