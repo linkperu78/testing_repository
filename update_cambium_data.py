@@ -12,8 +12,6 @@ from concurrent.futures import ThreadPoolExecutor
 from globalHCG  import *
 from datetime   import datetime
 from pprint     import pprint
-import subprocess
-import traceback
 import queue
 import re
 import os
@@ -118,59 +116,64 @@ def GetCambiumDataByIP(target_ip, dict_snmp, cambium_type):
 
 
 def async_task(ip_device : str, tipo_PMP: str, queue : queue.Queue, dict_snmp : dict = None):
-    data_snmp   = GetCambiumDataByIP(ip_device, dict_snmp, tipo_PMP)
-
-    if not data_snmp:
+    data_snmp_raw   = GetCambiumDataByIP(ip_device, dict_snmp, tipo_PMP)
+    #print(f"{data_snmp_raw}")
+    if not data_snmp_raw:
         return
-
-    #print(f"{data_snmp}")
+        
+    # Inicializamos los valores para MODEL
+    model_columnames    = list( data_snmp_raw.keys() )
+    
+    # Agregamos los campos iniciales
+    fecha_device    = data_snmp_raw["fecha"]
+    data_snmp       = {
+        "ip"    : ip_device,
+        "fecha" : fecha_device
+    }
 
     # Avg power rx/tx
-    message_avg_power = data_snmp["avg_power"].strip()
+    message_avg_power = data_snmp_raw["avg_power"].strip()
     if "-AP" in tipo_PMP:
-        data_snmp["avg_power_tx"] = float(message_avg_power)
-        data_snmp["avg_power_rx"] = None
+        data_snmp["avg_power"] = {
+            "tx" : float(message_avg_power)
+        }
     else:
         matches = [float(m) for m in re.findall(r"(-?\d+\.\d+)\s*dBm\s*[VH]", message_avg_power)] if message_avg_power else [0,0]
-        data_snmp["avg_power_rx"] = matches[0] if len(matches) > 0 else None
-        data_snmp["avg_power_tx"] = matches[1] if len(matches) > 1 else None
+        data_snmp["avg_power"] = {
+            "rx" : matches[0] if len(matches) > 0 else None,
+            "tx" : matches[1] if len(matches) > 1 else None
+        }
 
-    data_snmp["link_radio_tx"] = easy_float_array_to_float(data_snmp["link_radio_tx"])
-    data_snmp["link_radio_rx"] = easy_float_array_to_float(data_snmp["link_radio_rx"])
-    data_snmp["snr_h"]         = easy_float_array_to_float(data_snmp["snr_h"])
-    data_snmp["snr_v"]         = easy_float_array_to_float(data_snmp["snr_v"])
+    data_snmp["link_radio"] = {
+        "tx" : easy_float_array_to_float( data_snmp_raw["link_radio_tx"] ),
+        "rx" : easy_float_array_to_float( data_snmp_raw["link_radio_rx"] ),
+    }
 
-    # Agregamos diferenciadores clave
-    ip_device       = data_snmp["ip"]
-    fecha_device    = data_snmp["fecha"]
+    data_snmp["snr"] = {
+        "V" : easy_float_array_to_float( data_snmp_raw["snr_v"] ),
+        "H" : easy_float_array_to_float( data_snmp_raw["snr_h"] ),
+    }
+
+    # Agregamos campos pendientes
+    array_filtrado = [
+        key for key in data_snmp_raw 
+        if "GPS" not in key.upper() and not any(key.startswith(existing_key) for existing_key in data_snmp)
+    ] 
+    extra_dictionary = {key: data_snmp_raw[key] for key in array_filtrado}
+    data_snmp["ifresults_metricas"] = extra_dictionary or None
 
     # Creamos el diccionario para datos GPS
-    latitud  = float(data_snmp.get("GPSLat", "0").replace('+', '').strip() or 0)
-    longitud = float(data_snmp.get("GPSLon", "0").replace('+', '').strip() or 0)
-    altitud  = float(data_snmp.get("GPSAlt", "0").strip() or 0)
-
+    latitud  = float(data_snmp_raw.get("GPSLat", "0").replace('+', '').strip() or 0)
+    longitud = float(data_snmp_raw.get("GPSLon", "0").replace('+', '').strip() or 0)
+    altitud  = float(data_snmp_raw.get("GPSAlt", "0").strip() or 0)
     dictionary_gps = {
         "ip"        : ip_device,
         "fecha"     : fecha_device,
         "latitud"   : latitud,
         "longitud"  : longitud,
         "altitud"   : altitud
-    } if latitud!=0 and longitud!=0 else {}
+    } if latitud and longitud else {}
 
-    for a in ["GPSLat", "GPSLon", "GPSAlt", "avg_power"]:
-        data_snmp.pop(a, None)  # Avoids KeyError if key is missing
-    
-    fieldnames          = list(Model.model_fields.keys()) + ["fecha", "ip"]
-    extra_dictionary    = {k: v for k, v in data_snmp.items() if k not in fieldnames}
-    data_snmp           = {k: v for k, v in data_snmp.items() if k in fieldnames}
-    data_snmp["ifresults_metricas"] = extra_dictionary
-    #data_snmp["snr_h"] = data_snmp.get("snr_h", None)
-    #data_snmp["snr_v"] = data_snmp.get("snr_v", None)
-
-    pprint(data_snmp)
-    if dictionary_gps:
-        pprint(dictionary_gps)
-   
     queue.put([data_snmp, dictionary_gps])
 
 
