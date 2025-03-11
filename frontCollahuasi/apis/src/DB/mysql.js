@@ -612,7 +612,7 @@ async function getAllRXLVLRealDataByIP(ip, res) {
   const response = await client.get("PredRealData-" + ip);
   if (response) return res.json(JSON.parse(response));
   pool.query(
-    `SELECT DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00") AS fecha, link_radio_rx AS kpi 
+    `SELECT DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00") AS fecha, link_radio AS kpi 
     FROM cambium_data a
     WHERE ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY ;`,
     async (error, result) => {
@@ -690,7 +690,7 @@ async function getRealSNRDataByIP(res, ip) {
   const response = await client.get("SNRRealDataByIp-" + ip);
   if (response) return res.json(JSON.parse(response));
   pool.query(
-    `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.snr_v, a.snr_h
+    `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.snr
     FROM cambium_data a 
     WHERE ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY;`,
     async (error, result) => {
@@ -911,21 +911,19 @@ async function getGraphTopologyData(ip, type, res) {
     ORDER BY a.fecha ASC; `,
 
     cambium_data: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, 
-    a.link_radio_rx AS radioh, 
-    a.link_radio_tx AS radiov, 
+    a.link_radio, 
     a.ifresults_metricas AS throughput,
-    a.snr_v AS snrv,
-    a.snr_h AS snrh
+    a.snr
     FROM cambium_data a
     WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY 
     ORDER BY a.fecha ASC;`,
 
-    linkradiohoriz: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.link_radio_rx AS kpi 
+    linkradiohoriz: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.link_radio AS kpi 
     FROM cambium_data a
     WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY 
     ORDER BY a.fecha ASC;`,
 
-    linkradiovert: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.link_radio_tx AS kpi 
+    linkradiovert: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.link_radio AS kpi 
     FROM cambium_data a 
     WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY 
     ORDER BY fecha ASC;`,
@@ -940,7 +938,7 @@ async function getGraphTopologyData(ip, type, res) {
     WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY
     ORDER BY a.fecha ASC;`,
 
-    snr: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, snr_v AS snr 
+    snr: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, snr
     FROM cambium_data a 
     WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY  
     ORDER BY a.fecha ASC;`,
@@ -1159,10 +1157,10 @@ async function getWorstOperability(res, fecini, fecfin, macType) {
 
 async function getWorstQualityLAP(res, fecini, fecfin, macType) {
   pool.query(
-    `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.link_radio_rx, a.avg_power_rx AS avgpower, a.ip, b.tag AS name, b.tipo 
+    `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.link_radio, a.avg_power AS avgpower, a.ip, b.tag AS name, b.tipo 
     FROM cambium_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE b.rol = '${macType}' AND a.link_radio_rx < 0 AND a.fecha BETWEEN '${fecini}' AND '${fecfin}'   
-    ORDER BY a.link_radio_rx DESC 
+    WHERE b.rol = '${macType}' AND a.fecha BETWEEN '${fecini}' AND '${fecfin}'   
+    ORDER BY a.fecha DESC 
     LIMIT 100;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -1173,8 +1171,8 @@ async function getWorstQualityLAP(res, fecini, fecfin, macType) {
 
 async function getWorstQualitySNR(res, fecini, fecfin, macType) {
   pool.query(
-    `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr_v, a.avg_power_rx AS avgpower, a.ip, b.tag AS name, b.tipo 
-    FROM cambium_data a INNER JOIN inventario b ON a.ip = b.ip 
+    `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr, a.avg_power AS avgpower, a.ip, b.tag AS name, b.tipo 
+    FROM cambium_data a INNER JOIN inventario b ON a.ip = b.ip
     WHERE b.rol = '${macType}' AND a.fecha BETWEEN '${fecini}' AND '${fecfin}' ;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -1638,7 +1636,7 @@ async function getAllSNRDataByIP(res, ip) {
   const response = await client.get("AllSNRDataByIp-" + ip);
   if (response) return res.json(JSON.parse(response));
   pool.query(
-    `SELECT DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.ip, c.latitud, c.longitud, a.snr_v AS snr, b.tag AS name, b.tipo 
+    `SELECT DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.ip, c.latitud, c.longitud, a.snr, b.tag AS name, b.tipo 
     FROM cambium_data a 
     INNER JOIN inventario b ON a.ip = b.ip 
     INNER JOIN ubicacion_gps c ON a.ip = c.ip 

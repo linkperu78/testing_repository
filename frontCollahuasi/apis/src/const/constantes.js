@@ -5,13 +5,13 @@ const SELECT_QUERY = {
     ORDER BY fecha DESC 
     LIMIT 20`,
 
-  quality_lap: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr_v , a.link_radio_rx, a.avg_power_rx AS avgpower, a.ip, b.tag AS name, b.tipo 
+  quality_lap: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr, a.link_radio, a.avg_power AS avgpower, a.ip, b.tag AS name, b.tipo 
     FROM inventario b INNER JOIN cambium_data a ON a.ip=b.ip 
-    WHERE a.link_radio_rx < 0 AND fecha > NOW() - INTERVAL 1 DAY  
-    ORDER BY a.fecha desc , a.link_radio_rx DESC 
+    WHERE a.fecha > NOW() - INTERVAL 1 DAY  
+    ORDER BY a.fecha desc
     LIMIT 23`,
 
-  quality_snr: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr_v, a.snr_h, a.link_radio_rx, a.avg_power_rx AS avgpower, a.ip, b.tag AS name, b.tipo 
+  quality_snr: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr, a.link_radio, a.avg_power AS avgpower, a.ip, b.tag AS name, b.tipo 
     FROM inventario b INNER JOIN cambium_data a ON a.ip=b.ip 
     WHERE fecha > NOW() - INTERVAL 1 DAY  
     ORDER BY a.fecha DESC 
@@ -45,7 +45,7 @@ const SELECT_QUERY = {
   GROUP BY 1,2 
   ORDER BY ok DESC`,
 
-  kpisnr: `SELECT DISTINCT(a.ip),MAX(DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00")) AS fecha , a.snr_v, b.tag AS name, b.tipo 
+  kpisnr: `SELECT DISTINCT(a.ip),MAX(DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00")) AS fecha , a.snr, b.tag AS name, b.tipo 
   FROM inventario b INNER JOIN cambium_data a ON a.ip=b.ip 
   WHERE fecha > NOW() - INTERVAL 1 HOUR 
   GROUP BY a.ip;`,
@@ -57,10 +57,10 @@ const KPI_QUERYS_LAST_TIME = {
     WHERE a.fecha = (SELECT MAX(fecha) FROM latencia)
     ORDER BY latencia DESC;`,
 
-  quality_lap: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr_v, a.link_radio_rx, a.avg_power_rx AS avgpower, a.ip, b.tag AS name, b.tipo, b.rol AS subtipo
+  quality_lap: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr, a.link_radio, a.avg_power AS avgpower, a.ip, b.tag AS name, b.tipo, b.rol AS subtipo
     FROM inventario b INNER JOIN cambium_data a ON a.ip=b.ip 
-    WHERE fecha = (SELECT MAX(fecha) FROM cambium_data)
-    ORDER BY a.link_radio_rx DESC`,
+    WHERE a.fecha = (SELECT MAX(fecha) FROM cambium_data)
+    ORDER BY a.fecha DESC`,
 
   temp_inst: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.ip, b.tag AS name, b.tipo, b.rol AS subtipo, a.valores 
     FROM inventario b INNER JOIN sensores a ON a.ip = b.ip 

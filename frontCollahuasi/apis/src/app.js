@@ -131,10 +131,6 @@ async function getDataCharge() {
   precharge.preChargeDataKPI("wire_inst");
   precharge.preChargeDataKPI("operability");
   precharge.preChargeDataKPI("kpisnr");
-  precharge.getKPIDashboard("latency");
-  precharge.getKPIDashboard("quality_lap");
-  precharge.getKPIDashboard("temp_inst");
-  precharge.getKPIDashboard("operability");
   precharge.getAllOperability();
   precharge.getAllOperabilityLastDay();
   await precharge.getAllWirelessData();

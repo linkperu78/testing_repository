@@ -173,7 +173,7 @@ async function getAllPredictRXLVLData() {
 
 async function getAllSNRData() {
   await conexion.query(
-    `SELECT DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.ip, c.latitud, c.longitud, a.snr_v AS snr, b.tag AS name, b.tipo 
+    `SELECT DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.ip, c.latitud, c.longitud, a.snr, b.tag AS name, b.tipo 
     FROM cambium_data a 
     INNER JOIN inventario b ON a.ip = b.ip 
     INNER JOIN ubicacion_gps c ON a.ip = c.ip 
