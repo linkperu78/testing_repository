@@ -87,13 +87,26 @@ def generar_mensaje_whatsapp(alertas, tipo_alerta):
     return mensaje_chat_gpt(client=client, mensaje=mensaje_prompt)
 
 
+
 def enviar_mensajes_whatsapp(mensaje, tipo_alerta):
-    """Envía el mensaje generado por WhatsApp solo si existe."""
-    if mensaje:
-        for mudslide_id in MUDSLICE_ID_LIST:
-            print(f"Enviando mensaje de {tipo_alerta} a {mudslide_id}")
-            send_whatsapp_message_mudslide(mudslide_id, mensaje)
-            sleep(2)  # Esperar entre mensajes para evitar bloqueos de WhatsApp
+    """Envía el mensaje por WhatsApp solo si existe."""
+    if not mensaje:
+        print(f"⚠️ No hay alertas de {tipo_alerta} para enviar.")
+        return  # No ejecuta nada si el mensaje está vacío
+
+    for mudslide_id in MUDSLICE_ID_LIST:
+        print(f"📤 Enviando mensaje de {tipo_alerta} a {mudslide_id}")
+
+        try:
+            # Intentar enviar con un timeout de 10 segundos
+            send_whatsapp_message_mudslide(mudslide_id, mensaje, timeout=10)
+            print(f"✅ Mensaje de {tipo_alerta} enviado correctamente a {mudslide_id}")
+
+        except TimeoutError:
+            print(f"⚠️ Timeout: WhatsApp no respondió en 10 segundos para {mudslide_id}.")
+        except Exception as e:
+            print(f"❌ Error al enviar mensaje a {mudslide_id}: {e}")
+        sleep(2)  # Esperar entre mensajes para evitar bloqueos de WhatsApp
 
 
 # 🟢 **Ejecutar el flujo**

@@ -119,22 +119,25 @@ def mensaje_chat_gpt(client, mensaje, is_windows=False):
     return chat_mensaje
 
 
-def send_whatsapp_message_mudslide(id, mensaje):
+
+def send_whatsapp_message_mudslide(id, mensaje, timeout=10):
+    """Envía un mensaje a un usuario o grupo de WhatsApp usando Mudslide."""
     env = os.environ.copy()
     env["NODE_OPTIONS"] = "--experimental-global-webcrypto"
 
-    # 🔹 Reemplazar saltos de línea explícitamente para que WhatsApp los interprete bien
-    mensaje_safe = mensaje.replace('"', "'")  # Evita conflictos con comillas dobles
+    # 🔹 Usar `--` antes del mensaje para evitar problemas con `-`
+    comando = f'NODE_OPTIONS=--experimental-global-webcrypto mudslide send {id} -- "{mensaje}"'
 
-    # 🔹 Agregar `--` para indicar que todo lo que sigue es un argumento y no una opción de CLI
-    comando = f'NODE_OPTIONS=--experimental-global-webcrypto mudslide send {id} -- "{mensaje_safe}"'
-
-    print("Comando a ejecutar:", comando)  # Debug
+    print(f"Comando a ejecutar: {comando}")
 
     try:
-        resultado = subprocess.run(comando, shell=True, env=env, capture_output=True, text=True, check=True)
-        print("Mensaje enviado correctamente:", resultado.stdout)
+        resultado = subprocess.run(comando, shell=True, env=env, capture_output=True, text=True, check=True, timeout=timeout)
+        print(f"✅ Mensaje enviado correctamente a {id}: {resultado.stdout}")
+
+    except subprocess.TimeoutExpired:
+        raise TimeoutError(f"❌ Timeout: No se recibió respuesta de WhatsApp en {timeout} segundos para {id}.")
     except subprocess.CalledProcessError as error:
-        print("Error al enviar el mensaje:", error.stderr)
+        print(f"❌ Error al enviar mensaje a {id}: {error.stderr}")
+
 
 
