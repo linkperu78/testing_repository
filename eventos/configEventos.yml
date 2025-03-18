@@ -1,0 +1,38 @@
+api:
+  eventos:
+    add_list: /eventos/add_list
+    add: /eventos/add
+    get: /eventos/get
+    get_ip: /eventos/get_ip
+    urgentes: /eventos/urgentes
+
+  latencia:
+    get_poor_latency: /latencia/get_poor_latency
+
+  cambium_data:
+    get_snr_h: /cambium_data/get/snr_h
+    get_snr_v: /cambium_data/get/snr_v
+
+whatsapp:
+  twilio:
+    account_sid: 'TU_TWILIO_ACCOUNT_SID_AQUI'
+    auth_token: 'TU_TWILIO_AUTH_TOKEN_AQUI'
+    whatsapp_number: 'whatsapp:TU_NUMERO_DE_TWILIO'
+    my_whatsapp_number: 'whatsapp:TU_NUMERO_PERSONAL'
+
+  mudslice:
+    id_zaldivar: ["ID_GRUPO_WHATSAPP_AQUI"]
+    id_antucoya: ["ID_GRUPO_WHATSAPP_AQUI"]
+    id_cananea: ["ID_GRUPO_WHATSAPP_AQUI"]
+    id_default: ["TU_NUMERO_PERSONAL"]
+
+email:
+  smtp_server: 'smtp.TU_SERVIDOR_SMTP.com'
+  smtp_port: 587
+  sender_email: 'TU_EMAIL_AQUI'
+  sender_password: 'TU_PASSWORD_O_TOKEN_AQUI'
+  recipients: ['EMAIL1_AQUI', 'EMAIL2_AQUI']
+
+telegram:
+  token: 'TU_TELEGRAM_BOT_TOKEN_AQUI'
+  chat_id: 'TU_CHAT_ID_AQUI'
