@@ -95,10 +95,20 @@ else:
         })
 
 # Obtener datos de Cambium
-url_get_snr_h = f'{urljoin(DB_API_URL, config["api"]["cambium_data"]["get_snr_h"])}/</20/?start_date={start_date}&end_date={end_date}&limit={limit}&offset={offset}'
-url_get_snr_v = f'{urljoin(DB_API_URL, config["api"]["cambium_data"]["get_snr_v"])}/</20/?start_date={start_date}&end_date={end_date}&limit={limit}&offset={offset}'
-data_cambium_snr_h = api_request(url_get_snr_h)
-data_cambium_snr_v = api_request(url_get_snr_v)
+url_get_snr = f'{urljoin(DB_API_URL, config["api"]["cambium_data"]["get_snr_h"])}?start_date={start_date}&end_date={end_date}&limit={limit}&offset={offset}'
+data_cambium = api_request(url_get_snr, dataframe=True)
+
+if data_cambium is not None:
+    # Extraer valores de snr_h y snr_v desde la columna snr
+    data_cambium['snr'] = data_cambium['snr'].apply(lambda x: json.loads(x) if isinstance(x, str) else x)
+    data_cambium_snr_h = data_cambium[data_cambium['snr'].apply(lambda x: isinstance(x, dict) and 'snr_h' in x)].copy()
+    data_cambium_snr_h['snr_h'] = data_cambium_snr_h['snr'].apply(lambda x: x.get('snr_h'))
+    
+    data_cambium_snr_v = data_cambium[data_cambium['snr'].apply(lambda x: isinstance(x, dict) and 'snr_v' in x)].copy()
+    data_cambium_snr_v['snr_v'] = data_cambium_snr_v['snr'].apply(lambda x: x.get('snr_v'))
+else:
+    data_cambium_snr_h, data_cambium_snr_v = None, None
+
 
 if data_cambium_snr_h is None:
     print("No se pudo obtener datos de Cambium (SNR H).")
