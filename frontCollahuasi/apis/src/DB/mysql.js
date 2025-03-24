@@ -879,9 +879,10 @@ async function getAllOperabilityByIP(ip, res) {
     SUM(CASE WHEN a.latencia >= 0 AND a.latencia < 100  THEN 1 ELSE 0 END) AS ok,
     SUM(CASE WHEN a.latencia >= 100 AND a.latencia < 200 THEN 1 ELSE 0 END) AS alert,
     SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm,
-    SUM(CASE WHEN a.latencia >= 500 AND a.latencia < 0 THEN 1 ELSE 0 END) AS down
+    SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down
     FROM latencia a INNER JOIN inventario c ON a.ip = c.ip  
     WHERE a.fecha > NOW() - INTERVAL 30 DAY AND a.ip = '${ip}'
+    GROUP BY a.fecha
     ORDER BY a.fecha DESC; `,
     async (error, result) => {
       if (error) return console.log(error);
@@ -1143,7 +1144,7 @@ async function getWorstOperability(res, fecini, fecfin, macType) {
     SUM(CASE WHEN a.latencia >= 0 AND a.latencia < 100  THEN 1 ELSE 0 END) AS ok,
     SUM(CASE WHEN a.latencia >= 100 AND a.latencia < 200 THEN 1 ELSE 0 END) AS alert,
     SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm,
-    SUM(CASE WHEN a.latencia >= 500 AND a.latencia < 0 THEN 1 ELSE 0 END) AS down
+    SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down
     FROM latencia a INNER JOIN inventario c ON a.ip = c.ip 
     WHERE c.rol = '${macType}' AND a.fecha BETWEEN '${fecini}' AND '${fecfin}' 
     GROUP BY a.ip, c.tag, c.tipo 
@@ -1616,7 +1617,7 @@ async function getStatusHistoryByIP(ip, res) {
     SUM(CASE WHEN a.latencia >= 0 AND a.latencia < 100  THEN 1 ELSE 0 END) AS ok, 
     SUM(CASE WHEN a.latencia >= 100 AND a.latencia < 200 THEN 1 ELSE 0 END) AS alert, 
     SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm, 
-    SUM(CASE WHEN a.latencia >= 500 AND a.latencia < 0 THEN 1 ELSE 0 END) AS down 
+    SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down 
     FROM latencia a INNER JOIN inventario c ON a.ip = c.ip 
     WHERE a.fecha > NOW() - INTERVAL 30 DAY AND a.ip = '${ip}' 
     GROUP BY a.ip, c.tag, c.tipo  

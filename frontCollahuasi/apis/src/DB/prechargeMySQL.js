@@ -58,7 +58,7 @@ async function getAllLatLngRAJANT() {
   conexion.query(
     `SELECT a.ip, b.tag AS name, b.tipo, DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') as fecha,  a.latitud, a.longitud
     FROM ubicacion_gps a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha > Now() - INTERVAL 15 MINUTE
+    WHERE a.fecha > Now() - INTERVAL 15 MINUTE AND UPPER(b.rol) like '%ACCESO%'
     ORDER BY a.fecha DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -69,9 +69,9 @@ async function getAllLatLngRAJANT() {
 
 async function getAllLatLngPMPSM() {
   conexion.query(
-    `SELECT b.ip, b.tag AS name, b.tipo,  0 AS latitud, 0 AS longitud
+    `SELECT b.ip, b.tag AS name, b.tipo,  -20.9720 AS latitud, -68.7160 AS longitud
     FROM inventario b
-    WHERE UPPER(b.tipo) = 'PMP'`,
+    WHERE UPPER(b.tipo) = 'PMP-SM'`,
     async (error, result) => {
       if (error) return console.log(error);
       await client.set("LatLngPMPSM", JSON.stringify(result));
@@ -88,7 +88,7 @@ async function getAllTopologyData() {
       WHEN b.latencia >= 200 AND b.latencia < 500 AND b.fecha >= NOW() - INTERVAL 15 MINUTE THEN 'alarm'
       ELSE 'down'
     END AS status
-    FROM latencia b INNER JOIN inventario a ON a.ip = b.ip
+    FROM latencia b INNER JOIN inventario a ON a.ip = b.ip AND b.fecha >= NOW() - INTERVAL 15 MINUTE
     GROUP BY 1,2,3,4,5,6; `,
     async (error, result) => {
       if (error) return console.log(error);
@@ -295,7 +295,7 @@ async function getDataBaseStatus() {
 
 async function getCostWiredpeers() {
   await conexion.query(
-    `SELECT a.ip, DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.wireless, b.tag AS name, b.tipo, a.config
+    `SELECT a.ip, DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.wired AS wireless, b.tag AS name, b.tipo, a.config
     FROM rajant_data a INNER JOIN inventario b ON a.ip = b.ip 
     WHERE a.fecha >= NOW() - INTERVAL 15 MINUTE
     ORDER BY a.fecha DESC, a.ip DESC;`,
@@ -337,7 +337,7 @@ async function getAllOperability() {
     SUM(CASE WHEN a.latencia >= 0 AND a.latencia < 100  THEN 1 ELSE 0 END) AS ok, 
     SUM(CASE WHEN a.latencia >= 100 AND a.latencia < 200 THEN 1 ELSE 0 END) AS alert, 
     SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm, 
-    SUM(CASE WHEN a.latencia >= 500 AND a.latencia < 0 THEN 1 ELSE 0 END) AS down 
+    SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down 
     FROM latencia a INNER JOIN inventario c ON a.ip = c.ip 
     WHERE a.fecha > NOW() - INTERVAL 30 DAY
     GROUP BY 1,2
@@ -355,7 +355,7 @@ async function getAllOperabilityLastDay() {
     SUM(CASE WHEN a.latencia >= 0 AND a.latencia < 100  THEN 1 ELSE 0 END) AS ok, 
     SUM(CASE WHEN a.latencia >= 100 AND a.latencia < 200 THEN 1 ELSE 0 END) AS alert, 
     SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm, 
-    SUM(CASE WHEN a.latencia >= 500 AND a.latencia < 0 THEN 1 ELSE 0 END) AS down 
+    SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down 
     FROM latencia a INNER JOIN inventario c ON a.ip = c.ip 
     WHERE (a.fecha >= NOW() - INTERVAL 1 DAY) 
     GROUP BY 1 
@@ -407,7 +407,7 @@ async function getLastConectionHaultruck() {
 async function getCountLastConectionHaultruck() {
   await conexion.query(
     `SELECT b.tag AS name, a.ip, 
-    SUM(CASE WHEN a.latencia >= 500 AND a.latencia < 0 THEN 1 ELSE 0 END) AS down
+    SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down
     FROM latencia a INNER JOIN inventario b ON a.ip = b.ip 
     WHERE b.tipo = 'Haultruck' AND a.fecha >= NOW() - INTERVAL 1 DAY 
     GROUP BY 1,2 
