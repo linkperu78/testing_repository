@@ -82,3 +82,6 @@ module.exports = {
   SELECT_QUERY,
   KPI_QUERYS_LAST_TIME,
 };
+
+// view  : 13a36234d86ebd002a844a95a7d58506
+// admin : 8b8a98073e749302745352c5cd4cb2aa
