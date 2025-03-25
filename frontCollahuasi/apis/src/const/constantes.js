@@ -1,7 +1,7 @@
 const SELECT_QUERY = {
   latency: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') as fecha, a.ip, b.tag AS name, b.rol AS subtipo, a.latencia, b.tipo 
     FROM inventario b INNER JOIN latencia a ON b.ip = a.ip  
-    WHERE latencia > 300 AND a.fecha > NOW() - INTERVAL 1 DAY 
+    WHERE (latencia > 300 OR latencia < 0) AND a.fecha > NOW() - INTERVAL 1 DAY 
     ORDER BY fecha DESC 
     LIMIT 20`,
 
@@ -39,7 +39,7 @@ const SELECT_QUERY = {
   SUM(CASE WHEN a.latencia >= 0 AND a.latencia < 100  THEN 1 ELSE 0 END) AS ok, 
   SUM(CASE WHEN a.latencia >= 100 AND a.latencia < 200 THEN 1 ELSE 0 END) AS alert, 
   SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm, 
-  SUM(CASE WHEN a.latencia >= 500 AND a.latencia < 0 THEN 1 ELSE 0 END) AS down 
+  SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down 
   FROM latencia a INNER JOIN inventario c ON a.ip = c.ip 
   WHERE a.fecha > NOW() - INTERVAL 30 DAY
   GROUP BY 1,2 
@@ -71,7 +71,7 @@ const KPI_QUERYS_LAST_TIME = {
   SUM(CASE WHEN a.latencia >= 0 AND a.latencia < 100  THEN 1 ELSE 0 END) AS ok, 
   SUM(CASE WHEN a.latencia >= 100 AND a.latencia < 200 THEN 1 ELSE 0 END) AS alert, 
   SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm, 
-  SUM(CASE WHEN a.latencia >= 500 AND a.latencia < 0 THEN 1 ELSE 0 END) AS down 
+  SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down 
   FROM latencia a INNER JOIN inventario c ON a.ip = c.ip 
   WHERE a.fecha > NOW() - INTERVAL 30 DAY
   GROUP BY 1,2 
