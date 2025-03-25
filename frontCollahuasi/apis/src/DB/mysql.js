@@ -1146,7 +1146,7 @@ async function getWorstOperability(res, fecini, fecfin, macType) {
     SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm,
     SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down
     FROM latencia a INNER JOIN inventario c ON a.ip = c.ip 
-    WHERE c.rol = '${macType}' AND a.fecha BETWEEN '${fecini}' AND '${fecfin}' 
+    WHERE UPPER(c.rol) = UPPER('${macType}') AND a.fecha BETWEEN '${fecini}' AND '${fecfin}' 
     GROUP BY a.ip, c.tag, c.tipo 
     ORDER BY ok DESC; `,
     async (error, result) => {
@@ -1160,7 +1160,7 @@ async function getWorstQualityLAP(res, fecini, fecfin, macType) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.link_radio, a.avg_power AS avgpower, a.ip, b.tag AS name, b.tipo 
     FROM cambium_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE b.rol = '${macType}' AND a.fecha BETWEEN '${fecini}' AND '${fecfin}'   
+    WHERE UPPER(b.rol) = UPPER('${macType}') AND a.fecha BETWEEN '${fecini}' AND '${fecfin}'   
     ORDER BY a.fecha DESC 
     LIMIT 100;`,
     async (error, result) => {
@@ -1174,7 +1174,7 @@ async function getWorstQualitySNR(res, fecini, fecfin, macType) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha , a.snr, a.avg_power AS avgpower, a.ip, b.tag AS name, b.tipo 
     FROM cambium_data a INNER JOIN inventario b ON a.ip = b.ip
-    WHERE b.rol = '${macType}' AND a.fecha BETWEEN '${fecini}' AND '${fecfin}' ;`,
+    WHERE UPPER(b.rol) = UPPER('${macType}') AND a.fecha BETWEEN '${fecini}' AND '${fecfin}' ;`,
     async (error, result) => {
       if (error) return console.log(error);
       res.json(result);
@@ -1210,9 +1210,9 @@ async function getTENWorstLatency(res, fecini, fecfin, macType) {
   pool.query(
     `SELECT a.ip, b.tag AS name, b.tipo, AVG(a.latencia) AS latencia 
     FROM latencia a INNER JOIN inventario b ON a.ip = b.ip
-    WHERE a.fecha BETWEEN '${fecini}' AND '${fecfin}' AND b.rol = '${macType}'
+    WHERE a.fecha BETWEEN '${fecini}' AND '${fecfin}' AND UPPER(b.rol) = UPPER('${macType}')
     GROUP BY a.ip
-    order BY a.latencia DESC
+    order BY latencia DESC
     LIMIT 10;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -1229,7 +1229,7 @@ async function getTopFiveLatency(res, fecini, fecfin, tipo, macType) {
   pool.query(
     `SELECT a.ip 
     FROM latencia a INNER JOIN inventario b ON a.ip = b.ip
-    WHERE b.rol = '${macType}' AND ${rangeTime}
+    WHERE UPPER(b.rol) = UPPER('${macType}') AND ${rangeTime}
     GROUP BY 1 
     ORDER BY a.latencia ASC 
     LIMIT 10;`,
