@@ -82,4 +82,7 @@ module.exports = {
   SELECT_QUERY,
   KPI_QUERYS_LAST_TIME,
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 726fffaa2002adc6f8028a74b62db85c745278e3
