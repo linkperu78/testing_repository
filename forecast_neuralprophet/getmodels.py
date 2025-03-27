@@ -109,8 +109,8 @@ for forecast_type in forecast_types:
         print("No hay datos para procesar.")
         continue
 
-    df_raw['snr_h'] = df_raw['snr'].apply(lambda x: extract_value(x, 'snr_h'))
-    df_raw['snr_v'] = df_raw['snr'].apply(lambda x: extract_value(x, 'snr_v'))
+    df_raw['snr_h'] = df_raw['snr'].apply(lambda x: extract_value(x, 'H'))
+    df_raw['snr_v'] = df_raw['snr'].apply(lambda x: extract_value(x, 'V'))
     df_raw['rx'] = df_raw['link_radio'].apply(lambda x: extract_value(x, 'rx'))
 
     prediction_column = get_prediction_column(forecast_name)
