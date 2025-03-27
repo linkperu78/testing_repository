@@ -1,14 +1,15 @@
 const express = require("express");
 const morgan = require("morgan");
-const fs = require("fs");
-const https = require("https");
-const http = require("http");
-// const zmq = require("zeromq/v5-compat");
-// const WebSocket = require("ws");
-// const wss = new WebSocket.Server({ port: 2385 });
+// const fs = require("fs");
+// const https = require("https");
+// const http = require("http");
+
+// PUERTOS
+// const HTTP_PORT = 8970;
+// const HTTPS_PORT = 4150;
+const MYSQL_PORT = 4159;
 
 const bodyParser = require("body-parser");
-// const rateLimit = require('express-rate-limit');
 
 const inventario = require("./modulos/inventario/rutas");
 const kpi = require("./modulos/kpi/rutas");
@@ -26,54 +27,20 @@ const statuspage = require("./modulos/change_priv/rutas");
 const dashboard = require("./modulos/dashboard/rutas");
 const report = require("./modulos/report/rutas");
 const rutaYAML = require("./modulos/yaml/rutas");
-const error = require("./red/error");
-const mysql = require("./DB/mysql");
 const precharge = require("./DB/prechargeMySQL");
-const transporter = require("./mail");
 const sendMail = require(".//modulos/mail/rutas");
 const monitoreo = require("./modulos/monitoreo/rutas");
 const estadisticas = require("./modulos/estadisticas/rutas");
 const proxypages = require("./modulos/proxypages/rutas");
 const configuration = require("./modulos/configuration/rutas");
+const error = require("./red/error");
 
 const app = express();
-// const limiter       = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 100,
-//   standardHeaders: true,
-//   legacyHeaders: false,
-// });
 
 app.use(bodyParser.json({ limit: "500kb" }));
 
-const privateKey = fs.readFileSync("/etc/apache2/ssl/server.key", "utf8");
-const certificate = fs.readFileSync("/etc/apache2/ssl/server.crt", "utf8");
-
-const credentials = {
-  key: privateKey,
-  cert: certificate,
-};
-
 //Middleware
 app.use((req, res, next) => {
-  const allowedOrigins = [
-    "http://192.168.2.223",
-    "https://192.168.2.223",
-    "http://192.168.2.194:8080",
-    "http://192.168.2.167:8080",
-    "http://192.168.1.104:8080", //Hogar
-    "http://192.168.2.185:8020",
-    "http://192.168.2.194:8020",
-    "http://192.168.0.101:8020",
-    "http://192.168.2.185",
-    "https://192.168.2.152",
-    "https://smartlink.hcgpe.com",
-  ];
-  const origin = req.headers.origin;
-
-  // if (allowedOrigins.includes(origin)) {
-  //   res.setHeader("Access-Control-Allow-Origin", origin);
-  // }
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -86,13 +53,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(limiter);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //configuracion
-app.set("port", 4159);
+app.set("port", MYSQL_PORT);
 
 //rutas
 app.use("/api/inventario", inventario);
@@ -196,8 +162,6 @@ function comprobarHora() {
 
 setInterval(() => {
   comprobarHora();
-  // precharge.getAllDataGestor();
-  // precharge.getAllDataIPS2();
 }, 60000);
 
 setTimeout(() => {
@@ -206,49 +170,31 @@ setTimeout(() => {
   getCostsData();
   getKpiCostData();
   getTopologyStatus();
-  // precharge.getAllTopologyData();
 }, 100);
 
-// setTimeout(() => {
-//   const subscriber = zmq.socket("sub");
-//   subscriber.connect("tcp://localhost:5555");
-//   subscriber.subscribe(""); // Suscribirse a todos los mensajes
+// para hacerlo HTTPS
 
-//   wss.on("connection", (ws) => {
-//     console.log("Cliente conectado");
+// const privateKey = fs.readFileSync("/etc/apache2/ssl/server.key", "utf8");
+// const certificate = fs.readFileSync("/etc/apache2/ssl/server.crt", "utf8");
 
-//     // Enviar mensajes al cliente cuando lleguen por ZeroMQ
-//     subscriber.on("message", (message) => {
-//       ws.send(message.toString());
-//     });
+// const credentials = {
+//   key: privateKey,
+//   cert: certificate,
+// };
 
-//     // Manejar la desconexión del cliente
-//     ws.on("close", () => {
-//       console.log("Cliente desconectado");
-//     });
-//   });
+// const httpsServer = https.createServer(credentials, app);
 
-//   console.log("Servidor WebSocket escuchando en ws://localhost:2385");
-// }, 1000);
+// const httpServer = http.createServer((req, res) => {
+//   res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
+//   res.end();
+// });
 
-const httpsServer = https.createServer(credentials, app);
+// httpServer.listen(HTTP_PORT, () => {
+//   console.log(`Servidor HTTP redirigiendo a HTTPS en el puerto ${HTTP_PORT}`);
+// });
 
-// Crear Servidor HTTP que redirige a HTTPS
-const httpServer = http.createServer((req, res) => {
-  res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
-  res.end();
-});
-
-// Escuchar en puertos HTTP y HTTPS
-const HTTP_PORT = 8970;
-const HTTPS_PORT = 4150;
-
-httpServer.listen(HTTP_PORT, () => {
-  console.log(`Servidor HTTP redirigiendo a HTTPS en el puerto ${HTTP_PORT}`);
-});
-
-httpsServer.listen(HTTPS_PORT, () => {
-  console.log(`Servidor HTTPS corriendo en el puerto ${HTTPS_PORT}`);
-});
+// httpsServer.listen(HTTPS_PORT, () => {
+//   console.log(`Servidor HTTPS corriendo en el puerto ${HTTPS_PORT}`);
+// });
 
 module.exports = app;
