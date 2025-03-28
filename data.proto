@@ -1,0 +1,5997 @@
+Se han detectado un total de 6 equipos en Inventario
+system {
+  platform: "FE1"
+  uptime: 20379.259765625
+  idle: 19321.205078125
+  running: true
+  bridgeup: true
+  version: "11.28.3"
+  freeMemory: 1655828
+  factoryMode: false
+  networkId: "\000\000~\315.\366"
+  ipv4 {
+    address: "192.168.19.34"
+    subnet: "255.255.255.0"
+    gateway: "192.168.19.1"
+    dns: "0.0.0.0"
+  }
+  encapId: 120144
+  legacyPlatform: "lmbjrA"
+  temperature: 1950
+  macs: "00:13:95:5c:85:9f 84:8d:84:00:47:96 48:a9:8a:a3:82:d1 04:f0:21:c0:d6:d6 04:f0:21:c0:d6:8c"
+  bootCounter: 54
+  device {
+    pSlot: "0000:03:00.0"
+    vendorId: 5772
+    deviceId: 60
+    subsystemVendorId: 0
+    subsystemDeviceId: 0
+  }
+  device {
+    pSlot: "0000:06:00.0"
+    vendorId: 5772
+    deviceId: 51
+    subsystemVendorId: 6582
+    subsystemDeviceId: 53270
+  }
+  device {
+    pSlot: "0000:05:00.0"
+    vendorId: 5772
+    deviceId: 60
+    subsystemVendorId: 0
+    subsystemDeviceId: 0
+  }
+  sensors {
+    temperature {
+      key: 0
+      action: ADD
+      name: "MB.temp1"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/temp_LMB.Q7_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 1950
+        boot: 2500
+        min: 1750
+        max: 2650
+      }
+    }
+    temperature {
+      key: 1
+      action: ADD
+      name: "MB.temp2"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/temp_LMB.FP_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 1650
+        boot: 2200
+        min: 1500
+        max: 2350
+      }
+    }
+    temperature {
+      key: 2
+      action: ADD
+      name: "DCDC.temp"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/temp_DCDC_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 2000
+        boot: 2550
+        min: 1850
+        max: 2750
+      }
+    }
+    temperature {
+      key: 3
+      action: ADD
+      name: "Package id 0"
+      path: "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 1900
+        boot: 2500
+        min: 1600
+        max: 2700
+      }
+    }
+    temperature {
+      key: 4
+      action: ADD
+      name: "Core 0"
+      path: "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 1800
+        boot: 2400
+        min: 1500
+        max: 2600
+      }
+    }
+    temperature {
+      key: 5
+      action: ADD
+      name: "Core 2"
+      path: "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp4_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 1700
+        boot: 2500
+        min: 1300
+        max: 2500
+      }
+    }
+    temperature {
+      key: 6
+      action: ADD
+      name: "cg-cpu"
+      path: "/sys/devices/platform/rj-cg-hwmon/hwmon/hwmon3/temp1_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 1700
+        boot: 2400
+        min: 1300
+        max: 2600
+      }
+    }
+    temperature {
+      key: 7
+      action: ADD
+      name: "cg-board"
+      path: "/sys/devices/platform/rj-cg-hwmon/hwmon/hwmon3/temp2_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 1930
+        boot: 2420
+        min: 1750
+        max: 2630
+      }
+    }
+    voltage {
+      key: 0
+      action: ADD
+      name: "MB.12V0"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/volt_LMB.12V0_input"
+      value {
+        statsTimestampMillis: 20379230
+        current: 1219
+        boot: 1219
+        min: 1194
+        max: 1243
+      }
+    }
+    voltage {
+      key: 1
+      action: ADD
+      name: "MB.3V3"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/volt_LMB.3V3_input"
+      value {
+        statsTimestampMillis: 20379230
+        current: 348
+        boot: 348
+        min: 344
+        max: 354
+      }
+    }
+    voltage {
+      key: 2
+      action: ADD
+      name: "MB.5V0"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/volt_LMB.5V0_input"
+      value {
+        statsTimestampMillis: 20379230
+        current: 503
+        boot: 503
+        min: 497
+        max: 507
+      }
+    }
+    voltage {
+      key: 3
+      action: ADD
+      name: "input"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/volt_DCDC.VIN_input"
+      value {
+        statsTimestampMillis: 20379230
+        current: 4820
+        boot: 4817
+        min: 4751
+        max: 4947
+      }
+    }
+    voltage {
+      key: 4
+      action: ADD
+      name: "DCDC.DCIN"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/volt_DCDC.DCIN_input"
+      value {
+        statsTimestampMillis: 20379230
+        current: 4809
+        boot: 4807
+        min: 4738
+        max: 4891
+      }
+    }
+    voltage {
+      key: 5
+      action: ADD
+      name: "DCDC.PoE.eth0"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/volt_DCDC.PoE.eth0_input"
+      value {
+        statsTimestampMillis: 20379230
+        current: 2
+        boot: 2
+        min: 2
+        max: 148
+      }
+    }
+    voltage {
+      key: 6
+      action: ADD
+      name: "DCDC.PoE.eth1"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/volt_DCDC.PoE.eth1_input"
+      value {
+        statsTimestampMillis: 20379230
+        current: 60
+        boot: 60
+        min: 2
+        max: 174
+      }
+    }
+    voltage {
+      key: 7
+      action: ADD
+      name: "battery"
+      path: "/sys/devices/platform/rj-bmp-hwmon/hwmon/hwmon6/volt_VBATT_input"
+      value {
+        statsTimestampMillis: 20379230
+        current: 349
+        boot: 349
+        min: 345
+        max: 355
+      }
+    }
+    voltage {
+      key: 8
+      action: ADD
+      name: "cg-5V-supply"
+      path: "/sys/devices/platform/rj-cg-hwmon/hwmon/hwmon3/in1_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 500
+        boot: 500
+        min: 500
+        max: 500
+      }
+    }
+    voltage {
+      key: 9
+      action: ADD
+      name: "cg-5V-standby"
+      path: "/sys/devices/platform/rj-cg-hwmon/hwmon/hwmon3/in2_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 500
+        boot: 500
+        min: 500
+        max: 500
+      }
+    }
+    voltage {
+      key: 10
+      action: ADD
+      name: "cg-5V-supply-current"
+      path: "/sys/devices/platform/rj-cg-hwmon/hwmon/hwmon3/in3_input"
+      value {
+        statsTimestampMillis: 20379231
+        current: 54
+        boot: 99
+        min: 39
+        max: 99
+      }
+    }
+  }
+  dfsDomain: FCC
+  countrycode: 840
+  primaryInterface: "tap0"
+  restartEvent {
+    meta {
+      description: "reboot command initiated by adminbcc@::FFFF:192.168.20.60 using agent Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+      bootCounter: 54
+      cpuTimestampMillis: 1359436
+      timestamp: 1743169753
+      client {
+        index: 1
+        action: ADD
+        userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+        remoteUsername: "adminbcc"
+        remoteOS: "Windows Server 2019"
+        appInstanceID: "29b2efcb-382b-491d-9de6-d0ceb3da92a2"
+        address: "::FFFF:192.168.20.60"
+        port: 54807
+      }
+      clientComment: ""
+      version: "11.28.3, b1"
+    }
+    code: USER_REBOOT
+    rebootNeeded: true
+  }
+  cpuTimestampMillis: 20379230
+  eventLog {
+    logSize: 133
+    lastIndex: 133
+    events {
+      key: 114
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 70
+          }
+          before {
+            serial: 69
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 49
+          cpuTimestampMillis: 951294520
+          timestamp: 1742475650
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 114
+      }
+    }
+    events {
+      key: 115
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 71
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          before {
+            serial: 70
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 49
+          cpuTimestampMillis: 954822150
+          timestamp: 1742479178
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 115
+      }
+    }
+    events {
+      key: 116
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 72
+          }
+          before {
+            serial: 71
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 49
+          cpuTimestampMillis: 954836410
+          timestamp: 1742479192
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 116
+      }
+    }
+    events {
+      key: 117
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 73
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          before {
+            serial: 72
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 49
+          cpuTimestampMillis: 957157341
+          timestamp: 1742481513
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 117
+      }
+    }
+    events {
+      key: 118
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 74
+          }
+          before {
+            serial: 73
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 49
+          cpuTimestampMillis: 957172518
+          timestamp: 1742481528
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 118
+      }
+    }
+    events {
+      key: 119
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 75
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          before {
+            serial: 74
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 49
+          cpuTimestampMillis: 957195490
+          timestamp: 1742481551
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 119
+      }
+    }
+    events {
+      key: 120
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 76
+          }
+          before {
+            serial: 75
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 49
+          cpuTimestampMillis: 957209750
+          timestamp: 1742481565
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 120
+      }
+    }
+    events {
+      key: 121
+      action: ADD
+      event {
+        type: RESTART
+        restart {
+          code: USER_REBOOT
+          rebootNeeded: false
+        }
+        meta {
+          description: "reboot command initiated by adminbcc@::FFFF:192.168.20.60 using agent Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+          bootCounter: 49
+          cpuTimestampMillis: 1128781993
+          timestamp: 1742653138
+          client {
+            index: 1
+            action: ADD
+            userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+            remoteUsername: "adminbcc"
+            remoteOS: "Windows Server 2019"
+            appInstanceID: "fccbd1b2-6932-47b4-a3d3-0cfa9ac18a23"
+            address: "::FFFF:192.168.20.60"
+            port: 61758
+          }
+          clientComment: ""
+          version: "11.28.3, b1"
+        }
+        id: 121
+      }
+    }
+    events {
+      key: 122
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 77
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          before {
+            serial: 76
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 51
+          cpuTimestampMillis: 419267670
+          timestamp: 1743072426
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 122
+      }
+    }
+    events {
+      key: 123
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 78
+          }
+          before {
+            serial: 77
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 51
+          cpuTimestampMillis: 419282940
+          timestamp: 1743072441
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 123
+      }
+    }
+    events {
+      key: 124
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 79
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          before {
+            serial: 78
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 51
+          cpuTimestampMillis: 419524927
+          timestamp: 1743072683
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 124
+      }
+    }
+    events {
+      key: 125
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 80
+          }
+          before {
+            serial: 79
+            instamesh {
+              traces {
+                ipOrMac: "192.168.19.37"
+                action: ADD
+              }
+            }
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by internal@localhost using agent run-once-task-agent"
+          bootCounter: 51
+          cpuTimestampMillis: 419540210
+          timestamp: 1743072699
+          client {
+            index: 1
+            action: ADD
+            userAgent: "run-once-task-agent"
+            remoteUsername: "internal"
+            address: "localhost"
+          }
+          version: "11.28.3, b1"
+        }
+        id: 125
+      }
+    }
+    events {
+      key: 126
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 81
+            instamesh {
+              arpProxyTimeout: 600
+            }
+          }
+          before {
+            serial: 80
+            instamesh {
+              arpProxyTimeout: 10
+            }
+          }
+          rebootNeeded: false
+        }
+        meta {
+          description: "Configuration change initiated by adminbcc@::FFFF:192.168.20.60 using agent Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+          bootCounter: 51
+          cpuTimestampMillis: 420019829
+          timestamp: 1743073178
+          client {
+            index: 1
+            action: ADD
+            userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+            remoteUsername: "adminbcc"
+            remoteOS: "Windows Server 2019"
+            appInstanceID: "9f15f4a0-f31c-4a1f-b7cd-f700fb0112ca"
+            address: "::FFFF:192.168.20.60"
+            port: 50147
+          }
+          version: "11.28.3, b1"
+        }
+        id: 126
+      }
+    }
+    events {
+      key: 127
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 82
+            security {
+              acl {
+                blackList {
+                  mac: "\304\2554OI\355"
+                  action: ADD
+                  comment: "Added 19:06:50 CLST"
+                }
+              }
+            }
+          }
+          before {
+            serial: 81
+          }
+          rebootNeeded: true
+        }
+        meta {
+          description: "Configuration change initiated by adminbcc@::FFFF:192.168.20.60 using agent Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+          bootCounter: 51
+          cpuTimestampMillis: 459844681
+          timestamp: 1743113003
+          client {
+            index: 1
+            action: ADD
+            userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+            remoteUsername: "adminbcc"
+            remoteOS: "Windows Server 2019"
+            appInstanceID: "9f15f4a0-f31c-4a1f-b7cd-f700fb0112ca"
+            address: "::FFFF:192.168.20.60"
+            port: 50147
+          }
+          version: "11.28.3, b1"
+        }
+        id: 127
+      }
+    }
+    events {
+      key: 128
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 83
+            security {
+              acl {
+                aclMode: "BLACKLIST"
+              }
+            }
+          }
+          before {
+            serial: 82
+            security {
+              acl {
+                aclMode: "NONE"
+              }
+            }
+          }
+          rebootNeeded: true
+        }
+        meta {
+          description: "Configuration change initiated by adminbcc@::FFFF:192.168.20.60 using agent Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+          bootCounter: 51
+          cpuTimestampMillis: 460309059
+          timestamp: 1743113468
+          client {
+            index: 1
+            action: ADD
+            userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+            remoteUsername: "adminbcc"
+            remoteOS: "Windows Server 2019"
+            appInstanceID: "9f15f4a0-f31c-4a1f-b7cd-f700fb0112ca"
+            address: "::FFFF:192.168.20.60"
+            port: 50147
+          }
+          version: "11.28.3, b1"
+        }
+        id: 128
+      }
+    }
+    events {
+      key: 129
+      action: ADD
+      event {
+        type: RESTART
+        restart {
+          code: USER_REBOOT
+          rebootNeeded: true
+        }
+        meta {
+          description: "reboot command initiated by adminbcc@::FFFF:192.168.20.60 using agent Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+          bootCounter: 51
+          cpuTimestampMillis: 460586589
+          timestamp: 1743113745
+          client {
+            index: 1
+            action: ADD
+            userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+            remoteUsername: "adminbcc"
+            remoteOS: "Windows Server 2019"
+            appInstanceID: "9f15f4a0-f31c-4a1f-b7cd-f700fb0112ca"
+            address: "::FFFF:192.168.20.60"
+            port: 50147
+          }
+          clientComment: ""
+          version: "11.28.3, b1"
+        }
+        id: 129
+      }
+    }
+    events {
+      key: 130
+      action: ADD
+      event {
+        type: RESTART
+        restart {
+          meta {
+            description: "Power-On"
+            bootCounter: 52
+            timestamp: 1743165074
+          }
+          code: POWER_ON
+        }
+        meta {
+          description: "Power-On"
+          bootCounter: 52
+          cpuTimestampMillis: 16998
+          timestamp: 1743165074
+          version: "11.28.3, b1"
+        }
+        id: 130
+      }
+    }
+    events {
+      key: 131
+      action: ADD
+      event {
+        type: RESTART
+        restart {
+          meta {
+            description: "Power-On"
+            bootCounter: 53
+            timestamp: 1743168410
+          }
+          code: POWER_ON
+        }
+        meta {
+          description: "Power-On"
+          bootCounter: 53
+          cpuTimestampMillis: 16878
+          timestamp: 1743168410
+          version: "11.28.3, b1"
+        }
+        id: 131
+      }
+    }
+    events {
+      key: 132
+      action: ADD
+      event {
+        type: CONFIG_CHANGE
+        configChange {
+          delta {
+            serial: 84
+          }
+          before {
+            serial: 83
+            security {
+              acl {
+                blackList {
+                  mac: "\304\2554OI\355"
+                  action: ADD
+                  comment: "Added 19:06:50 CLST"
+                }
+              }
+            }
+          }
+          rebootNeeded: true
+        }
+        meta {
+          description: "Configuration change initiated by adminbcc@::FFFF:192.168.20.60 using agent Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+          bootCounter: 54
+          cpuTimestampMillis: 1346710
+          timestamp: 1743169740
+          client {
+            index: 1
+            action: ADD
+            userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+            remoteUsername: "adminbcc"
+            remoteOS: "Windows Server 2019"
+            appInstanceID: "29b2efcb-382b-491d-9de6-d0ceb3da92a2"
+            address: "::FFFF:192.168.20.60"
+            port: 54807
+          }
+          version: "11.28.3, b1"
+        }
+        id: 132
+      }
+    }
+    events {
+      key: 133
+      action: ADD
+      event {
+        type: RESTART
+        restart {
+          code: USER_REBOOT
+          rebootNeeded: true
+        }
+        meta {
+          description: "reboot command initiated by adminbcc@::FFFF:192.168.20.60 using agent Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+          bootCounter: 54
+          cpuTimestampMillis: 1359436
+          timestamp: 1743169753
+          client {
+            index: 1
+            action: ADD
+            userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+            remoteUsername: "adminbcc"
+            remoteOS: "Windows Server 2019"
+            appInstanceID: "29b2efcb-382b-491d-9de6-d0ceb3da92a2"
+            address: "::FFFF:192.168.20.60"
+            port: 54807
+          }
+          clientComment: ""
+          version: "11.28.3, b1"
+        }
+        id: 133
+      }
+    }
+  }
+  clockTime: 1743190156
+  ipv6 {
+    address: "fe80::848d:84ff:fe42:4480"
+  }
+  hashes {
+    rule: "\377\227\324\300{lXbU2I\275\317U\363J\266\017\221d"
+    meta: "\360\340]\3762[\374\372u\305\260\262{\206\307Z\275o\016/"
+    model: "c\303\346B-\003\302y\216\234\035\270#\357B\342(aX\272"
+    stateMeta: "\332L\013\371\203\273\235$5/A\234\217\3254\013\352,2q"
+    alertMeta: "\027\236M\203\226\317\233\334\010\277\206\330\270\033b\311\036|\272m"
+  }
+}
+build {
+  date: "Thu Nov 14 14:33:49 EST 2024"
+  user: "jenkins"
+  number: "b1"
+  host: "Linux sl-1.dc.rajant.com 5.14.0-427.42.1.el9_4.x86_64 #1 SMP PREEMPT_DYNAMIC Thu Oct 31 14:01:51 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux"
+  description: "release"
+  timestamp: "1731612829"
+  version: "11.28.3"
+}
+instamesh {
+  arpDropped: 161864
+  arpRequests: 206271
+  arpRequestsAnswered: 13374
+  arpRequestsUnicasted: 14381
+  arpTotal: 768854
+  floodsDropped: 21
+  packetsDropped: 1169738
+  packetsMulticast: 610291
+  packetsReceived: 4590999
+  packetsSent: 4389316
+  sourceFloodsDropped: 6889
+  timeWaited: 4464538
+  discoveriesSourced: 284
+  discoveriesPassed: 4037
+  ndDropped: 0
+  ndRequests: 215
+  ndRequestsAnswered: 0
+  ndRequestsUnicasted: 0
+  ndTotal: 3835
+  undeliverablesReceived: 201
+  undeliverableTransmitFailures: 348
+  statsTimestampMillis: 20378080
+  unicastDropped: 39174
+  overflows: 113
+  unicastIntroSourced: 0
+  broadcastIntroSourced: 2239
+  broadcastIntroPassed: 5124
+  unicastIntroRespSourced: 14
+  unicastIntroRespPassed: 0
+  arpDropped_64: 161864
+  arpRequests_64: 206271
+  arpRequestsAnswered_64: 13374
+  arpRequestsUnicasted_64: 14381
+  arpTotal_64: 768854
+  floodsDropped_64: 21
+  packetsDropped_64: 1169738
+  packetsMulticast_64: 610291
+  packetsReceived_64: 4590999
+  packetsSent_64: 4389316
+  sourceFloodsDropped_64: 6889
+  timeWaited_64: 4464538
+  discoveriesSourced_64: 284
+  discoveriesPassed_64: 4037
+  ndDropped_64: 0
+  ndRequests_64: 215
+  ndRequestsAnswered_64: 0
+  ndRequestsUnicasted_64: 0
+  ndTotal_64: 3835
+  undeliverablesReceived_64: 201
+  undeliverableTransmitFailures_64: 348
+  unicastDropped_64: 39174
+  overflows_64: 113
+  unicastIntroSourced_64: 0
+  broadcastIntroSourced_64: 2239
+  broadcastIntroPassed_64: 5124
+  unicastIntroRespSourced_64: 14
+  unicastIntroRespPassed_64: 0
+}
+wireless {
+  key: 0
+  action: ADD
+  mac: "\204\215\204BD~"
+  name: "wlan0"
+  noise: -108
+  channel: 161
+  range: 3218
+  rxAntennaSelect: 3
+  timeout: 60
+  txpower: 30
+  txAntennaSelect: 3
+  stats {
+    rxBytes: 143488055
+    rxPackets: 1956624
+    txBytes: 68704273
+    txPackets: 451843
+    radarDetections: 0
+    pulseEvents: 0
+    statsTimestampMillis: 20379235
+    rxPhyErrors: 0
+    radarDetections_64: 0
+    pulseEvents_64: 0
+    rxPhyErrors_64: 0
+  }
+  peer {
+    mac: "\204\215\204A\317\347"
+    action: ADD
+    enabled: true
+    cost: 530
+    rate: 520
+    rssi: 18
+    signal: -90
+    encapId: 111450
+    ipv4Address: "192.168.19.36"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe41:cfe7%wlan0wds"
+  }
+  peer {
+    mac: "\204\215\204B\020\333"
+    action: ADD
+    enabled: true
+    cost: 957
+    rate: 520
+    rssi: 26
+    signal: -82
+    encapId: 111492
+    ipv4Address: "192.168.19.32"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe42:10db%wlan0wds"
+  }
+  peer {
+    mac: "\204\215\204A\317\230"
+    action: ADD
+    enabled: true
+    cost: 3720
+    rate: 65
+    rssi: 11
+    signal: -97
+    encapId: 111424
+    ipv4Address: "192.168.19.31"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe41:cf98%wlan0wds"
+  }
+  channelActiveTime: 39627388077
+  channelBusyTime: 2196179297
+  channelReceiveTime: 1626174845
+  channelTransmitTime: 184131732
+  failedToDetect: false
+  dfsPolicy {
+    enforcement: UNRESTRICTED
+    cac: 60
+    minTpcDelta: 0
+    indoor: false
+  }
+  statsTimestampMillis: 20377582
+  phy: "phy1"
+  monitor: false
+  displayChannel: 161
+  firmwareVersion: "10.4-988X-rajant.1.9e37c984"
+}
+wireless {
+  key: 1
+  action: ADD
+  mac: "\204\215\204BD\177"
+  name: "wlan1"
+  noise: -101
+  channel: 165
+  range: 3218
+  rxAntennaSelect: 3
+  timeout: 60
+  txpower: 30
+  txAntennaSelect: 3
+  stats {
+    rxBytes: 639834705
+    rxPackets: 2552636
+    txBytes: 352202626
+    txPackets: 1686436
+    radarDetections: 0
+    pulseEvents: 0
+    statsTimestampMillis: 20379236
+    rxPhyErrors: 0
+    radarDetections_64: 0
+    pulseEvents_64: 0
+    rxPhyErrors_64: 0
+  }
+  peer {
+    mac: "\204\215\204A\317\346"
+    action: ADD
+    enabled: true
+    cost: 526
+    rate: 585
+    rssi: 31
+    signal: -70
+    encapId: 111450
+    ipv4Address: "192.168.19.36"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe41:cfe6%wlan1wds"
+  }
+  peer {
+    mac: "\204\215\204A\317\260"
+    action: ADD
+    enabled: true
+    cost: 564
+    rate: 1040
+    rssi: 31
+    signal: -70
+    encapId: 111433
+    ipv4Address: "192.168.19.37"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe41:cfb0%wlan1wds"
+  }
+  peer {
+    mac: "\204\215\204B\020\334"
+    action: ADD
+    enabled: true
+    cost: 657
+    rate: 390
+    rssi: 19
+    signal: -82
+    encapId: 111492
+    ipv4Address: "192.168.19.32"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe42:10dc%wlan1wds"
+  }
+  peer {
+    mac: "\204\215\204A\317\227"
+    action: ADD
+    enabled: true
+    cost: 1190
+    rate: 130
+    rssi: 16
+    signal: -85
+    encapId: 111424
+    ipv4Address: "192.168.19.31"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe41:cf97%wlan1wds"
+  }
+  channelActiveTime: 39654390065
+  channelBusyTime: 1847507941
+  channelReceiveTime: 1388658173
+  channelTransmitTime: 285921768
+  failedToDetect: false
+  dfsPolicy {
+    enforcement: UNRESTRICTED
+    cac: 60
+    minTpcDelta: 0
+    indoor: false
+  }
+  statsTimestampMillis: 20377582
+  phy: "phy0"
+  monitor: false
+  displayChannel: 165
+  firmwareVersion: "10.4-988X-rajant.1.9e37c984"
+}
+wireless {
+  key: 2
+  action: ADD
+  mac: "\204\215\204BD}"
+  name: "wlan2"
+  noise: -96
+  channel: 6
+  range: 3218
+  rxAntennaSelect: 3
+  timeout: 60
+  txpower: 30
+  txAntennaSelect: 3
+  stats {
+    rxBytes: 656940799
+    rxPackets: 4323452
+    txBytes: 400873506
+    txPackets: 2155375
+    radarDetections: 0
+    pulseEvents: 0
+    statsTimestampMillis: 20379237
+    rxInterrupts: 4926518
+    txInterrupts: 2253746
+    beaconInterrupts: 794951
+    rxPhyErrors: 199077
+    radarDetections_64: 0
+    pulseEvents_64: 0
+    rxPhyErrors_64: 199077
+  }
+  ap {
+    key: 0
+    action: ADD
+    essid: "MLINK"
+    client {
+      mac: "H\251\212D\261\300"
+      action: ADD
+      rate: 540
+      rssi: 25
+      signal: -71
+    }
+    client {
+      mac: "\010U1\370\t\367"
+      action: ADD
+      rate: 110
+      rssi: 27
+      signal: -69
+    }
+    client {
+      mac: "$\244<@\022\222"
+      action: ADD
+      rate: 10
+      rssi: 22
+      signal: -74
+    }
+    client {
+      mac: "$\244<@\013\264"
+      action: ADD
+      rate: 20
+      rssi: 20
+      signal: -76
+    }
+    client {
+      mac: "\334\237\333\230\267}"
+      action: ADD
+      rate: 110
+      rssi: 20
+      signal: -76
+    }
+    client {
+      mac: "H\251\212\014\024]"
+      action: ADD
+      rate: 10
+      rssi: 19
+      signal: -77
+    }
+    client {
+      mac: "\334\237\333\230\267z"
+      action: ADD
+      rate: 120
+      rssi: 27
+      signal: -69
+    }
+    client {
+      mac: "\304\2554\354j~"
+      action: ADD
+      rate: 110
+      rssi: 25
+      signal: -71
+    }
+    client {
+      mac: "H\251\212D\245\273"
+      action: ADD
+      rate: 240
+      rssi: 13
+      signal: -83
+    }
+    client {
+      mac: "\334\237\333\230\271^"
+      action: ADD
+      rate: 10
+      rssi: 34
+      signal: -62
+    }
+    client {
+      mac: "\270i\364\325Y\335"
+      action: ADD
+      rate: 110
+      rssi: 30
+      signal: -66
+    }
+    client {
+      mac: "\334\237\333\230\266\217"
+      action: ADD
+      rate: 20
+      rssi: 20
+      signal: -76
+    }
+    client {
+      mac: "H\251\212D\245\271"
+      action: ADD
+      rate: 55
+      rssi: 19
+      signal: -77
+    }
+    client {
+      mac: "H\251\212D\245\330"
+      action: ADD
+      rate: 10
+      rssi: 10
+      signal: -86
+    }
+    client {
+      mac: "H\251\212\037o\313"
+      action: ADD
+      rate: 10
+      rssi: 12
+      signal: -84
+    }
+    client {
+      mac: "\334\237\333\230\267\177"
+      action: ADD
+      rate: 20
+      rssi: 22
+      signal: -74
+    }
+    client {
+      mac: "\334\237\333\230\266\332"
+      action: ADD
+      rate: 10
+      rssi: 18
+      signal: -78
+    }
+  }
+  peer {
+    mac: "\204\215\204B\020\332"
+    action: ADD
+    enabled: true
+    cost: 44822
+    rate: 60
+    rssi: 32
+    signal: -64
+    encapId: 111492
+    ipv4Address: "192.168.19.32"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe42:10da%wlan2wds"
+  }
+  peer {
+    mac: "\204\215\204A\317\350"
+    action: ADD
+    enabled: false
+    cost: 41647
+    rate: 110
+    rssi: 29
+    signal: -67
+    encapId: 111450
+    ipv4Address: "192.168.19.36"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe41:cfe8%wlan2wds"
+  }
+  peer {
+    mac: "\204\215\204A\317\261"
+    action: ADD
+    enabled: true
+    cost: 4741
+    rate: 110
+    rssi: 29
+    signal: -67
+    encapId: 111433
+    ipv4Address: "192.168.19.37"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe41:cfb1%wlan2wds"
+  }
+  peer {
+    mac: "\204\215\204A\317\231"
+    action: ADD
+    enabled: true
+    cost: 41991
+    rate: 240
+    rssi: 31
+    signal: -65
+    encapId: 111424
+    ipv4Address: "192.168.19.31"
+    txpower: 30
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: "fe80::868d:84ff:fe41:cf99%wlan2wds"
+  }
+  channelActiveTime: 20284844
+  channelBusyTime: 10219325
+  channelReceiveTime: 7867623
+  channelTransmitTime: 1800713
+  failedToDetect: false
+  dfsPolicy {
+    enforcement: UNRESTRICTED
+    cac: 60
+    minTpcDelta: 0
+    indoor: false
+  }
+  statsTimestampMillis: 20377582
+  phy: "phy2"
+  monitor: false
+  displayChannel: 6
+}
+wired {
+  key: 0
+  action: ADD
+  mac: "\204\215\204BD\200"
+  masterMac: "\204\215\204A\317\262"
+  aptState: APT_STATE_SLAVE
+  stats {
+    rxBytes: 285446886
+    rxPackets: 3037190
+    txBytes: 33650348
+    txPackets: 172241
+    rxDroppedPackets: 0
+    txDroppedPackets: 0
+    statsTimestampMillis: 20379232
+    rxErrors: 0
+    txErrors: 0
+    rxCrcErrors: 0
+    rxDroppedPackets_64: 0
+    txDroppedPackets_64: 0
+    rxErrors_64: 0
+    txErrors_64: 0
+    rxCrcErrors_64: 0
+  }
+  peer {
+    mac: "\204\215\204A\317\262"
+    action: ADD
+    enabled: true
+    cost: 1897
+    encapId: 111433
+    ipv4Address: "192.168.19.37"
+    version {
+      majorV: 11
+      minorV: 28
+      patch: 3
+      preRelease: "-b1"
+    }
+    linkLocalAddress: ""
+  }
+  name: "eth0"
+  stateChanges: 1
+  linkup: true
+  rate: RATE_1000
+  duplex: DUPLEX_FULL
+  autoneg: true
+  statsTimestampMillis: 60589
+}
+wired {
+  key: 1
+  action: ADD
+  mac: "\204\215\204BD\201"
+  masterMac: "\377\377\377\377\377\377"
+  aptState: APT_STATE_NONE
+  stats {
+    rxBytes: 0
+    rxPackets: 0
+    txBytes: 0
+    txPackets: 0
+    rxDroppedPackets: 0
+    txDroppedPackets: 0
+    statsTimestampMillis: 20379233
+    rxErrors: 0
+    txErrors: 0
+    rxCrcErrors: 0
+    rxDroppedPackets_64: 0
+    txDroppedPackets_64: 0
+    rxErrors_64: 0
+    txErrors_64: 0
+    rxCrcErrors_64: 0
+  }
+  name: "eth1"
+  stateChanges: 0
+  linkup: false
+  rate: RATE_NONE
+  duplex: DUPLEX_NONE
+  autoneg: false
+  statsTimestampMillis: 70810
+}
+configuration {
+  saved {
+    general {
+      name: "CE-RJNT-04"
+      notes: ""
+      ledMode: "ON"
+      adminPort: 2300
+      localNativeVLAN: 13
+      obsolete3: false
+      system {
+        obsolete1: ""
+        obsolete2: ""
+        sshKeys {
+        }
+        obsolete4: ""
+        ssl {
+          debugLevel: 0
+          customUserHandshakePriority: ""
+          customUserCertificateType: "ECC_512"
+          maxConnections: 0
+          securityProfile: "COMPATIBILITY;RSA_2432;EXPORT:%COMPAT:%SERVER_PRECEDENCE"
+        }
+        persistentLog {
+          enabled: true
+          size: 4096
+          rotation: 4
+          details: false
+        }
+        backup {
+          enabled: false
+        }
+      }
+      convertedFromV10Config: false
+      v10md5: ""
+      linkedDeviceProbeInterval: 15
+      linkedDeviceRefreshInterval: 300
+      warmUpAction: "REBOOT_ONCE_WARM"
+      warmUpTime: 300
+      coldTemperature: 500
+      warmTemperature: 0
+      highTemperature: 0
+      criticalTemperature: 0
+      criticalTemperatureAction: "DO_NOTHING"
+      ledGoodCost: 10000
+      bypassCheckInterval: 604800
+      resetButtonAction: "CONFIG_RESET"
+      lowVoltage: 3800
+      highVoltage: 5900
+      ledStatusMode: "PEERS"
+    }
+    serial: 84
+    manualLocation {
+      latitude: ""
+      longitude: ""
+      altitude: 0.0
+    }
+    ipv4 {
+      assignmentMethod: "MANUAL"
+      manualIPv4 {
+        address: "192.168.19.34"
+        subnet: "255.255.255.0"
+        gateway: "192.168.19.1"
+        dns: "0.0.0.0"
+      }
+    }
+    dhcpServer {
+      enable: false
+      authoritative: true
+    }
+    battery {
+      warningThresholdMinutes: 60
+      errorThresholdMinutes: 30
+    }
+    wireless {
+      key: 0
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 161
+      bandwidth: "ht20"
+      beaconIntervalMS: 200
+      timeoutSeconds: 60
+      IMMinCostDiffPercent: 10
+      multicastRate: 24000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan0"
+      maximumPeers: 128
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 35
+        targetHiSnr: 45
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wireless {
+      key: 1
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 165
+      bandwidth: "ht20"
+      beaconIntervalMS: 200
+      timeoutSeconds: 60
+      IMMinCostDiffPercent: 10
+      multicastRate: 24000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan1"
+      maximumPeers: 128
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 35
+        targetHiSnr: 45
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wireless {
+      key: 2
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 6
+      bandwidth: "20"
+      beaconIntervalMS: 200
+      timeoutSeconds: 60
+      IMMinCostDiffPercent: 10
+      multicastRate: 12000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: true
+        essid: "MLINK"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: false
+          selectedVLANs {
+            vlan: 20
+            action: ADD
+          }
+          nativeVLAN: 20
+        }
+        security {
+          mode: "WEP"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan2"
+      maximumPeers: 250
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 35
+        targetHiSnr: 45
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wired {
+      key: 0
+      action: ADD
+      mode: "BRIDGE"
+      speedMbps: "AUTO"
+      duplexMode: "AUTO"
+      gatewayMode: "DHCP"
+      ipv4 {
+        address: "0.0.0.0"
+        subnet: "0.0.0.0"
+        gateway: "0.0.0.0"
+        dns: "0.0.0.0"
+      }
+      portVLANConfig {
+        acceptUntagged: true
+        acceptSelectedVLANs: true
+        acceptNonSelectedVLANs: false
+        selectedVLANs {
+          vlan: 1
+          action: ADD
+        }
+        selectedVLANs {
+          vlan: 13
+          action: ADD
+        }
+        selectedVLANs {
+          vlan: 20
+          action: ADD
+        }
+        nativeVLAN: 13
+      }
+      name: "eth0"
+      requestFallback: false
+      alternateGateway: false
+    }
+    wired {
+      key: 1
+      action: ADD
+      mode: "BRIDGE"
+      speedMbps: "AUTO"
+      duplexMode: "AUTO"
+      gatewayMode: "DHCP"
+      ipv4 {
+        address: "0.0.0.0"
+        subnet: "0.0.0.0"
+        gateway: "0.0.0.0"
+        dns: "0.0.0.0"
+      }
+      portVLANConfig {
+        acceptUntagged: true
+        acceptSelectedVLANs: true
+        acceptNonSelectedVLANs: false
+        selectedVLANs {
+          vlan: 1
+          action: ADD
+        }
+        selectedVLANs {
+          vlan: 13
+          action: ADD
+        }
+        selectedVLANs {
+          vlan: 20
+          action: ADD
+        }
+        nativeVLAN: 13
+      }
+      name: "eth1"
+      requestFallback: false
+      alternateGateway: false
+    }
+    security {
+      passphrase {
+      }
+      acl {
+        aclMode: "BLACKLIST"
+        apOnly: true
+      }
+      packetCipher: "NONE"
+      macCipher: "NONE"
+      authMac: "NONE"
+      networkKeySequenceNumber: 0
+      networkKeyType: "RAW"
+      FIPS: false
+      allowHwCrypto: true
+      policy: "NONE"
+      allowNameDiscovery: true
+      principalAuthRequired: false
+    }
+    instamesh {
+      ds: 100000
+      dt: 10
+      maxTTL: 50
+      gcInterval: 4
+      gcMinimumAge: 300
+      gcThresh: 1024
+      maxFloodPackets: 100
+      maxFloodPerSourcePackets: 50
+      aptTimeout: 45000
+      aptKeepAliveInterval: 2000
+      arpProxyTimeout: 600
+      arpGcThresh: 1024
+      connectionTimeout: 60
+      keepAliveInterval: 70
+      aptPriority: 150
+      broadcastReceiveThreshold: 2
+      crumbGcThresh: 256
+      dropSTP: true
+      v10Compat: false
+      reportPeerLinkStatistics: false
+      networkName: "RAJANT-MESH-CMDIC"
+      tacticalMulticastCoalesceInterval: 4
+      costDecayInterval: 30
+      rptInt: 4
+      tacticalMulticast: true
+      excellentCost: 5000
+      goodCost: 10000
+      fairCost: 20000
+      ndGcThresh: 256
+      allowBurst: true
+      defaultPassingLane: "COSTS"
+      excellentLaneAdjustment: 2
+      goodLaneAdjustment: 0
+      fairLaneAdjustment: -2
+      poorLaneAdjustment: -4
+      tacticalMulticastMinCost: 10000
+      forwardMulticast: true
+      multicastCount: 1
+      limitedMulticast: true
+      perHopTTL: 500
+      slaveMulticast: true
+      ignoreStp: false
+      traceGateway: false
+      domainName: ""
+      keepAliveSize: 0
+      rptUdp: false
+      aptCostThreshold: 1000
+      rptTimeout: 45000
+      rptKeepAliveInterval: 2000
+      pktBufferDropLatePkts: true
+      pktBufferDropExpiredPkts: true
+      continuousDiscovery: 30
+      pktBufferRefPeriod: 30000
+      failoverThreshold: 1
+      penaltyLimit: 10
+      debug: 3
+      aptMulticast: true
+      foreignAptDis: true
+      aptAckInterval: 4000
+      rptAckInterval: 4000
+      aptCostDecayInterval: 30
+      rptCostDecayInterval: 30
+      tacticalMulticastCostInterval: 4
+      tacticalMulticastMinRecv: 95
+      aptMinimumLatency: 0
+      rptMinimumLatency: 0
+      maxRptMulticast: 100
+      rptOverLte: false
+    }
+    breadcrumbService {
+      eventLog {
+        maximumSize: 10000
+        rotationSize: 10
+      }
+    }
+    vlans {
+      number: 1
+      action: ADD
+      priority: 0
+      name: "Default"
+    }
+    vlans {
+      number: 13
+      action: ADD
+      priority: 0
+      name: "Ericar"
+    }
+    vlans {
+      number: 20
+      action: ADD
+      priority: 0
+      name: "Masterlink"
+    }
+    troip {
+      instanceCount: 1
+      enableSideTone: true
+      sideToneGain: 0.30000001192092896
+      enableEarpiece: true
+      volume: 1.0
+      enableVAD: true
+      VADThreshold: 0.0020000000949949026
+      micSession: "L"
+      enableMic: true
+      micGain: 1.0
+      rightMulticastAddress: ""
+      leftMulticastAddress: ""
+      auxAudioAvail: false
+      enableAux: false
+      auxGain: 1.0
+      auxSession: "L"
+      enableMulticast: true
+      debugLevel: 0
+      forceMixmasterIP: ""
+      enableHidPtt: false
+      rawHidPtt: false
+      IpDscp: 0
+      playFilename: ""
+      captureDevice: ""
+      playoutDevice: ""
+      mixmasterElectionBias: 0
+      doubleTapAction: "NONE"
+      localMixmaster: true
+      audioCodec: "PCMU"
+      leftCallSlot: 0
+      rightCallSlot: 0
+    }
+    capture {
+      enabled: false
+      packetsz: 65535
+      port: 5825
+    }
+    snmpServer {
+      enable: false
+      version: "SNMP_V1_2C"
+      profile {
+        username: ""
+        authenticationProtocol: "NONE"
+        privacyProtocol: "NONE"
+      }
+    }
+    industrial {
+      modbus {
+        tcpPort: 1502
+        device: "/dev/ttyUSB0"
+        baudRate: "115200"
+        dataBits: "8"
+        parity: "N"
+        stopBits: "1"
+        slaveId: 1
+      }
+      mode: "NONE"
+    }
+    skipValidation: false
+    gpsDevice {
+      device: "USB"
+      gpsIP: "0.0.0.0"
+      gpsPort: 10110
+      timeout: 300
+    }
+    cryptoModule {
+      expireWarningThreshold: 0
+    }
+    stagedMeshSettings {
+      staged: false
+      networkName: "Rajant Mesh Network"
+      packetCipher: "NONE"
+      macCipher: "NONE"
+      authMac: "NONE"
+      networkKeySequenceNumber: 0
+      policy: "NONE"
+    }
+    devices {
+      greenGO {
+        enableDiscovery: false
+      }
+    }
+    bcapi {
+      transmitTimeout: 300
+      maxWatcherInterval: 300
+      keepaliveIdleTime: 300
+    }
+    restapi {
+      enable: false
+      port: 443
+    }
+    version: "11.28.3-b1"
+    timesync {
+      enableHWClockSync: false
+      enableGpsClockSync: false
+      enableNtpClockSync: false
+      enableNtpServer: false
+    }
+    deploymentMode {
+      enable: false
+      join {
+        state: STATE_UNCONFIGURED
+        networkId: ""
+        networkName: ""
+      }
+    }
+    cloud {
+      enable: false
+      url: ""
+      period: 120
+    }
+    survey {
+      enable: false
+      listenTime: 2
+    }
+    aeroscout {
+      enable: false
+      vendorID: 130
+      port: 1144
+      dilutionFactor: 10
+      dilutionTimeout: 5
+    }
+    iperf3 {
+      enable: false
+      clientTaskTimeMax: 60
+    }
+    apcm {
+      enable: false
+      statusPeriod: 10
+      clientPurgePeriod: 60
+      clientTransitionDelay: 20
+      clientMinAssociationTime: 60
+    }
+  }
+  active {
+    general {
+      name: "CE-RJNT-04"
+      notes: ""
+      ledMode: "ON"
+      adminPort: 2300
+      localNativeVLAN: 13
+      obsolete3: false
+      system {
+        obsolete1: ""
+        obsolete2: ""
+        sshKeys {
+        }
+        obsolete4: ""
+        ssl {
+          debugLevel: 0
+          customUserHandshakePriority: ""
+          customUserCertificateType: "ECC_512"
+          maxConnections: 0
+          securityProfile: "COMPATIBILITY;RSA_2432;EXPORT:%COMPAT:%SERVER_PRECEDENCE"
+        }
+        persistentLog {
+          enabled: true
+          size: 4096
+          rotation: 4
+          details: false
+        }
+        backup {
+          enabled: false
+        }
+      }
+      convertedFromV10Config: false
+      v10md5: ""
+      linkedDeviceProbeInterval: 15
+      linkedDeviceRefreshInterval: 300
+      warmUpAction: "REBOOT_ONCE_WARM"
+      warmUpTime: 300
+      coldTemperature: 500
+      warmTemperature: 0
+      highTemperature: 0
+      criticalTemperature: 0
+      criticalTemperatureAction: "DO_NOTHING"
+      ledGoodCost: 10000
+      bypassCheckInterval: 604800
+      resetButtonAction: "CONFIG_RESET"
+      lowVoltage: 3800
+      highVoltage: 5900
+      ledStatusMode: "PEERS"
+    }
+    serial: 84
+    manualLocation {
+      latitude: ""
+      longitude: ""
+      altitude: 0.0
+    }
+    ipv4 {
+      assignmentMethod: "MANUAL"
+      manualIPv4 {
+        address: "192.168.19.34"
+        subnet: "255.255.255.0"
+        gateway: "192.168.19.1"
+        dns: "0.0.0.0"
+      }
+    }
+    dhcpServer {
+      enable: false
+      authoritative: true
+    }
+    battery {
+      warningThresholdMinutes: 60
+      errorThresholdMinutes: 30
+    }
+    wireless {
+      key: 0
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 161
+      bandwidth: "ht20"
+      beaconIntervalMS: 200
+      timeoutSeconds: 60
+      IMMinCostDiffPercent: 10
+      multicastRate: 24000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan0"
+      maximumPeers: 128
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 35
+        targetHiSnr: 45
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wireless {
+      key: 1
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 165
+      bandwidth: "ht20"
+      beaconIntervalMS: 200
+      timeoutSeconds: 60
+      IMMinCostDiffPercent: 10
+      multicastRate: 24000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan1"
+      maximumPeers: 128
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 35
+        targetHiSnr: 45
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wireless {
+      key: 2
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 6
+      bandwidth: "20"
+      beaconIntervalMS: 200
+      timeoutSeconds: 60
+      IMMinCostDiffPercent: 10
+      multicastRate: 12000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: true
+        essid: "MLINK"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: false
+          selectedVLANs {
+            vlan: 20
+            action: ADD
+          }
+          nativeVLAN: 20
+        }
+        security {
+          mode: "WEP"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan2"
+      maximumPeers: 250
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 35
+        targetHiSnr: 45
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wired {
+      key: 0
+      action: ADD
+      mode: "BRIDGE"
+      speedMbps: "AUTO"
+      duplexMode: "AUTO"
+      gatewayMode: "DHCP"
+      ipv4 {
+        address: "0.0.0.0"
+        subnet: "0.0.0.0"
+        gateway: "0.0.0.0"
+        dns: "0.0.0.0"
+      }
+      portVLANConfig {
+        acceptUntagged: true
+        acceptSelectedVLANs: true
+        acceptNonSelectedVLANs: false
+        selectedVLANs {
+          vlan: 1
+          action: ADD
+        }
+        selectedVLANs {
+          vlan: 13
+          action: ADD
+        }
+        selectedVLANs {
+          vlan: 20
+          action: ADD
+        }
+        nativeVLAN: 13
+      }
+      name: "eth0"
+      requestFallback: false
+      alternateGateway: false
+    }
+    wired {
+      key: 1
+      action: ADD
+      mode: "BRIDGE"
+      speedMbps: "AUTO"
+      duplexMode: "AUTO"
+      gatewayMode: "DHCP"
+      ipv4 {
+        address: "0.0.0.0"
+        subnet: "0.0.0.0"
+        gateway: "0.0.0.0"
+        dns: "0.0.0.0"
+      }
+      portVLANConfig {
+        acceptUntagged: true
+        acceptSelectedVLANs: true
+        acceptNonSelectedVLANs: false
+        selectedVLANs {
+          vlan: 1
+          action: ADD
+        }
+        selectedVLANs {
+          vlan: 13
+          action: ADD
+        }
+        selectedVLANs {
+          vlan: 20
+          action: ADD
+        }
+        nativeVLAN: 13
+      }
+      name: "eth1"
+      requestFallback: false
+      alternateGateway: false
+    }
+    security {
+      passphrase {
+      }
+      acl {
+        aclMode: "BLACKLIST"
+        apOnly: true
+      }
+      packetCipher: "NONE"
+      macCipher: "NONE"
+      authMac: "NONE"
+      networkKeySequenceNumber: 0
+      networkKeyType: "RAW"
+      FIPS: false
+      allowHwCrypto: true
+      policy: "NONE"
+      allowNameDiscovery: true
+      principalAuthRequired: false
+    }
+    instamesh {
+      ds: 100000
+      dt: 10
+      maxTTL: 50
+      gcInterval: 4
+      gcMinimumAge: 300
+      gcThresh: 1024
+      maxFloodPackets: 100
+      maxFloodPerSourcePackets: 50
+      aptTimeout: 45000
+      aptKeepAliveInterval: 2000
+      arpProxyTimeout: 600
+      arpGcThresh: 1024
+      connectionTimeout: 60
+      keepAliveInterval: 70
+      aptPriority: 150
+      broadcastReceiveThreshold: 2
+      crumbGcThresh: 256
+      dropSTP: true
+      v10Compat: false
+      reportPeerLinkStatistics: false
+      networkName: "RAJANT-MESH-CMDIC"
+      tacticalMulticastCoalesceInterval: 4
+      costDecayInterval: 30
+      rptInt: 4
+      tacticalMulticast: true
+      excellentCost: 5000
+      goodCost: 10000
+      fairCost: 20000
+      ndGcThresh: 256
+      allowBurst: true
+      defaultPassingLane: "COSTS"
+      excellentLaneAdjustment: 2
+      goodLaneAdjustment: 0
+      fairLaneAdjustment: -2
+      poorLaneAdjustment: -4
+      tacticalMulticastMinCost: 10000
+      forwardMulticast: true
+      multicastCount: 1
+      limitedMulticast: true
+      perHopTTL: 500
+      slaveMulticast: true
+      ignoreStp: false
+      traceGateway: false
+      domainName: ""
+      keepAliveSize: 0
+      rptUdp: false
+      aptCostThreshold: 1000
+      rptTimeout: 45000
+      rptKeepAliveInterval: 2000
+      pktBufferDropLatePkts: true
+      pktBufferDropExpiredPkts: true
+      continuousDiscovery: 30
+      pktBufferRefPeriod: 30000
+      failoverThreshold: 1
+      penaltyLimit: 10
+      debug: 3
+      aptMulticast: true
+      foreignAptDis: true
+      aptAckInterval: 4000
+      rptAckInterval: 4000
+      aptCostDecayInterval: 30
+      rptCostDecayInterval: 30
+      tacticalMulticastCostInterval: 4
+      tacticalMulticastMinRecv: 95
+      aptMinimumLatency: 0
+      rptMinimumLatency: 0
+      maxRptMulticast: 100
+      rptOverLte: false
+    }
+    breadcrumbService {
+      log {
+        name: "AlertMetaDatabase"
+        level: "info"
+      }
+      log {
+        name: "BcapiPacket"
+        level: "info"
+      }
+      log {
+        name: "Client"
+        level: "info"
+      }
+      log {
+        name: "ConfigMetaDatabase"
+        level: "info"
+      }
+      log {
+        name: "Configuration"
+        level: "info"
+      }
+      log {
+        name: "ConfigurationFilter"
+        level: "info"
+      }
+      log {
+        name: "FirmwareUpgrade"
+        level: "info"
+      }
+      log {
+        name: "GnuTLS"
+        level: "info"
+      }
+      log {
+        name: "LedController"
+        level: "info"
+      }
+      log {
+        name: "LedService"
+        level: "info"
+      }
+      log {
+        name: "LedSystem"
+        level: "info"
+      }
+      log {
+        name: "LteService"
+        level: "info"
+      }
+      log {
+        name: "ModelDatabase"
+        level: "info"
+      }
+      log {
+        name: "NetworkService"
+        level: "info"
+      }
+      log {
+        name: "RSM"
+        level: "info"
+      }
+      log {
+        name: "ResetPollerService"
+        level: "info"
+      }
+      log {
+        name: "SessionLocal"
+        level: "info"
+      }
+      log {
+        name: "StateMetaDatabase"
+        level: "info"
+      }
+      log {
+        name: "SupService"
+        level: "info"
+      }
+      log {
+        name: "SystemService"
+        level: "info"
+      }
+      log {
+        name: "SystemState"
+        level: "info"
+      }
+      log {
+        name: "TaskServiceManager"
+        level: "info"
+      }
+      log {
+        name: "Watcher"
+        level: "info"
+      }
+      log {
+        name: "Wireless Client Manager"
+        level: "info"
+      }
+      log {
+        name: "GpsService"
+        level: "info"
+      }
+      eventLog {
+        maximumSize: 10000
+        rotationSize: 10
+      }
+    }
+    vlans {
+      number: 1
+      action: ADD
+      priority: 0
+      name: "Default"
+    }
+    vlans {
+      number: 13
+      action: ADD
+      priority: 0
+      name: "Ericar"
+    }
+    vlans {
+      number: 20
+      action: ADD
+      priority: 0
+      name: "Masterlink"
+    }
+    troip {
+      instanceCount: 1
+      enableSideTone: true
+      sideToneGain: 0.30000001192092896
+      enableEarpiece: true
+      volume: 1.0
+      enableVAD: true
+      VADThreshold: 0.0020000000949949026
+      micSession: "L"
+      enableMic: true
+      micGain: 1.0
+      rightMulticastAddress: ""
+      leftMulticastAddress: ""
+      auxAudioAvail: false
+      enableAux: false
+      auxGain: 1.0
+      auxSession: "L"
+      enableMulticast: true
+      debugLevel: 0
+      forceMixmasterIP: ""
+      enableHidPtt: false
+      rawHidPtt: false
+      IpDscp: 0
+      playFilename: ""
+      captureDevice: ""
+      playoutDevice: ""
+      mixmasterElectionBias: 0
+      doubleTapAction: "NONE"
+      localMixmaster: true
+      audioCodec: "PCMU"
+      leftCallSlot: 0
+      rightCallSlot: 0
+    }
+    capture {
+      enabled: false
+      packetsz: 65535
+      port: 5825
+    }
+    snmpServer {
+      enable: false
+      version: "SNMP_V1_2C"
+      profile {
+        username: ""
+        authenticationProtocol: "NONE"
+        privacyProtocol: "NONE"
+      }
+    }
+    industrial {
+      modbus {
+        tcpPort: 1502
+        device: "/dev/ttyUSB0"
+        baudRate: "115200"
+        dataBits: "8"
+        parity: "N"
+        stopBits: "1"
+        slaveId: 1
+      }
+      mode: "NONE"
+    }
+    skipValidation: false
+    gpsDevice {
+      device: "USB"
+      gpsIP: "0.0.0.0"
+      gpsPort: 10110
+      timeout: 300
+    }
+    cryptoModule {
+      expireWarningThreshold: 0
+    }
+    stagedMeshSettings {
+      staged: false
+      networkName: "Rajant Mesh Network"
+      packetCipher: "NONE"
+      macCipher: "NONE"
+      authMac: "NONE"
+      networkKeySequenceNumber: 0
+      policy: "NONE"
+    }
+    devices {
+      greenGO {
+        enableDiscovery: false
+      }
+    }
+    bcapi {
+      transmitTimeout: 300
+      maxWatcherInterval: 300
+      keepaliveIdleTime: 300
+    }
+    restapi {
+      enable: false
+      port: 443
+    }
+    version: "11.28.3-b1"
+    timesync {
+      enableHWClockSync: false
+      enableGpsClockSync: false
+      enableNtpClockSync: false
+      enableNtpServer: false
+    }
+    deploymentMode {
+      enable: false
+      join {
+        state: STATE_UNCONFIGURED
+        networkId: ""
+        networkName: ""
+      }
+    }
+    cloud {
+      enable: false
+      url: ""
+      period: 120
+    }
+    survey {
+      enable: false
+      listenTime: 2
+    }
+    aeroscout {
+      enable: false
+      vendorID: 130
+      port: 1144
+      dilutionFactor: 10
+      dilutionTimeout: 5
+    }
+    iperf3 {
+      enable: false
+      clientTaskTimeMax: 60
+    }
+    apcm {
+      enable: false
+      statusPeriod: 10
+      clientPurgePeriod: 60
+      clientTransitionDelay: 20
+      clientMinAssociationTime: 60
+    }
+  }
+  factory {
+    general {
+      name: ""
+      notes: ""
+      ledMode: "ON"
+      adminPort: 2300
+      localNativeVLAN: 0
+      obsolete3: false
+      system {
+        obsolete1: ""
+        obsolete2: ""
+        sshKeys {
+          authorized: ""
+          dss: ""
+          rsa: ""
+        }
+        obsolete4: ""
+        ssl {
+          publicKey: ""
+          privateKey: ""
+          debugLevel: 0
+          customUserHandshakePriority: ""
+          customUserCertificateType: "ECC_512"
+          maxConnections: 0
+          securityProfile: "COMPATIBILITY;RSA_2432;EXPORT:%COMPAT:%SERVER_PRECEDENCE"
+          createKeys: true
+        }
+        persistentLog {
+          enabled: true
+          size: 4096
+          rotation: 4
+          details: false
+        }
+        backup {
+          enabled: false
+          passphrase: "breadcrumb-backup"
+        }
+      }
+      convertedFromV10Config: false
+      v10md5: ""
+      linkedDeviceProbeInterval: 15
+      linkedDeviceRefreshInterval: 300
+      warmUpAction: "REBOOT_ONCE_WARM"
+      warmUpTime: 300
+      coldTemperature: 500
+      warmTemperature: 0
+      highTemperature: 0
+      criticalTemperature: 0
+      criticalTemperatureAction: "DO_NOTHING"
+      ledGoodCost: 10000
+      bypassCheckInterval: 604800
+      resetButtonAction: "CONFIG_RESET"
+      lowVoltage: 3800
+      highVoltage: 5900
+      ledStatusMode: "PEERS"
+    }
+    manualLocation {
+      latitude: ""
+      longitude: ""
+      altitude: 0.0
+    }
+    ipv4 {
+      assignmentMethod: "COMPUTED_v11"
+      manualIPv4 {
+        address: "0.0.0.0"
+        subnet: "0.0.0.0"
+        gateway: "0.0.0.0"
+        dns: "0.0.0.0"
+      }
+    }
+    dhcpServer {
+      enable: false
+      authoritative: true
+    }
+    battery {
+      warningThresholdMinutes: 60
+      errorThresholdMinutes: 30
+    }
+    wireless {
+      key: 0
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 157
+      bandwidth: "ht40+"
+      beaconIntervalMS: 100
+      timeoutSeconds: 30
+      IMMinCostDiffPercent: 10
+      multicastRate: 24000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan0"
+      maximumPeers: 128
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 40
+        targetHiSnr: 55
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        passphrase: ""
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        privateKey: ""
+        privateKeyPasswd: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wireless {
+      key: 1
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 48
+      bandwidth: "ht40-"
+      beaconIntervalMS: 100
+      timeoutSeconds: 30
+      IMMinCostDiffPercent: 10
+      multicastRate: 12000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan1"
+      maximumPeers: 128
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 40
+        targetHiSnr: 55
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        passphrase: ""
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        privateKey: ""
+        privateKeyPasswd: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wireless {
+      key: 2
+      action: ADD
+      enableMesh: true
+      regComplianceMode: "MANUAL"
+      countryCode: 840
+      txPower: 30
+      channel: 11
+      bandwidth: "ht20"
+      beaconIntervalMS: 100
+      timeoutSeconds: 30
+      IMMinCostDiffPercent: 10
+      multicastRate: 6000
+      rangeMeters: 3218
+      rxSelect: 3
+      txSelect: 3
+      enableBRA: true
+      ap {
+        key: 0
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 1
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 2
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      ap {
+        key: 3
+        action: ADD
+        enable: false
+        essid: "rajant"
+        enableEssidBroadcast: true
+        portVLANConfig {
+          acceptUntagged: true
+          acceptSelectedVLANs: true
+          acceptNonSelectedVLANs: true
+          nativeVLAN: 0
+        }
+        security {
+          mode: "OPEN"
+          wpaKeyType: "PASSPHRASE"
+          passphrase: "INSECURITY"
+          rawkey: "\000\000\000\000\000"
+          cipherSuite: "CCMP"
+          gtkRekeyIntervalSeconds: 600
+          gtkRekeyWhenStationLeaves: true
+          gmkRekeyIntervalSeconds: 86400
+          radiusRetryIntervalSeconds: 600
+          accountingRetryIntervalSeconds: 600
+          wpaRawkey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+          radiusServer {
+            key: 0
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 1
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          radiusServer {
+            key: 2
+            action: ADD
+            port: 1812
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 0
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 1
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          accountingServer {
+            key: 2
+            action: ADD
+            port: 1813
+            sharedSecret: "testing123"
+            address: ""
+          }
+          wepKeyIndex: 0
+        }
+        ignoreProbeRequest: true
+        txPower: -1
+        txPowerMode: "DISABLED"
+      }
+      name: "wlan2"
+      maximumPeers: 250
+      noiseWarnThreshold: 0
+      noiseErrorThreshold: 0
+      enableCapture: true
+      compression: false
+      dynamictxpower {
+        enable: true
+        targetLoSnr: 40
+        targetHiSnr: 55
+      }
+      clusterId: 0
+      sendSpectrumAccessBeacons: false
+      client {
+        enable: false
+        ssid: "rajant"
+        passphrase: ""
+        keyMgmt: "WPA-PSK"
+        eap: "PEAP"
+        caCert: ""
+        identity: ""
+        clientCert: ""
+        privateKey: ""
+        privateKeyPasswd: ""
+        meshless: false
+      }
+      dataRateMask: 17592186044415
+      disableWeakSignalDetection: false
+      aggregationLimit: 65536
+      maximumDataRates: 4
+      maximumRetriesPerDataRate: 10
+      maximumTimePerDataRate: 3000
+      minimumErrorPenalty: 20000
+      dfsAntennaGain: 6
+      enableAeroscout: false
+      interruptTimeout: 30000
+      clearChannelAssessment: 128
+      bgaOnly: false
+      softwareQueueSize: 32
+      hardwareQueueSize: 512
+      txqErrorMode: 0
+      sifs: 1
+      eifs: 0
+      rssiThresh: 1792
+      dfsDebug: 0
+    }
+    wired {
+      key: 0
+      action: ADD
+      mode: "BRIDGE"
+      speedMbps: "AUTO"
+      duplexMode: "AUTO"
+      gatewayMode: "DHCP"
+      ipv4 {
+        address: "0.0.0.0"
+        subnet: "0.0.0.0"
+        gateway: "0.0.0.0"
+        dns: "0.0.0.0"
+      }
+      portVLANConfig {
+        acceptUntagged: true
+        acceptSelectedVLANs: true
+        acceptNonSelectedVLANs: true
+        nativeVLAN: 0
+      }
+      name: "eth0"
+      requestFallback: false
+      alternateGateway: false
+    }
+    wired {
+      key: 1
+      action: ADD
+      mode: "BRIDGE"
+      speedMbps: "AUTO"
+      duplexMode: "AUTO"
+      gatewayMode: "DHCP"
+      ipv4 {
+        address: "0.0.0.0"
+        subnet: "0.0.0.0"
+        gateway: "0.0.0.0"
+        dns: "0.0.0.0"
+      }
+      portVLANConfig {
+        acceptUntagged: true
+        acceptSelectedVLANs: true
+        acceptNonSelectedVLANs: true
+        nativeVLAN: 0
+      }
+      name: "eth1"
+      requestFallback: false
+      alternateGateway: false
+    }
+    security {
+      passphrase {
+        viewPassphrase: "breadcrumb-view"
+        adminPassphrase: "breadcrumb-admin"
+        coPassphrase: "breadcrumb-co"
+      }
+      acl {
+        aclMode: "NONE"
+        apOnly: true
+      }
+      packetCipher: "NONE"
+      macCipher: "NONE"
+      authMac: "NONE"
+      networkKey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+      v10NEK: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+      v10NAK: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+      networkKeySequenceNumber: 0
+      networkPassphrase: "Rajant Mesh Network"
+      networkKeyType: "RAW"
+      FIPS: false
+      allowHwCrypto: true
+      policy: "NONE"
+      allowNameDiscovery: true
+      principalAuthRequired: false
+    }
+    instamesh {
+      ds: 100000
+      dt: 10
+      maxTTL: 50
+      gcInterval: 4
+      gcMinimumAge: 300
+      gcThresh: 512
+      maxFloodPackets: 20
+      maxFloodPerSourcePackets: 10
+      aptTimeout: 45000
+      aptKeepAliveInterval: 2000
+      arpProxyTimeout: 10
+      arpGcThresh: 1024
+      connectionTimeout: 30
+      keepAliveInterval: 4
+      aptPriority: 110
+      broadcastReceiveThreshold: 2
+      crumbGcThresh: 256
+      dropSTP: true
+      v10Compat: false
+      reportPeerLinkStatistics: false
+      networkName: "Rajant Mesh Network"
+      tacticalMulticastCoalesceInterval: 4
+      costDecayInterval: 30
+      rptInt: 4
+      tacticalMulticast: true
+      excellentCost: 5000
+      goodCost: 10000
+      fairCost: 20000
+      ndGcThresh: 256
+      allowBurst: true
+      defaultPassingLane: "COSTS"
+      excellentLaneAdjustment: 2
+      goodLaneAdjustment: 0
+      fairLaneAdjustment: -2
+      poorLaneAdjustment: -4
+      tacticalMulticastMinCost: 10000
+      forwardMulticast: true
+      multicastCount: 1
+      limitedMulticast: true
+      perHopTTL: 500
+      slaveMulticast: true
+      ignoreStp: false
+      traceGateway: false
+      domainName: ""
+      keepAliveSize: 0
+      rptUdp: false
+      aptCostThreshold: 1000
+      rptTimeout: 45000
+      rptKeepAliveInterval: 2000
+      pktBufferDropLatePkts: true
+      pktBufferDropExpiredPkts: true
+      continuousDiscovery: 30
+      pktBufferRefPeriod: 30000
+      failoverThreshold: 1
+      penaltyLimit: 10
+      debug: 3
+      aptMulticast: false
+      foreignAptDis: true
+      aptAckInterval: 4000
+      rptAckInterval: 4000
+      aptCostDecayInterval: 30
+      rptCostDecayInterval: 30
+      tacticalMulticastCostInterval: 4
+      tacticalMulticastMinRecv: 95
+      aptMinimumLatency: 0
+      rptMinimumLatency: 0
+      maxRptMulticast: 100
+      rptOverLte: false
+    }
+    breadcrumbService {
+      eventLog {
+        maximumSize: 10000
+        rotationSize: 10
+      }
+    }
+    troip {
+      instanceCount: 1
+      enableSideTone: true
+      sideToneGain: 0.30000001192092896
+      enableEarpiece: true
+      volume: 1.0
+      enableVAD: true
+      VADThreshold: 0.0020000000949949026
+      micSession: "L"
+      enableMic: true
+      micGain: 1.0
+      rightMulticastAddress: ""
+      leftMulticastAddress: ""
+      auxAudioAvail: false
+      enableAux: false
+      auxGain: 1.0
+      auxSession: "L"
+      enableMulticast: true
+      debugLevel: 0
+      forceMixmasterIP: ""
+      enableHidPtt: false
+      rawHidPtt: false
+      IpDscp: 0
+      playFilename: ""
+      captureDevice: ""
+      playoutDevice: ""
+      mixmasterElectionBias: 0
+      doubleTapAction: "NONE"
+      localMixmaster: true
+      audioCodec: "PCMU"
+      leftCallSlot: 0
+      rightCallSlot: 0
+    }
+    capture {
+      enabled: false
+      packetsz: 65535
+      port: 5825
+    }
+    snmpServer {
+      enable: false
+      version: "SNMP_V1_2C"
+      profile {
+        username: ""
+        authenticationProtocol: "NONE"
+        authenticationPassword: "12345678_PLEASE_CHANGE_ME!"
+        privacyProtocol: "NONE"
+        privacyPassword: ""
+      }
+    }
+    industrial {
+      modbus {
+        tcpPort: 1502
+        device: "/dev/ttyUSB0"
+        baudRate: "115200"
+        dataBits: "8"
+        parity: "N"
+        stopBits: "1"
+        slaveId: 1
+      }
+      mode: "NONE"
+    }
+    skipValidation: false
+    gpsDevice {
+      device: "USB"
+      gpsIP: "0.0.0.0"
+      gpsPort: 10110
+      timeout: 300
+    }
+    cryptoModule {
+      expireWarningThreshold: 0
+    }
+    stagedMeshSettings {
+      staged: false
+      networkName: "Rajant Mesh Network"
+      packetCipher: "NONE"
+      macCipher: "NONE"
+      authMac: "NONE"
+      networkKey: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+      networkKeySequenceNumber: 0
+      policy: "NONE"
+    }
+    devices {
+      greenGO {
+        enableDiscovery: false
+      }
+    }
+    bcapi {
+      transmitTimeout: 300
+      maxWatcherInterval: 300
+      keepaliveIdleTime: 300
+    }
+    restapi {
+      enable: false
+      port: 443
+    }
+    version: "DEFAULT"
+    timesync {
+      enableHWClockSync: false
+      enableGpsClockSync: false
+      enableNtpClockSync: false
+      enableNtpServer: false
+    }
+    deploymentMode {
+      enable: false
+      join {
+        state: STATE_UNCONFIGURED
+        passphrase: ""
+        networkId: ""
+        networkName: ""
+      }
+    }
+    cloud {
+      enable: false
+      url: ""
+      period: 120
+    }
+    survey {
+      enable: false
+      listenTime: 2
+    }
+    aeroscout {
+      enable: false
+      vendorID: 130
+      port: 1144
+      dilutionFactor: 10
+      dilutionTimeout: 5
+    }
+    iperf3 {
+      enable: false
+      clientTaskTimeMax: 60
+    }
+    apcm {
+      enable: false
+      statusPeriod: 10
+      clientPurgePeriod: 60
+      clientTransitionDelay: 20
+      clientMinAssociationTime: 60
+    }
+  }
+  savedHash: "P\215\220F\301\341\316\023,\010\336x&dL\244\'\302\235\340"
+  activeHash: "P\215\220F\301\341\316\023,\010\336x&dL\244\'\302\235\340"
+}
+hardware {
+  serial: "FE1-2455LS-120144"
+  profile: "FE1-2455LS"
+  imkey: "020548A98AA382D104F021C0D6D604F021C0D68C0013955C859F848D84004796848D8442447D848D8442447E848D8442447F848D84424480848D844244810001D550306402302E769B490FB56102D25051A57758BB9AE68F168B1C22248291F91014BEF26EB4601248FA3E58F2CAA9532F6AAC5B971E02304534BEFAF5F6963C1341C01F2DD72D8C83435D2359D6E996A7368F363D4BFCBB9BA4600D32FF4B44D92D537EF5EE5880"
+  date: "2024-08-20 13:29:11"
+  countrycode: 840
+  boardData {
+  }
+}
+adminSessions {
+  sessionID: 231928234011
+  action: ADD
+  age: 0
+  userAgent: "Rajant BC|Commander v11.28.3, build 0_20241114-151131UTC"
+  remoteUsername: "adminbcc"
+  remoteOS: "Windows Server 2019"
+  appInstanceID: "29b2efcb-382b-491d-9de6-d0ceb3da92a2"
+  role: CO
+  address: "::FFFF:192.168.20.60"
+  port: 54842
+  watchRegistration {
+    registrationId: 1743169797
+    action: ADD
+    watchObject {
+      messagePath: "system.reboot"
+      action: ADD
+      interval: 0
+    }
+    watchObject {
+      messagePath: "system.isRebooting"
+      action: ADD
+      interval: 0
+    }
+    watchObject {
+      messagePath: "system.licenses"
+      action: ADD
+      interval: 0
+    }
+    watchObject {
+      messagePath: "alertSystem.identify"
+      action: ADD
+      interval: 0
+    }
+    watchObject {
+      messagePath: "configuration"
+      action: ADD
+      interval: 0
+    }
+    watchObject {
+      messagePath: "fileTransfer"
+      action: ADD
+      interval: 1
+    }
+    watchObject {
+      messagePath: "task"
+      action: ADD
+      interval: 1
+    }
+    watchObject {
+      messagePath: "alertSystem.alerts"
+      action: ADD
+      interval: 4
+    }
+    watchObject {
+      messagePath: ""
+      action: ADD
+      interval: 8
+    }
+  }
+  stats {
+    rxBytes: 376
+    rxPackets: 1
+    txBytes: 2863205
+    txPackets: 7432
+    txBytesPending: 0
+    txPacketsPending: 0
+    txBufferWaste: 2973738
+    rxTimestampMillis: 39055
+    txTimestampMillis: 20376202
+    rxBytesCompressed: 0
+    rxBytesSavedByCompression: 0
+    rxBytesBloatedByCompression: 0
+    txBytesCompressed: 2452164
+    txBytesSavedByCompression: 1010769
+    txBytesBloatedByCompression: 0
+    statsTimestampMillis: 20377586
+    rxPartialPackets: 2
+  }
+  fd: 39
+  connectTimestampMillis: 39033
+  loginTimestampMillis: 39055
+}
+adminSessions {
+  sessionID: 231928234053
+  action: ADD
+  age: 0
+  userAgent: ""
+  remoteUsername: ""
+  remoteOS: ""
+  appInstanceID: "d1380eb8-5e2a-4416-938c-da8476626334"
+  role: CO
+  address: "::FFFF:192.168.20.62"
+  port: 54956
+  fd: 40
+  connectTimestampMillis: 20380518
+  loginTimestampMillis: 20380570
+}
+fileTransfer {
+  state: UPLOAD_IDLE
+}
+gps {
+  gpsSwitch {
+    enabled: true
+  }
+  gpsPos {
+    gpsTime: 193316.0
+    gpsLat: "2058.7455S"
+    gpsLong: "06841.4923W"
+    gpsPrecisionH: 0.6000000238418579
+    gpsQuality: 2.0
+    gpsSatsInView: 26
+    gpsAlt: 4608.2998046875
+    gpsGeoidalSep: 34.20000076293945
+  }
+  gpsRMC {
+    gpsTime: 193315.0
+    gpsStatus: true
+    gpsDate: 280325.0
+    gpsDateTime: "2503281933.15"
+  }
+}
+alertSystem {
+  led {
+    sequence: "G 5000"
+  }
+  bestRadioRate: 1170
+  alerts {
+    index: 1001
+    type: WARNING
+    message: "High cost APT link"
+    applicationMessage: " 111433 : 84:8D:84:41:CF:B2 : 1864;"
+    code: 531
+    led: false
+  }
+  ledMode: "ON"
+  identify: false
+  customSequence: ""
+}
+manufacturer {
+  date: "12-28-2023"
+  uniqueId: "f52f4244188b9a53"
+  ident: "LMBJR-A"
+  partnum: "21-100205-002"
+  serialnum: "8708380312"
+  datestamp_utc: "20231228180557"
+  pcb_rev: "A"
+  cm_loc_code: "0"
+}
+fastPeerUpdate {
+  fastPeerClients: 0
+}
+
+- ✔ Successfully added 1 records to the database.
+- ✔ Successfully added 1 records to the database.
+- ✔ Successfully added 1 records to the database.
