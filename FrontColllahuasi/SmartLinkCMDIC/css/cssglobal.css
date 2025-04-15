@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Material Design Icons' !important;
+    src: url('app://./fonts/materialdesignicons-webfont.woff2') format('woff2'),
+         url('app://./fonts/materialdesignicons-webfont.woff') format('woff'),
+         url('app://./fonts/materialdesignicons-webfont.ttf') format('truetype') !important;
+    font-weight: normal !important;
+    font-style: normal  !important;
+  }
