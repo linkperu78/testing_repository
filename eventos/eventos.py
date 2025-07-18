@@ -8,6 +8,7 @@ import json
 # from globalHCG import *
 from urllib.parse import urljoin
 import pprint
+import time
 
 from functions_eventos import api_request, calcular_recurrencia, round_to_nearest_quarter_hour, get_eventos_previos, DB_API_URL
 
@@ -28,6 +29,8 @@ parser.add_argument('--end_date', type=str, default=end_date_default, help="Fech
 parser.add_argument('--limit', type=int, default=1000, help="Cantidad de registros maximos a obtener.")
 parser.add_argument('--offset', type=int, default=0, help="Pagina de registros a obtener.")
 parser.add_argument('--intervalo_recurrencia', type=int, default=15, help="Intervalo en minutos para evaluar recurrencia. Por defecto: 15 minutos.")
+parser.add_argument('--time_sleep', type=int, default=0, help="Tiempo en segundos antes de ejecutar el script")
+
 
 
 args = parser.parse_args()
@@ -36,8 +39,13 @@ end_date = args.end_date
 limit = args.limit
 offset = args.offset
 intervalo_recurrencia = args.intervalo_recurrencia
+time_sleep = args.time_sleep
+
 
 print(f"Fecha de inicio: {start_date}, Fecha de fin: {end_date}, Limit: {limit}, Offset: {offset}, Intervalo de recurrencia: {intervalo_recurrencia}")
+print(f"El script se ejecutara en {time_sleep} segundos")
+time.sleep(time_sleep)
+
 
 # Lista de eventos
 eventos = []
@@ -64,7 +72,7 @@ else:
     for d in latencias_100_200:
         fecha_evento = round_to_nearest_quarter_hour(d["fecha"], return_as_string=True, iso_format_string=True)
         recurrencia = calcular_recurrencia(url_eventos_previos=url_eventos_previos, ip=d["ip"], fecha_evento=fecha_evento, tipo_evento="Señal Deficiente", intervalo_recurrencia=intervalo_recurrencia)
-        urgente = recurrencia >= 3  # Marcar como urgente si recurrencia >= 3
+        urgente = recurrencia >= 4  # Marcar como urgente si recurrencia >= 3
         eventos.append({
             "ip": d["ip"],
             "fecha": fecha_evento,
@@ -80,7 +88,7 @@ else:
     for d in latencias_mayores_200:
         fecha_evento = round_to_nearest_quarter_hour(d["fecha"], return_as_string=True, iso_format_string=True)
         recurrencia = calcular_recurrencia(url_eventos_previos=url_eventos_previos, ip=d["ip"], fecha_evento=fecha_evento, tipo_evento="Señal Deficiente", intervalo_recurrencia=intervalo_recurrencia)
-        urgente = recurrencia >= 3
+        urgente = recurrencia >= 0
         eventos.append({
             "ip": d["ip"],
             "fecha": fecha_evento,
@@ -95,10 +103,11 @@ else:
         })
 
 # Obtener datos de Cambium
-url_get_snr = f'{urljoin(DB_API_URL, config["api"]["cambium_data"]["get_snr_h"])}?start_date={start_date}&end_date={end_date}&limit={limit}&offset={offset}'
+url_get_snr = f'{urljoin(DB_API_URL, config["api"]["cambium_data"]["get"])}?start_date={start_date}&end_date={end_date}&limit={limit}&offset={offset}'
+print(url_get_snr)
 data_cambium = api_request(url_get_snr, dataframe=True)
 
-if data_cambium is not None:
+if data_cambium is not None and not data_cambium.empty:
     # Extraer valores de snr_h y snr_v desde la columna snr
     data_cambium['snr'] = data_cambium['snr'].apply(lambda x: json.loads(x) if isinstance(x, str) else x)
     data_cambium_snr_h = data_cambium[data_cambium['snr'].apply(lambda x: isinstance(x, dict) and 'snr_h' in x)].copy()
@@ -109,8 +118,9 @@ if data_cambium is not None:
 else:
     data_cambium_snr_h, data_cambium_snr_v = None, None
 
+print(data_cambium_snr_h, data_cambium_snr_v)
 
-if data_cambium_snr_h is None:
+if data_cambium_snr_h is None or data_cambium_snr_h.empty:
     print("No se pudo obtener datos de Cambium (SNR H).")
 else:
     print("Datos de Cambium obtenidos (SNR H)")
@@ -124,7 +134,7 @@ else:
                                            intervalo_recurrencia=intervalo_recurrencia,
                                            tipo_interferencia="snr_h"
                                            )
-        urgente = recurrencia >= 3
+        urgente = recurrencia >= 2
         if d["snr_h"] <= 20 and d["snr_h"] > 15:
             eventos.append({
                 "ip": d["ip"],
@@ -155,7 +165,7 @@ else:
                 }
             })
 
-if data_cambium_snr_v is None:
+if data_cambium_snr_v is None or data_cambium_snr_v.empty:
     print("No se pudo obtener datos de Cambium (SNR V).")
 else:
     print("Datos de Cambium obtenidos (SNR V)")
@@ -170,7 +180,7 @@ else:
                                            intervalo_recurrencia=intervalo_recurrencia,
                                            tipo_interferencia="snr_v"
                                            )
-        urgente = recurrencia >= 3
+        urgente = recurrencia >= 2
         if d["snr_v"] <= 20 and d["snr_v"] > 15:
             eventos.append({
                 "ip": d["ip"],

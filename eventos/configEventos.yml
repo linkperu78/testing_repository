@@ -10,8 +10,7 @@ api:
     get_poor_latency: /latencia/get_poor_latency
 
   cambium_data:
-    get_snr_h: /cambium_data/get/snr_h
-    get_snr_v: /cambium_data/get/snr_v
+    get: /cambium_data/get
 
 whatsapp:
   twilio:
@@ -21,10 +20,9 @@ whatsapp:
     my_whatsapp_number: 'whatsapp:TU_NUMERO_PERSONAL'
 
   mudslice:
-    id_zaldivar: ["ID_GRUPO_WHATSAPP_AQUI"]
-    id_antucoya: ["ID_GRUPO_WHATSAPP_AQUI"]
-    id_cananea: ["ID_GRUPO_WHATSAPP_AQUI"]
-    id_default: ["TU_NUMERO_PERSONAL"]
+    id_collahuasi: ["+56977566595", "120363027104819888@g.us", "+56971083001", "+56982280571", "+56976426949", "+56939496396"]
+    #id_collahuasi: ["+56977566595"]
+    #id_default: ["+56977566595"]
 
 email:
   smtp_server: 'smtp.TU_SERVIDOR_SMTP.com'
@@ -36,3 +34,4 @@ email:
 telegram:
   token: 'TU_TELEGRAM_BOT_TOKEN_AQUI'
   chat_id: 'TU_CHAT_ID_AQUI'
+
