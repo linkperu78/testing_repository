@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from openai import OpenAI
 from functions_eventos import DB_API_URL, api_request, mensaje_chat_gpt
-from functions_enviar_eventos import obtener_alertas, generar_destinatario, enviar_whatsapp_mudslide, saludo_inicial_hora
+from functions_enviar_eventos import obtener_alertas, generar_destinatario, enviar_correo_html, saludo_inicial_hora
 
 # Leer configuración desde YAML
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -126,6 +126,10 @@ def guardar_como_html(html, nombre_archivo="alertas.html"):
 
 if __name__ == "__main__":
     # Obtener alertas urgentes
+    remitente = config["email"]["remitente"]
+    clave = config["email"]["smtp_password"]
+    destinatarios = config["email"]["destinatarios"]
+
     señal_deficientes_urgentes, interferencias_urgentes = obtener_alertas(
         url_alertas_urgentes=DB_API_URL,
         horas_atras=args.hours_ago,
@@ -143,3 +147,13 @@ if __name__ == "__main__":
 
     mensaje_señales = generar_mensaje_correo(crear_tabla_señales, "señal deficiente", empresa)
     mensaje_interferencias = generar_mensaje_correo(crear_tabla_interferencias, "interferencias", empresa)
+
+
+    enviar_correo_html(
+        remitente=remitente,
+        clave=clave,
+        destinatarios=destinatarios,
+        asunto=f"Alertas y alarmas de {empresa}",
+        mensaje=mensaje_señales,
+    )
+    

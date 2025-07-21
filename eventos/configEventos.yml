@@ -25,11 +25,11 @@ whatsapp:
     #id_default: ["+56977566595"]
 
 email:
-  smtp_server: 'smtp.TU_SERVIDOR_SMTP.com'
-  smtp_port: 587
-  sender_email: 'TU_EMAIL_AQUI'
-  sender_password: 'TU_PASSWORD_O_TOKEN_AQUI'
-  recipients: ['EMAIL1_AQUI', 'EMAIL2_AQUI']
+  smtp_server: 'smtp.gmail.com'
+  smtp_puerto: 587
+  remitente: 'ccarmonar@hcglsa.com'
+  smtp_password: 'rxnvhmpucetngmcj'
+  destinatarios: ["ccarmona@hcglsa.com", "ci.carmona.rodriguez@gmail.com"]
 
 telegram:
   token: 'TU_TELEGRAM_BOT_TOKEN_AQUI'
