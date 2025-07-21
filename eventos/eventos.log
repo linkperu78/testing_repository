@@ -1,0 +1,166 @@
+Fecha de inicio: 2025-07-21T17:26:02, Fecha de fin: 2025-07-21T17:32:02, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T17:26:02&end_date=2025-07-21T17:32:02&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 0
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T17:26:02&end_date=2025-07-21T17:32:02&limit=1000&offset=0
+None None
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 0 eventos. URL: http://localhost:8000/eventos/add_list
+[]
+No hay eventos para insertar
+Fecha de inicio: 2025-07-21T17:41:01, Fecha de fin: 2025-07-21T17:47:01, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T17:41:01&end_date=2025-07-21T17:47:01&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 0
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T17:41:01&end_date=2025-07-21T17:47:01&limit=1000&offset=0
+None None
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 0 eventos. URL: http://localhost:8000/eventos/add_list
+[]
+No hay eventos para insertar
+Fecha de inicio: 2025-07-21T17:56:01, Fecha de fin: 2025-07-21T18:02:01, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T17:56:01&end_date=2025-07-21T18:02:01&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 0
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T17:56:01&end_date=2025-07-21T18:02:01&limit=1000&offset=0
+None None
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 0 eventos. URL: http://localhost:8000/eventos/add_list
+[]
+No hay eventos para insertar
+Fecha de inicio: 2025-07-21T18:11:02, Fecha de fin: 2025-07-21T18:17:02, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T18:11:02&end_date=2025-07-21T18:17:02&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 0
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T18:11:02&end_date=2025-07-21T18:17:02&limit=1000&offset=0
+Empty DataFrame
+Columns: [id, ip, fecha, snr, link_radio, avg_power, ifresults_metricas, snr_h]
+Index: [] Empty DataFrame
+Columns: [id, ip, fecha, snr, link_radio, avg_power, ifresults_metricas, snr_v]
+Index: []
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 0 eventos. URL: http://localhost:8000/eventos/add_list
+[]
+No hay eventos para insertar
+Fecha de inicio: 2025-07-21T18:26:02, Fecha de fin: 2025-07-21T18:32:02, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T18:26:02&end_date=2025-07-21T18:32:02&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 1
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T18:26:02&end_date=2025-07-21T18:32:02&limit=1000&offset=0
+Empty DataFrame
+Columns: [id, ip, fecha, snr, link_radio, avg_power, ifresults_metricas, snr_h]
+Index: [] Empty DataFrame
+Columns: [id, ip, fecha, snr, link_radio, avg_power, ifresults_metricas, snr_v]
+Index: []
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 1 eventos. URL: http://localhost:8000/eventos/add_list
+[   {   'detalle': {'latencia': 1488.344970703125},
+        'estado': 'Alarma',
+        'fecha': '2025-07-21T18:30:00',
+        'ip': '192.168.19.27',
+        'nodo': 'ap',
+        'problema': 'Señal deficiente',
+        'recurrencia': 1,
+        'urgente': True}]
+Fecha de inicio: 2025-07-21T18:41:02, Fecha de fin: 2025-07-21T18:47:02, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T18:41:02&end_date=2025-07-21T18:47:02&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 0
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T18:41:02&end_date=2025-07-21T18:47:02&limit=1000&offset=0
+Empty DataFrame
+Columns: [id, ip, fecha, snr, link_radio, avg_power, ifresults_metricas, snr_h]
+Index: [] Empty DataFrame
+Columns: [id, ip, fecha, snr, link_radio, avg_power, ifresults_metricas, snr_v]
+Index: []
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 0 eventos. URL: http://localhost:8000/eventos/add_list
+[]
+No hay eventos para insertar
+Fecha de inicio: 2025-07-21T18:56:01, Fecha de fin: 2025-07-21T19:02:01, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T18:56:01&end_date=2025-07-21T19:02:01&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 0
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T18:56:01&end_date=2025-07-21T19:02:01&limit=1000&offset=0
+None None
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 0 eventos. URL: http://localhost:8000/eventos/add_list
+[]
+No hay eventos para insertar
+Fecha de inicio: 2025-07-21T19:11:01, Fecha de fin: 2025-07-21T19:17:01, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T19:11:01&end_date=2025-07-21T19:17:01&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 0
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T19:11:01&end_date=2025-07-21T19:17:01&limit=1000&offset=0
+Empty DataFrame
+Columns: [id, ip, fecha, snr, link_radio, avg_power, ifresults_metricas, snr_h]
+Index: [] Empty DataFrame
+Columns: [id, ip, fecha, snr, link_radio, avg_power, ifresults_metricas, snr_v]
+Index: []
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 0 eventos. URL: http://localhost:8000/eventos/add_list
+[]
+No hay eventos para insertar
+Fecha de inicio: 2025-07-21T19:26:02, Fecha de fin: 2025-07-21T19:32:02, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T19:26:02&end_date=2025-07-21T19:32:02&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 1
+Latencias mayores a 200 ms: 1
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T19:26:02&end_date=2025-07-21T19:32:02&limit=1000&offset=0
+None None
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 2 eventos. URL: http://localhost:8000/eventos/add_list
+[   {   'detalle': {'latencia': 179.30299377441406},
+        'estado': 'Alerta',
+        'fecha': '2025-07-21T19:30:00',
+        'ip': '192.168.19.23',
+        'nodo': 'ap',
+        'problema': 'Señal deficiente',
+        'recurrencia': 1,
+        'urgente': False},
+    {   'detalle': {'latencia': 1492.073974609375},
+        'estado': 'Alarma',
+        'fecha': '2025-07-21T19:30:00',
+        'ip': '192.168.19.27',
+        'nodo': 'ap',
+        'problema': 'Señal deficiente',
+        'recurrencia': 1,
+        'urgente': False}]
+Fecha de inicio: 2025-07-21T19:41:02, Fecha de fin: 2025-07-21T19:47:02, Limit: 1000, Offset: 0, Intervalo de recurrencia: 15
+El script se ejecutara en 30 segundos
+http://localhost:8000/latencia/get_poor_latency?start_date=2025-07-21T19:41:02&end_date=2025-07-21T19:47:02&limit=1000&offset=0
+Datos de latencia obtenidos.
+Latencias entre 100 y 200 ms: 0
+Latencias mayores a 200 ms: 0
+http://localhost:8000/cambium_data/get?start_date=2025-07-21T19:41:02&end_date=2025-07-21T19:47:02&limit=1000&offset=0
+None None
+No se pudo obtener datos de Cambium (SNR H).
+No se pudo obtener datos de Cambium (SNR V).
+Insertando 0 eventos. URL: http://localhost:8000/eventos/add_list
+[]
+No hay eventos para insertar

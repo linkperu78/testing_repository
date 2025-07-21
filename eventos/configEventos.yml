@@ -27,10 +27,13 @@ whatsapp:
 email:
   smtp_server: 'smtp.gmail.com'
   smtp_puerto: 587
-  remitente: 'ccarmonar@hcglsa.com'
+  remitente: 'ccarmona@hcglsa.com'
   smtp_password: 'rxnvhmpucetngmcj'
-  destinatarios: ["ccarmona@hcglsa.com", "ci.carmona.rodriguez@gmail.com"]
-
+  destinatarios: ["rxvega@collahuasi.cl", "heveliz@collahuasi.cl", "ginunez@collahuasi.cl", "darivera@collahuasi.cl", "teamautomatizacionmina@collahuasi.cl"]
+  con_copia: ["ccastillo@hcglsa.com", "ccarmona@hcglsa.com"]
+  #destinatarios: ["ci.carmona.rodriguez@gmail.com"]
+  #con_copia: ["ccarmona@hcglsa.com"]
+  
 telegram:
   token: 'TU_TELEGRAM_BOT_TOKEN_AQUI'
   chat_id: 'TU_CHAT_ID_AQUI'

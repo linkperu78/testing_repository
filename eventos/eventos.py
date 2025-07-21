@@ -20,7 +20,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 with open(f"{script_dir}/configEventos.yml", "r") as ymlfile:
     config = yaml.safe_load(ymlfile)
 
-start_date_default = (datetime.now() - timedelta(minutes=2)).strftime('%Y-%m-%dT%H:%M:%S')
+start_date_default = (datetime.now() - timedelta(minutes=4)).strftime('%Y-%m-%dT%H:%M:%S')
 end_date_default = (datetime.now() + timedelta(minutes=2)).strftime('%Y-%m-%dT%H:%M:%S')
 
 parser = argparse.ArgumentParser(description="Script para clustering y generación de heatmaps.")
@@ -72,7 +72,7 @@ else:
     for d in latencias_100_200:
         fecha_evento = round_to_nearest_quarter_hour(d["fecha"], return_as_string=True, iso_format_string=True)
         recurrencia = calcular_recurrencia(url_eventos_previos=url_eventos_previos, ip=d["ip"], fecha_evento=fecha_evento, tipo_evento="Señal Deficiente", intervalo_recurrencia=intervalo_recurrencia)
-        urgente = recurrencia >= 4  # Marcar como urgente si recurrencia >= 3
+        urgente = recurrencia >= 3  # Marcar como urgente si recurrencia >= 3
         eventos.append({
             "ip": d["ip"],
             "fecha": fecha_evento,
@@ -88,7 +88,7 @@ else:
     for d in latencias_mayores_200:
         fecha_evento = round_to_nearest_quarter_hour(d["fecha"], return_as_string=True, iso_format_string=True)
         recurrencia = calcular_recurrencia(url_eventos_previos=url_eventos_previos, ip=d["ip"], fecha_evento=fecha_evento, tipo_evento="Señal Deficiente", intervalo_recurrencia=intervalo_recurrencia)
-        urgente = recurrencia >= 0
+        urgente = recurrencia >= 3
         eventos.append({
             "ip": d["ip"],
             "fecha": fecha_evento,
