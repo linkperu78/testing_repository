@@ -120,25 +120,5 @@ def mensaje_chat_gpt(client, mensaje, is_windows=False):
 
 
 
-def send_whatsapp_message_mudslide(id, mensaje, timeout=10):
-    """Envía un mensaje a un usuario o grupo de WhatsApp usando Mudslide."""
-    env = os.environ.copy()
-    env["NODE_OPTIONS"] = "--experimental-global-webcrypto"
-
-    # 🔹 Usar `--` antes del mensaje para evitar problemas con `-`
-    #comando = f'NODE_OPTIONS=--experimental-global-webcrypto mudslide send {id} -- "{mensaje}"'
-    #comando = f'NODE_OPTIONS=--experimental-global-webcrypto mudslide send {id} -- "Prueba de mensaje"'
-    comando = f'npx mudslide@latest send {id} "{mensaje}"'
-    print(f"Comando a ejecutar: {comando}")
-
-    try:
-        resultado = subprocess.run(comando, shell=True, env=env, capture_output=True, text=True, check=True, timeout=timeout)
-        print(f"✅ Mensaje enviado correctamente a {id}")
-
-    except subprocess.TimeoutExpired:
-        raise TimeoutError(f"❌ Timeout: No se recibió respuesta de WhatsApp en {timeout} segundos para {id}.")
-    except subprocess.CalledProcessError as error:
-        print(f"❌ Error al enviar mensaje a {id}: {error.stderr}")
-
 
 

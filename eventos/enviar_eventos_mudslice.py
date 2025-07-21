@@ -10,7 +10,8 @@ from time import sleep
 from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from openai import OpenAI
-from functions_eventos import DB_API_URL, api_request, send_whatsapp_message_mudslide, mensaje_chat_gpt
+from functions_eventos import DB_API_URL, api_request, mensaje_chat_gpt
+from functions_enviar_eventos import obtener_alertas, generar_destinatario, enviar_whatsapp_mudslide, saludo_inicial_hora
 
 # Leer configuración desde YAML
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -39,43 +40,7 @@ MUDSLICE_ID_LIST = config['whatsapp']['mudslice'].get(mudslice_id, [])
 api_key='API_KEY'
 client = OpenAI(api_key=api_key)
 
-
-def obtener_alertas():
-    """Consulta la API para obtener alertas urgentes."""
-    now = datetime.now() - timedelta(hours=args.hours_ago, minutes=args.minutes_ago)
-    now_str = now.strftime("%Y-%m-%dT%H:%M:%S")  # Convertir a formato ISO 8601
-
-    url_alertas = urljoin(DB_API_URL, config["api"]["eventos"]["urgentes"]) + f"?fecha={now_str}"
-    print(url_alertas)
-    #url_alertas = urljoin(DB_API_URL, config["api"]["eventos"]["urgentes"]) + f"?fecha=2025-03-01T00:00:00"
-    #print(url_alertas)
-    alertas = api_request(url_alertas, dataframe=False)
-
-    if not alertas:
-        print("No hay alertas urgentes.")
-        sys.exit(0)
-
-    # Clasificar alertas
-    señal_deficientes = [i for i in alertas if "señal deficiente" in i.lower()]
-    interferencias = [i for i in alertas if "interferencia" in i.lower()]
-
-    return señal_deficientes, interferencias
-
-def generar_destinatario(numero):
-    if numero == "+56977566595":
-        return "Cristobal"
-    elif numero == "120363027104819888@g.us":
-        return "Collahuasi"
-    elif numero == "+56971083001":
-        return "Ricardo"
-    elif numero == "+56982280571":
-        return "Hector Veliz"
-    elif numero == "+56976426949":
-        return "Daniel"
-    elif numero == "+56939496396":
-        return "equipo del turno de automatizacion de la mina"
-    else:
-        return "Collahuasi"  
+url_alertas_urgentes = urljoin(DB_API_URL, config["api"]["eventos"]["urgentes"])
 
 
 def generar_mensaje_whatsapp(alertas, tipo_alerta, empresa):
@@ -89,8 +54,7 @@ def generar_mensaje_whatsapp(alertas, tipo_alerta, empresa):
         valor = "interferecia"
         
     mensaje_prompt = f"""
-    Eres un asistente que generará un informe breve para WhatsApp sobre {tipo_alerta}. Estas alertas las detecta un producto de software de HCG Group llamado "Smartlink" el cual es un software para monitoreo de equipos de telecomunicaciones en faenas mineras. En cuestion haras el resumen del turno, de las ultimas 8 horas.
-    
+    Eres un asistente que generará un informe breve para WhatsApp sobre {tipo_alerta}. Estas alertas las detecta un producto de software de HCG-GROUP llamado "Smartlink" el cual es un software para monitoreo de equipos de telecomunicaciones en faenas mineras. En cuestion haras el resumen del turno, de las ultimas 8 horas.
     
     Recuerda ser cordial y presentarte brevemente (SIN SALUDAR PORQUE EL SALUDO YA SE HACE ANTES DE QUE TE LLEGUE ESTA INFO A TI), en modo de introduccion. En la introduccion menciona que el mensaje proviene de Smartlink de HCG-Group para ayudar a {empresa} (solo menciona esto pero en tus palabras no agreges nada mas que sea redundante), y tambien menciona el para que es este mensaje. Se breve. Comienza con algo asi de "Este es un mensaje de "
     
@@ -114,13 +78,6 @@ def generar_mensaje_whatsapp(alertas, tipo_alerta, empresa):
 
     return mensaje_chat_gpt(client=client, mensaje=mensaje_prompt)
 
-def saludo_inicial_hora(hora):
-     if 8 <= hora < 12:
-         return "Buenos dias"
-     elif 12 <= hora <= 20:
-         return "Buenas tardes"
-     else:
-         return "Buenas noches"
 
 
 def enviar_mensajes_whatsapp(mensaje, tipo_alerta, mudslide_id, destinatario, introduccion):
@@ -136,11 +93,11 @@ def enviar_mensajes_whatsapp(mensaje, tipo_alerta, mudslide_id, destinatario, in
         # Intentar enviar con un timeout de 10 segundos
         mensaje = f"{introduccion}.\n{mensaje}"
         
-        send_whatsapp_message_mudslide(mudslide_id, mensaje, timeout=60)
-        print(f"✅ Mensaje de {tipo_alerta} enviado correctamente a {mudslide_id}")
+        enviar_whatsapp_mudslide(mudslide_id, mensaje, timeout=60)
+        print(f"✅ Mensaje de {tipo_alerta} enviado correctamente a {mudslide_id} - {destinatario}")
 
     except TimeoutError:
-        print(f"⚠️ Timeout: WhatsApp no respondió en 10 segundos para {mudslide_id}.")
+        print(f"⚠️ Timeout: WhatsApp no respondió en 10 segundos para {mudslide_id} - {destinatario}. Problemas con mudslide o conexión.")
     except Exception as e:
         print(f"❌ Error al enviar mensaje a {mudslide_id}: {e}")
     sleep(2)  # Esperar entre mensajes para evitar bloqueos de WhatsApp
@@ -148,7 +105,11 @@ def enviar_mensajes_whatsapp(mensaje, tipo_alerta, mudslide_id, destinatario, in
 
 # 🟢 **Ejecutar el flujo**
 if __name__ == "__main__":
-    señal_deficientes, interferencias = obtener_alertas()
+    señal_deficientes, interferencias = obtener_alertas(
+        url_alertas=DB_API_URL,
+        horas_atras=args.hours_ago,
+        minutos_atras=args.minutes_ago,
+    )
     hora_actual = datetime.now().hour
     saludo_inicial = saludo_inicial_hora(hora_actual)
     mensaje_señales = generar_mensaje_whatsapp(señal_deficientes, "señal deficiente", empresa)
