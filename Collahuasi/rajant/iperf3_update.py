@@ -1,6 +1,8 @@
 from smartlink.global_utils import FOLDER_OUTPUT
-from smartlink.http_utils   import DB_API_URL, get_request_to_url_with_filters
+from smartlink.models.rajant_performance_models import rajant_performance
+from smartlink.http_utils   import DB_API_URL, get_request_to_url_with_filters, post_request_to_url_model_array
 from bcapi_utils            import iperf3_broker
+
 import pandas as pd
 import traceback
 import argparse
@@ -16,12 +18,10 @@ output_file     = os.path.join(FOLDER_OUTPUT, "iperf3_result.csv")
 
 # Definición de argumentos
 _DEBUG_MODE = False
-parser = argparse.ArgumentParser(description="Script IPERF3 test performance")
-
-# Argumento opcional
-parser.add_argument('-d', '--debug', action='store_true', help='Habilita el modo debug')
-parser.add_argument('-t', '--time-scan', type=int, default=15, help='Tiempo base [s] de duracion del Test Performance / IPERF3')
-parser.add_argument('-b', '--bias', type=float, default=1.0, help='El valor minimo [Mbps] para ser considerado exitoso durante el primer escaneo')
+parser = argparse.ArgumentParser(description="Script IPERF3 test performance with MariaDB")
+parser.add_argument('-d', '--debug', action='store_true', help='Enable debug mode')
+parser.add_argument('-t', '--time-scan', type=int, default=15, help='Scan interval time [s] in seconds')
+parser.add_argument('-b', '--bias', type=float, default=1.0, help='El valor minimo [Mbps] para ser considerado exitoso')
 
 # Lectura de argumentos
 args = parser.parse_args()
@@ -33,22 +33,50 @@ BIAS_MIN_BANDWIDTH  = args.bias
 INVENTORY_URL   = DB_API_URL + "inventario/get"
 KEYNAME_SERVER  = "server_bcapi"
 ROLE_RAJANT     = "co"
+URL_POST_DATA   = DB_API_URL + "iperf3/add_list"
 CSV_COL_NAMES   = ["cliente", "servidor", "latencia", "send_Mbps", "send_coreU", "rec_Mbps", "rec_coreU", "fecha"]
+FIELD_INDEX = {
+    "ip": 0,         # cliente
+    "server": 1,     # servidor
+    "latencia": 2,   # latencia
+    "tx_bw": 3,      # send_Mbps
+    "tx_core": 4,    # send_coreU
+    "rx_bw": 5,      # rec_Mbps
+    "rx_core": 6,    # rec_coreU
+    "fecha": 7       # fecha
+}
 
-def get_result_iperf3(_client, _server, _role = "co", _timeout = 5, _scantime = 10, _debug = False) -> list:
+def get_result_iperf3(_client, _server, _role_rajant = "co", _timeout = 5, scantime = 10, _debug = _DEBUG_MODE) -> list:
     _client_broker = iperf3_broker(
         ip_cliente  = _client,
-        role        = _role,
+        role        = _role_rajant,
         timeout     = _timeout,
         debug_mode  = _debug
     )
     
     resultado_temp  = _client_broker.start_test_iperf3(
-        ip_server_target    = _server,
-        duration_time       = _scantime
+        ip_server_target = _server,
+        duration_time    = scantime
     )
 
     return resultado_temp
+
+def convert_array_to_model(input_data_array: list) -> rajant_performance:
+    data_array = [-1 if _value == "-" else _value for _value in input_data_array]
+    return rajant_performance(
+        ip=data_array[FIELD_INDEX["ip"]],
+        fecha=data_array[FIELD_INDEX["fecha"]],
+        server=data_array[FIELD_INDEX["server"]],
+        latencia=data_array[FIELD_INDEX["latencia"]],
+        bandwidth={
+            "Tx": data_array[FIELD_INDEX["tx_bw"]],
+            "Rx": data_array[FIELD_INDEX["rx_bw"]],
+        },
+        coreU={
+            "Tx": data_array[FIELD_INDEX["tx_core"]],
+            "Rx": data_array[FIELD_INDEX["rx_core"]],
+        }
+    )
 
 
 """ - - - - - - - - - - -  PROGRAMA PRINCIPAL  - - - - - - - - - - - """
@@ -158,13 +186,15 @@ if __name__ == "__main__":
         ## - - - - - - - - EVALUACION DE RESULTADOS VACIOS - - - - - - 
         for a in range(2, 4): # [2, 3]
             if not_connected:
-                print(f"\n {a} Eval: Reevaluando el 'valor' del bandwidth de {len(not_connected)} equipos Rajant")
+                print(f"\n ○ ○ {a}° Eval: Reevaluando el 'valor' del bandwidth de {len(not_connected)} equipos Rajant")
             
             still_not_connected = []
             
             for _client, _server in not_connected:
-                resultado_temp  = get_result_iperf3(_client, _server,
-                                                    _timeout     = 5, 
+                resultado_temp  = get_result_iperf3(_client, 
+                                                    _server,
+                                                    _role       = ROLE_RAJANT,
+                                                    _timeout    = 5, 
                                                     scantime    = BASE_TIME_SCAN,
                                                     _debug      = _DEBUG_MODE)
                 _evaluacion = resultado_temp[2]
@@ -177,9 +207,29 @@ if __name__ == "__main__":
 
             not_connected = still_not_connected.copy()
 
+        if _DEBUG_MODE:
+            print("\n Valores finales obtenidos")
+            for _, row in df_iperf3_result.iterrows():
+                print(f" \t- - - - - - -\n{row}")
+        
+        ## Sobreescribimos el archivo con los datos finales
         df_iperf3_result.to_csv(output_file, index = False)
-        print(f"Datos almacenados en {output_file}")
 
+        ## Preparamos los datos obtenidos en una lista de Model para añadirlos en la base de datos
+        list_models_to_storage = [
+            convert_array_to_model(row.tolist())
+            for _, row in df_iperf3_result.iterrows()
+        ]
+
+        ## Enviamos los datos a la base de datos mediante el uso de Smartlink API
+        post_request_to_url_model_array(
+            url = URL_POST_DATA,
+            timeout = 5,
+            array_model_to_post = list_models_to_storage,
+            _debug = _DEBUG_MODE
+        )
+
+        print(f"FINALIZADO")
 
     except Exception as e:
         print(f"Error en iperf3_mariadb.py =\n{e}")
