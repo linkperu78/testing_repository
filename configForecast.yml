@@ -1,0 +1,92 @@
+inventario_pmp_url : /inventario/get/tipo/PMP/
+inventario_pmp_ap_url : /inventario/get/tipo/PMP-AP/
+inventario_pmp_sm_url : /inventario/get/tipo/PMP-SM/
+
+cambium_data_ip_url_base : /cambium_data/get_ip/
+mimosa_data_ip_url_base : /mimosa_data/get_ip/
+
+
+
+predicciones_list_add: /predicciones/add_list/
+db_api_url: http://localhost:8000/
+
+rx:
+  neuralprophet_parameters:
+    n_forecasts: 3
+    growth: "off"
+    yearly_seasonality: false
+    weekly_seasonality: false
+    daily_seasonality: false
+    n_lags: 5
+    #num_hidden_layers: 1  # Valor por defecto
+    #d_hidden: 64  # Valor por defecto
+    learning_rate: 0.002
+    #optimizer: "AdamW"  # Valor por defecto
+    #ar_reg: 0.0  # Valor por defecto
+    normalize: "minmax"
+    epochs: 180
+    #drop_missing: false  # Valor por defecto
+snr_v:
+  neuralprophet_parameters:
+    n_forecasts: 3
+    growth: "off"
+    yearly_seasonality: false
+    weekly_seasonality: false
+    daily_seasonality: false
+    n_lags: 5
+    #num_hidden_layers: 1  # Valor por defecto
+    #d_hidden: 64  # Valor por defecto
+    learning_rate: 0.002
+    #optimizer: "AdamW"  # Valor por defecto
+    #ar_reg: 0.0  # Valor por defecto
+    normalize: "minmax"
+    epochs: 180
+    #drop_missing: false  # Valor por defecto
+snr_h:
+  neuralprophet_parameters:
+    n_forecasts: 3
+    growth: "off"
+    yearly_seasonality: false
+    weekly_seasonality: false
+    daily_seasonality: false
+    n_lags: 5
+    #num_hidden_layers: 1  # Valor por defecto
+    #d_hidden: 64  # Valor por defecto
+    learning_rate: 0.002
+    #optimizer: "AdamW"  # Valor por defecto
+    #ar_reg: 0.0  # Valor por defecto
+    normalize: "minmax"
+    epochs: 180
+    #drop_missing: false  # Valor por defecto
+airrx:
+  neuralprophet_parameters:
+    n_forecasts: 3
+    growth: "off"
+    yearly_seasonality: false
+    weekly_seasonality: false
+    daily_seasonality: false
+    n_lags: 5
+    #num_hidden_layers: 1  # Valor por defecto
+    #d_hidden: 64  # Valor por defecto
+    learning_rate: 0.002
+    #optimizer: "AdamW"  # Valor por defecto
+    #ar_reg: 0.0  # Valor por defecto
+    normalize: "minmax"
+    epochs: 180
+    #drop_missing: false  # Valor por defecto
+per:
+  neuralprophet_parameters:
+    n_forecasts: 3
+    growth: "off"
+    yearly_seasonality: false
+    weekly_seasonality: false
+    daily_seasonality: false
+    n_lags: 5
+    #num_hidden_layers: 1  # Valor por defecto
+    #d_hidden: 64  # Valor por defecto
+    learning_rate: 0.002
+    #optimizer: "AdamW"  # Valor por defecto
+    #ar_reg: 0.0  # Valor por defecto
+    normalize: "minmax"
+    epochs: 180
+    #drop_missing: false  # Valor por defecto
