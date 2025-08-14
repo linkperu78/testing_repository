@@ -195,41 +195,23 @@ function comprobarHora() {
 }
 
 setInterval(() => {
-  comprobarHora();
-  // precharge.getAllDataGestor();
-  // precharge.getAllDataIPS2();
+  precharge.getClientStatusData();
+  precharge.getAllTopologyData();
+  precharge.getAllOperabilityLastDay();
+  precharge.getAllOperability();
+  precharge.preChargeDataKPI("latency");
+  precharge.preChargeDataKPI("quality_lap");
+  precharge.preChargeDataKPI("quality_snr");
+  precharge.preChargeDataKPI("operability");
+  precharge.preChargeDataKPI("temp_inst");
 }, 60000);
 
-setTimeout(() => {
-  getDataCharge();
-  getDBSTATUS();
-  getCostsData();
-  getKpiCostData();
-  getTopologyStatus();
-  // precharge.getAllTopologyData();
-}, 100);
-
-// setTimeout(() => {
-//   const subscriber = zmq.socket("sub");
-//   subscriber.connect("tcp://localhost:5555");
-//   subscriber.subscribe(""); // Suscribirse a todos los mensajes
-
-//   wss.on("connection", (ws) => {
-//     console.log("Cliente conectado");
-
-//     // Enviar mensajes al cliente cuando lleguen por ZeroMQ
-//     subscriber.on("message", (message) => {
-//       ws.send(message.toString());
-//     });
-
-//     // Manejar la desconexión del cliente
-//     ws.on("close", () => {
-//       console.log("Cliente desconectado");
-//     });
-//   });
-
-//   console.log("Servidor WebSocket escuchando en ws://localhost:2385");
-// }, 1000);
+setInterval(() => {
+  precharge.getAllLatLngPMPSM();
+  precharge.getAllLatLngRAJANT();
+  precharge.getAllWirelessData();
+  precharge.getAllWiredData();
+}, 300000);
 
 const httpsServer = https.createServer(credentials, app);
 
