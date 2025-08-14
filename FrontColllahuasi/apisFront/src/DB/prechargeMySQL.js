@@ -58,7 +58,7 @@ async function getAllLatLngRAJANT() {
   conexion.query(
     `SELECT a.ip, b.tag AS name, b.tipo, DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') as fecha,  a.latitud, a.longitud
     FROM ubicacion_gps a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha > Now() - INTERVAL 15 MINUTE AND UPPER(b.rol) like '%ACCESO%'
+    WHERE a.fecha > Now() - INTERVAL 1 MINUTE AND UPPER(b.rol) like '%ACCESO%'
     ORDER BY a.fecha DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -83,12 +83,13 @@ async function getAllTopologyData() {
   conexion.query(
     `SELECT a.ip, a.tag AS name, a.marca, a.tipo, a.rol AS subtipo, 
     CASE 
-      WHEN b.latencia >= 0 AND b.latencia < 100 AND b.fecha >= NOW() - INTERVAL 15 MINUTE THEN 'ok'
-      WHEN b.latencia >= 100 AND b.latencia < 200 AND b.fecha >= NOW() - INTERVAL 15 MINUTE THEN 'alert'
-      WHEN b.latencia >= 200 AND b.latencia < 500 AND b.fecha >= NOW() - INTERVAL 15 MINUTE THEN 'alarm'
-      ELSE 'down'
+      WHEN b.latencia >= 0 AND b.latencia < 100 AND b.fecha >= NOW() - INTERVAL 1 MINUTE THEN 'ok'
+      WHEN b.latencia >= 100 AND b.latencia < 200 AND b.fecha >= NOW() - INTERVAL 1 MINUTE THEN 'alert'
+      WHEN b.latencia >= 200 AND b.fecha >= NOW() - INTERVAL 1 MINUTE THEN 'alarm'
+      WHEN b.latencia = -1 AND b.fecha >= NOW() - INTERVAL 1 MINUTE THEN 'down'
+      ELSE 'downs'
     END AS status
-    FROM latencia b INNER JOIN inventario a ON a.ip = b.ip AND b.fecha >= NOW() - INTERVAL 15 MINUTE
+    FROM latencia b INNER JOIN inventario a ON a.ip = b.ip AND b.fecha >= NOW() - INTERVAL 1 MINUTE
     GROUP BY 1,2,3,4,5,6; `,
     async (error, result) => {
       if (error) return console.log(error);
@@ -191,7 +192,7 @@ async function getAllRajantDataLastMinute() {
     FROM rajant_data a 
     INNER JOIN inventario b ON a.ip = b.ip 
     INNER JOIN sensores c ON a.ip = c.ip
-    WHERE a.fecha >= NOW() - INTERVAL 15 MINUTE AND DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') = DATE_FORMAT(c.fecha,'%Y-%m-%d %H:%i:00')
+    WHERE a.fecha >= NOW() - INTERVAL 1 MINUTE AND DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') = DATE_FORMAT(c.fecha,'%Y-%m-%d %H:%i:00')
     ORDER BY a.fecha DESC, a.ip DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -276,15 +277,15 @@ async function getAllCostJRData() {
 async function getDataBaseStatus() {
   conexion.query(
     `SELECT 
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM cambium_data WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS cambium_data, 
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM eventos WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS eventos,
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM latencia WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS latencia,
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM LTE_data WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS LTE_data,
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM predicciones WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS predicciones,
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM rajant_data WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS rajant_data,
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM sensores WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS sensores,
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM servidor_data WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS servidor_data,
-    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM ubicacion_gps WHERE fecha >= NOW() - INTERVAL 15 MINUTE ORDER BY fecha DESC LIMIT 1) AS ubicacion_gps
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM cambium_data WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS cambium_data, 
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM eventos WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS eventos,
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM latencia WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS latencia,
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM LTE_data WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS LTE_data,
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM predicciones WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS predicciones,
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM rajant_data WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS rajant_data,
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM sensores WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS sensores,
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM servidor_data WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS servidor_data,
+    (SELECT CASE WHEN fecha = null THEN 0 ELSE 1 END AS valor FROM ubicacion_gps WHERE fecha >= NOW() - INTERVAL 1 MINUTE ORDER BY fecha DESC LIMIT 1) AS ubicacion_gps
     FROM inventario LIMIT 1;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -297,7 +298,7 @@ async function getCostWiredpeers() {
   await conexion.query(
     `SELECT a.ip, DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.wired AS wireless, b.tag AS name, b.tipo, a.config
     FROM rajant_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha >= NOW() - INTERVAL 15 MINUTE
+    WHERE a.fecha >= NOW() - INTERVAL 1 MINUTE
     ORDER BY a.fecha DESC, a.ip DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -310,7 +311,7 @@ async function getCostWirelesspeers() {
   await conexion.query(
     `SELECT a.ip, DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.wireless, b.tag AS name, b.tipo, a.config
     FROM rajant_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha >= NOW() - INTERVAL 15 MINUTE
+    WHERE a.fecha >= NOW() - INTERVAL 1 MINUTE
     ORDER BY a.fecha DESC, a.ip DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -323,7 +324,7 @@ async function getVirMacServer(ip) {
   conexion.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.ip, mv, CPUActual, CPUFisico, MemoriaActual, MemoriaFisico, DiscoActual, DiscoFisico
     FROM servidor_data a
-    WHERE a.ip = '${ip}' AND a.fecha >= NOW() - INTERVAL 15 MINUTE;`,
+    WHERE a.ip = '${ip}' AND a.fecha >= NOW() - INTERVAL 1 MINUTE;`,
     async (error, result) => {
       if (error) return console.log(error);
       await client.set("infoVirMac-" + ip, JSON.stringify(result));
