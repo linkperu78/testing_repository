@@ -1,0 +1,46 @@
+# configClustering.yml
+# Archivo de configuración original para clustering
+
+# API Configuration
+api:
+  base_url: 'http://192.168.2.223:8000'  # URL base de tu API
+
+gmap:
+  api_key: 'TU_API_KEY_DE_GOOGLE_MAPS_AQUI'
+  
+url_clustering_list_add: /clustering/add_list
+
+# Configuración Parámetros del clustering
+clustering:
+  DBSCAN:
+    eps: 800
+    heatmap_radius: 30 
+
+clustering_offline:
+  DBSCAN:
+    eps: 800 ## En metros
+    # min_samples: 2 
+    heatmap_radius: 30
+
+map_parameters:
+  folium:
+    initial_location:
+      cananea: [30.951323,-110.314860]
+      zaldivar: [-24.215817, -69.076151]
+    initial_zoom: 12
+    heatmap_radius: 10
+    file_name: 'clustering_folium_map.html'
+    tiles_folder: 'tiles'
+
+  gmap:
+    initial_location:
+      cananea: [30.951323,-110.314860]
+      zaldivar: [-24.215817, -69.076151]
+    initial_zoom: 12
+    heatmap_radius: 10
+    file_name: 'clustering_showall_gmap.html'
+
+csv_data:
+  folder_path: C:\Users\RDI-CL\Documents\data\zaldivar\smartlinktelecom
+  df_latency: smartlinktelecom_table_LATENCY.csv
+  df_inventory: smartlinktelecom_table_inventory.csv
