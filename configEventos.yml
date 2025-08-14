@@ -1,0 +1,124 @@
+# Configuracion de APIs y endpoints
+api:
+  eventos:
+    add_list: /eventos/add_list
+    add: /eventos/add
+    get: /eventos/get
+    get_ip: /eventos/get_ip
+    urgentes: /eventos/urgentes
+
+  latencia:
+    get_poor_latency: /latencia/get_poor_latency
+
+  cambium_data:
+    get: /cambium_data/get
+
+# Configuracion de umbrales para determinar urgencia
+umbrales_urgencia:
+  latencia:
+    alerta: 100         # >= 100ms = Alerta
+    alarma: 200         # >= 200ms = Alarma  
+    recurrencia_alerta: 3   # Min recurrencias para Alerta urgente
+    recurrencia_alarma: 2   # Min recurrencias para Alarma urgente
+  
+  interferencia:
+    snr_h:
+      alerta: 20        # <= 20 = Alerta
+      alarma: 15        # <= 15 = Alarma
+      recurrencia_alerta: 2
+      recurrencia_alarma: 2
+    snr_v:
+      alerta: 20        # <= 20 = Alerta
+      alarma: 15        # <= 15 = Alarma
+      recurrencia_alerta: 2
+      recurrencia_alarma: 2
+  
+  temperatura:          # Para futuro uso
+    alerta: 70          # >= 70°C = Alerta
+    alarma: 85          # >= 85°C = Alarma
+    recurrencia_alerta: 2
+    recurrencia_alarma: 1
+
+# Configuracion de WhatsApp
+whatsapp:
+  twilio:
+    account_sid: 'TU_TWILIO_ACCOUNT_SID_AQUI'
+    auth_token: 'TU_TWILIO_AUTH_TOKEN_AQUI'
+    whatsapp_number: 'whatsapp:TU_NUMERO_DE_TWILIO'
+    my_whatsapp_number: 'whatsapp:TU_NUMERO_PERSONAL'
+
+  mudslice:
+    id_collahuasi: ["+56977566595", "120363027104819888@g.us", "+56971083001", "+56982280571", "+56976426949", "+56939496396"]
+    id_test: ["+56977566595"]
+    id_emergencia: ["120363027104819888@g.us", "+56977566595"]
+    #id_default: ["+56977566595"]
+
+# Configuracion de correo electronico
+email:
+  smtp_server: 'smtp.gmail.com'
+  smtp_puerto: 587
+  remitente: 'ccarmona@hcglsa.com'
+  smtp_password: 'rxnvhmpucetngmcj'
+  destinatarios: ["rxvega@collahuasi.cl", "heveliz@collahuasi.cl", "ginunez@collahuasi.cl", "darivera@collahuasi.cl", "teamautomatizacionmina@collahuasi.cl"]
+  con_copia: ["ccastillo@hcglsa.com", "ccarmona@hcglsa.com", "support@hcglsa.com"]
+  #destinatarios: ["ci.carmona.rodriguez@gmail.com"]
+  #con_copia: ["ccarmona@hcglsa.com","support@hcglsa.com"]
+  
+# Configuracion de Telegram (para futuro uso)
+telegram:
+  token: 'TU_TELEGRAM_BOT_TOKEN_AQUI'
+  chat_id: 'TU_CHAT_ID_AQUI'
+
+# Configuracion de base de datos/API
+database:
+  api_url: 'http://localhost:8000/'
+  timeout: 30
+  retry_attempts: 3
+
+# Configuracion general de la aplicacion
+general:
+  timezone: 'America/Santiago'
+  log_level: 'INFO'
+  max_message_length: 4000
+  default_hours_back: 8
+  default_intervalo_recurrencia: 15
+
+# Configuracion de horarios de ejecucion
+schedule:
+  whatsapp:
+    enabled: true
+    hours: [8, 12, 16, 20]  # Horas del dia para envio automatico
+    dias_semana: [1, 2, 3, 4, 5]  # Lunes a Viernes (1=Lunes, 7=Domingo)
+  
+  email:
+    enabled: true
+    hours: [9, 18]  # 9 AM y 6 PM
+    dias_semana: [1, 2, 3, 4, 5]
+
+# Configuracion de empresas/clientes
+empresas:
+  collahuasi:
+    nombre_completo: "Companhia Minera Doha Ines de Collahuasi"
+    nombre_corto: "Collahuasi"
+    timezone: "America/Santiago"
+    mudslice_group: "id_collahuasi"
+    contacto_emergencia: "+56977566595"
+  
+  default:
+    nombre_completo: "Cliente Generico"
+    nombre_corto: "Cliente"
+    timezone: "America/Santiago"
+    mudslice_group: "id_test"
+
+# Configuracion de mensajes personalizados
+mensajes:
+  saludo_personalizado:
+    manhana: "Buenos dias"
+    tarde: "Buenas tardes" 
+    noche: "Buenas noches"
+  
+  firma_automatica: "Este es un mensaje automatizado de Smartlink - HC-GROUP. No responder."
+  
+  templates:
+    whatsapp_intro: "Este es un mensaje de Smartlink de HC-GROUP para ayudar a {empresa}"
+    email_subject: "Alertas y alarmas de {empresa} - {fecha}"
