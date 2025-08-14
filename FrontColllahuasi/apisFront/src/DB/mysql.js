@@ -43,7 +43,7 @@ async function getAlarmToDashBoard(res) {
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.problema AS causa, a.ip, 
     a.detalle, a.estado AS status, b.tag AS name, b.rol AS subtipo, b.tipo, b.marca
     FROM eventos a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha >= NOW() - INTERVAL 15 MINUTE AND a.urgente = 0
+    WHERE a.fecha >= NOW() - INTERVAL 1 MINUTE
     ORDER BY fecha DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -57,7 +57,7 @@ async function getAlarmRecurrentToDashBoard(res) {
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.problema AS causa, a.ip, 
     a.detalle, a.estado AS status, b.tag AS name, b.rol AS subtipo, b.tipo, b.marca, a.recurrencia
     FROM eventos a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha >= NOW() - INTERVAL 6 HOUR AND a.urgente = 1
+    WHERE a.fecha >= NOW() - INTERVAL 1 HOUR AND a.urgente = 1
     ORDER BY fecha DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -104,7 +104,7 @@ async function getAllLatency(res) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') as fecha, a.ip, a.latencia, b.tag AS name, b.tipo, b.rol AS subtipo 
     FROM latencia a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha >= NOW() - INTERVAL 15 MINUTE
+    WHERE a.fecha >= NOW() - INTERVAL 1 MINUTE
     ORDER BY a.fecha DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -148,7 +148,7 @@ async function getAllWirelessDataByIP(res, ip) {
   await pool.query(
     `SELECT a.ip, b.tag AS name, DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.wireless
     FROM rajant_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha > NOW() - INTERVAL 30 DAY AND a.ip = '${ip}'
+    WHERE a.fecha > NOW() - INTERVAL 5 DAY AND a.ip = '${ip}'
     ORDER BY a.fecha ASC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -167,7 +167,7 @@ async function getAllWiredDataByIP(res, ip) {
   pool.query(
     `SELECT a.ip, b.tag AS name, DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.wired
     FROM rajant_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha > NOW() - INTERVAL 30 DAY AND a.ip = '${ip}'
+    WHERE a.fecha > NOW() - INTERVAL 5 DAY AND a.ip = '${ip}'
     ORDER BY a.fecha ASC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -186,7 +186,7 @@ async function getAllTempDataByIP(res, ip) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.ip, a.valores
     FROM sensores a
-    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY
+    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY
     ORDER BY a.fecha ASC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -206,7 +206,7 @@ async function getAllCostDataByIP(res, ip) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.ip, b.tag AS name, a.wired 
     FROM rajant_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY
+    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY
     GROUP BY a.fecha;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -226,7 +226,7 @@ async function getAllCostJRDataByIP(res, ip) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.ip, b.tag AS name, a.wired 
     FROM  rajant_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.fecha > NOW() - INTERVAL 30 DAY a.ip ='${ip}'`,
+    WHERE a.fecha > NOW() - INTERVAL 5 DAY a.ip ='${ip}'`,
     async (error, result) => {
       if (error) return console.log(error);
       await client.set("CostJRData-" + ip, JSON.stringify(result));
@@ -386,7 +386,7 @@ async function getAllLatLngANY() {
     pool.query(
       `SELECT b.ip, b.gpsLat AS latitud, b.gpsLong AS longitud, b.hostname, b.marca, b.tipo, b.padre, a.host_status AS status 
       FROM inventario b INNER JOIN status_history a ON b.ip = a.host_ip
-      WHERE b.gpsLat NOT LIKE '+0%' AND b.gpsLat NOT LIKE '-0%' AND b.gpsLat != '' AND b.gpsLat !='0' AND a.resulttime > NOW() - INTERVAL 15 MINUTE - INTERVAL 2 HOUR;`,
+      WHERE b.gpsLat NOT LIKE '+0%' AND b.gpsLat NOT LIKE '-0%' AND b.gpsLat != '' AND b.gpsLat !='0' AND a.resulttime > NOW() - INTERVAL 1 MINUTE;`,
       (error, result) => {
         if (error) return reject(error);
         resolve(result);
@@ -397,7 +397,7 @@ async function getAllLatLngANY() {
 
 async function getAllLatLngGPSTEST() {
   return new Promise((resolve, reject) => {
-    // WHERE datetime >= NOW() - INTERVAL 15 MINUTE - INTERVAL 1 HOUR
+    // WHERE datetime >= NOW() - INTERVAL 1 MINUTE - INTERVAL 1 HOUR
     pool.query(
       `SELECT b.ip AS ip, b.lat AS latitud, b.lon AS longitud, b.datetime, a.hostname, a.tipo, a.marca, (SELECT c.host_status  FROM status_history c WHERE c.host_ip = a.ip ORDER BY resulttime DESC LIMIT 1) AS status
       FROM gps_test b INNER JOIN inventario a ON b.ip = a.ip 
@@ -441,7 +441,7 @@ async function getPositionHaulTrucks(res, ip) {
   pool.query(
     `SELECT b.latencia, a.ip, DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00") AS fecha, a.latitud,a.longitud  
     FROM ubicacion_gps a INNER JOIN latencia b ON a.ip = b.ip
-    WHERE a.ip = '${ip}' AND a.fecha >= NOW() - INTERVAL 13 HOUR AND DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00") =  DATE_FORMAT(b.fecha, "%Y-%m-%d %H:%i:00") 
+    WHERE a.ip = '${ip}' AND a.fecha >= NOW() - INTERVAL 5 MINUTE AND DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00") =  DATE_FORMAT(b.fecha, "%Y-%m-%d %H:%i:00") 
     ORDER BY a.fecha DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -520,7 +520,7 @@ async function getPositionDrivesRajant(res, ip) {
 //   pool.query(
 //     `SELECT DATE_FORMAT(Datetime, "%Y-%m-%d %H:%i:00") AS fecha, lat, lon, rssi, rsrp, rsrq
 //     FROM tracking
-//     WHERE IP = '${ip}' AND lat != '' AND Datetime >= NOW() - INTERVAL 12 HOUR - INTERVAL 2 HOUR
+//     WHERE IP = '${ip}' AND lat != '' AND Datetime >= NOW() - INTERVAL 12 HOUR
 //     ORDER BY Datetime DESC;`,
 //     async (error, result) => {
 //       if (error) return console.log(error);
@@ -575,7 +575,7 @@ async function getPredTableRXLVLData(ip, res) {
   pool.query(
     `SELECT DATE_FORMAT(fecha, "%Y-%m-%d %H:%i:00") AS fecha, ip, tipo_prediccion AS causa, value AS detalle 
     FROM predicciones 
-    WHERE ip = '${ip}' AND fecha > NOW() - INTERVAL 30 DAY AND UPPER(tipo_prediccion) LIKE ('%RX%')
+    WHERE ip = '${ip}' AND fecha > NOW() - INTERVAL 5 DAY AND UPPER(tipo_prediccion) LIKE ('%RX%')
     ORDER BY fecha DESC 
     LIMIT 10;`,
     async (error, result) => {
@@ -595,7 +595,7 @@ async function getAllRXLVLPredDataByIP(ip, res) {
   pool.query(
     `SELECT DATE_FORMAT(fecha, "%Y-%m-%d %H:%i:00") AS fecha, value AS kpi 
     FROM predicciones 
-    WHERE ip = '${ip}' AND fecha > NOW() - INTERVAL 30 DAY AND UPPER(tipo_prediccion) LIKE ('%RX%') 
+    WHERE ip = '${ip}' AND fecha > NOW() - INTERVAL 5 DAY AND UPPER(tipo_prediccion) LIKE ('%RX%') 
     ORDER BY fecha ASC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -614,7 +614,7 @@ async function getAllRXLVLRealDataByIP(ip, res) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00") AS fecha, link_radio AS kpi 
     FROM cambium_data a
-    WHERE ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY ;`,
+    WHERE ip = '${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY ;`,
     async (error, result) => {
       if (error) return console.log(error);
       await client.set("PredRealData-" + ip, JSON.stringify(result));
@@ -653,7 +653,7 @@ async function getPredTabSNRDataByIP(ip, res) {
   pool.query(
     `SELECT a.tipo_prediccion AS causa, DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, ROUND(a.value,2) AS snr, b.ip, 'predict snr' AS status 
     FROM predicciones a INNER JOIN inventario b ON a.ip = b.ip
-    WHERE UPPER(tipo_prediccion) LIKE '%SNR%' AND a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY
+    WHERE UPPER(tipo_prediccion) LIKE '%SNR%' AND a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY
     ORDER BY a.fecha DESC 
     LIMIT 20;`,
     async (error, result) => {
@@ -674,7 +674,7 @@ async function getPredSNRDataByIP(ip, res) {
   pool.query(
     `SELECT a.tipo_prediccion AS causa, DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, ROUND(value,2) AS snr 
     FROM predicciones a
-    WHERE UPPER(tipo_prediccion)  LIKE '%SNR%' AND a.ip = '${ip}' AND fecha > NOW() - INTERVAL 30 DAY;`,
+    WHERE UPPER(tipo_prediccion)  LIKE '%SNR%' AND a.ip = '${ip}' AND fecha > NOW() - INTERVAL 5 DAY;`,
     async (error, result) => {
       if (error) return console.log(error);
       await client.set("PredPredSNRData-" + ip, JSON.stringify(result));
@@ -692,7 +692,7 @@ async function getRealSNRDataByIP(res, ip) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.snr
     FROM cambium_data a 
-    WHERE ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY;`,
+    WHERE ip = '${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY;`,
     async (error, result) => {
       if (error) return console.log(error);
       await client.set("SNRRealDataByIp-" + ip, JSON.stringify(result));
@@ -732,7 +732,7 @@ async function getAllServerData(res, ip) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.ip, a.info_snmp, b.tag AS name
     FROM servidor_data a INNER JOIN inventario b ON a.ip = b.ip 
-    WHERE a.ip IN (${finalIp}) AND a.fecha >= NOW() - INTERVAL 15 MINUTE
+    WHERE a.ip IN (${finalIp}) AND a.fecha >= NOW() - INTERVAL 1 MINUTE
     GROUP BY 2,3,4 
     ORDER BY 1 DESC,2`,
     async (error, result) => {
@@ -754,7 +754,7 @@ async function getAllServerGraphData(res, ip) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.info_snmp, b.tag AS name
     FROM servidor_data a INNER JOIN inventario b ON a.ip = b.ip
-    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY;`,
+    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY;`,
     async (error, result) => {
       if (error) return console.log(error);
 
@@ -793,7 +793,7 @@ async function getVirMacByIP(res, ip, vm) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, CPUActual, MemoriaActual, DiscoActual, CPUFisico, MemoriaFisico, DiscoFisico
     FROM servidor_data a 
-    WHERE a.ip = '${ip}' AND a.mv = '${vm}' AND a.fecha >= NOW() - INTERVAL 30 DAY;`,
+    WHERE a.ip = '${ip}' AND a.mv = '${vm}' AND a.fecha >= NOW() - INTERVAL 5 DAY;`,
     async (error, result) => {
       if (error) return console.log(error);
 
@@ -811,7 +811,7 @@ async function getAlarmVirMac(res, ip, vm) {
 
   pool.query(
     `SELECT host, nodo, status, causa, detalle, DATE_FORMAT(fecha, "%Y-%m-%d %H:%i:00") AS datetime
-    FROM xsim_events WHERE host = '${ip}' AND causa LIKE '%${vm}%' AND fecha >= NOW() - INTERVAL 30 DAY - INTERVAL 2 HOUR ORDER BY fecha DESC;`,
+    FROM xsim_events WHERE host = '${ip}' AND causa LIKE '%${vm}%' AND fecha >= NOW() - INTERVAL 5 DAY ORDER BY fecha DESC;`,
     async (error, result) => {
       if (error) return console.log(error);
 
@@ -881,7 +881,7 @@ async function getAllOperabilityByIP(ip, res) {
     SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm,
     SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down
     FROM latencia a INNER JOIN inventario c ON a.ip = c.ip  
-    WHERE a.fecha > NOW() - INTERVAL 30 DAY AND a.ip = '${ip}'
+    WHERE a.fecha > NOW() - INTERVAL 5 DAY AND a.ip = '${ip}'
     GROUP BY a.fecha
     ORDER BY a.fecha DESC; `,
     async (error, result) => {
@@ -908,7 +908,7 @@ async function getGraphTopologyData(ip, type, res) {
   const QUERY_TOPOLOGY = {
     latency: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.latencia AS kpi 
     FROM latencia a
-    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY
+    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 5 DAY
     ORDER BY a.fecha ASC; `,
 
     cambium_data: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, 
@@ -916,32 +916,32 @@ async function getGraphTopologyData(ip, type, res) {
     a.ifresults_metricas AS throughput,
     a.snr
     FROM cambium_data a
-    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY 
+    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 5 DAY 
     ORDER BY a.fecha ASC;`,
 
     linkradiohoriz: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.link_radio AS kpi 
     FROM cambium_data a
-    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY 
+    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 5 DAY 
     ORDER BY a.fecha ASC;`,
 
     linkradiovert: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.link_radio AS kpi 
     FROM cambium_data a 
-    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY 
+    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 5 DAY 
     ORDER BY fecha ASC;`,
 
     throughput: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.ifresults_metricas AS kpi 
     FROM cambium_data a  
-    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY  
+    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 5 DAY  
     ORDER BY fecha ASC;`,
 
     wlan: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, wireless AS kpiObj 
     FROM rajant_data a
-    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY
+    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 5 DAY
     ORDER BY a.fecha ASC;`,
 
     snr: `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, snr
     FROM cambium_data a 
-    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY  
+    WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 5 DAY  
     ORDER BY a.fecha ASC;`,
   };
 
@@ -969,7 +969,7 @@ async function getTableTopologyData(ip, res) {
     END AS status,
     DATE_FORMAT(a.fecha, "%Y-%m-%d %H:%i:00") AS fecha 
     FROM latencia a 
-    WHERE a.ip='${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY AND a.latencia >= 100 AND a.latencia <= 500
+    WHERE a.ip='${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY AND a.latencia >= 100 AND a.latencia <= 500
     ORDER BY a.fecha DESC LIMIT 6;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -996,7 +996,7 @@ async function getstatusLogGraph(ip, res) {
       ELSE 'down'
     END AS status
     FROM latencia a 
-    WHERE a.ip = '${ip}' AND a.fecha >= NOW() - INTERVAL 30 DAY 
+    WHERE a.ip = '${ip}' AND a.fecha >= NOW() - INTERVAL 5 DAY 
     ORDER BY a.fecha ASC`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -1016,7 +1016,7 @@ async function getLatencyByEquip(ip, res) {
 
   let queryFinal = `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00')  AS fecha, a.latencia 
   FROM latencia a 
-  WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 15 MINUTE
+  WHERE a.ip LIKE '${ip}' AND a.fecha >= NOW() - INTERVAL 1 MINUTE
   ORDER BY a.fecha DESC`;
 
   pool.query(queryFinal, async (error, result) => {
@@ -1088,7 +1088,7 @@ async function getSNMPDataByIP(res, ip) {
         OID LIKE '%1.3.6.1.2.1.2.2.1.19%' OR
         OID LIKE '%1.3.6.1.2.1.31.1.1.1.10%' OR
         OID LIKE '%1.3.6.1.2.1.31.1.1.1.11%'
-    ) AND Datetime >= NOW() - INTERVAL 30 DAY - INTERVAL 2 HOUR
+    ) AND Datetime >= NOW() - INTERVAL 5 DAY
     ORDER BY Datetime ASC;`,
     async (error, result) => {
       if (error) return console.log(error);
@@ -1119,7 +1119,7 @@ async function getSNMPUpDateDataByIP(res, ip) {
 //   pool.query(
 //     `SELECT host_status AS status
 //     FROM status_history
-//     WHERE host_ip = '${ip}' AND resulttime >= NOW() - INTERVAL 15 MINUTE
+//     WHERE host_ip = '${ip}' AND resulttime >= NOW() - INTERVAL 1 MINUTE
 //     ORDER BY resulttime DESC
 //     LiMIT 1;`,
 //     async (error, result) => {
@@ -1460,7 +1460,7 @@ async function getAllLTEDataGraph(res, ip) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, a.enlaces, a.estado 
     FROM LTE_data a
-    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY;`,
+    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY;`,
     async (error, result) => {
       if (error) return console.log(error);
 
@@ -1504,7 +1504,7 @@ async function getSNMPModemALLDataByIP(res, ip) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha, '%Y-%m-%d %H:%i:00') AS fecha, rssi, rsrp, rsrq, txbytes, rxbytes
     FROM LTE_data a 
-    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 30 DAY;`,
+    WHERE a.ip = '${ip}' AND a.fecha > NOW() - INTERVAL 5 DAY;`,
     async (error, result) => {
       if (error) return console.log(error);
 
@@ -1609,7 +1609,7 @@ async function getStatusHistoryByIP(ip, res) {
   if (response) return res.json(JSON.parse(response));
 
   // FROM latencia a INNER JOIN inventario c ON a.ip = c.ip
-  // WHERE a.fecha > NOW() - INTERVAL 30 DAY
+  // WHERE a.fecha > NOW() - INTERVAL 5 DAY
   // GROUP BY 1,2
   // ORDER BY ok DESC
   pool.query(
@@ -1619,7 +1619,7 @@ async function getStatusHistoryByIP(ip, res) {
     SUM(CASE WHEN a.latencia >= 200 AND a.latencia < 500 THEN 1 ELSE 0 END) AS alarm, 
     SUM(CASE WHEN a.latencia >= 500 OR a.latencia < 0 THEN 1 ELSE 0 END) AS down 
     FROM latencia a INNER JOIN inventario c ON a.ip = c.ip 
-    WHERE a.fecha > NOW() - INTERVAL 30 DAY AND a.ip = '${ip}' 
+    WHERE a.fecha > NOW() - INTERVAL 5 DAY AND a.ip = '${ip}' 
     GROUP BY a.ip, c.tag, c.tipo  
     ORDER BY ok DESC`,
     async (error, result) => {
@@ -1721,7 +1721,7 @@ async function getLast30DaysLTE(res) {
   pool.query(
     `SELECT DATE_FORMAT(a.fecha,'%Y-%m-%d %H:%i:00') AS fecha, a.ip, a.sistema, a.enlaces, a.estado 
     FROM LTE_data a 
-    WHERE a.fecha > Now() - INTERVAL 30 DAY
+    WHERE a.fecha > Now() - INTERVAL 5 DAY
     ORDER BY a.ip ASC;`,
     async (error, result) => {
       if (error) return console.log(error);
