@@ -36,7 +36,7 @@ MUDSLICE_ID_LIST = config['whatsapp']['mudslice'].get(mudslice_id, [])
 
 # Inicializar cliente de OpenAI
 
-api_key='CAMBIAR ESTA COSA A GET ENV'
+api_key='sk-blablabla esto deberia estar en getenv'
 client = OpenAI(api_key=api_key)
 
 

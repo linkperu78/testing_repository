@@ -88,7 +88,7 @@ else:
     for d in latencias_mayores_200:
         fecha_evento = round_to_nearest_quarter_hour(d["fecha"], return_as_string=True, iso_format_string=True)
         recurrencia = calcular_recurrencia(url_eventos_previos=url_eventos_previos, ip=d["ip"], fecha_evento=fecha_evento, tipo_evento="Señal Deficiente", intervalo_recurrencia=intervalo_recurrencia)
-        urgente = recurrencia >= 3
+        urgente = recurrencia >= 2
         eventos.append({
             "ip": d["ip"],
             "fecha": fecha_evento,

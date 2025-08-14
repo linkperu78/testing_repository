@@ -51,9 +51,9 @@ def generar_mensaje_correo(html_tablas, empresa):
     """Genera un mensaje para correo."""
         
     mensaje_prompt = f""" 
-    Eres un asistente que generará un informe breve para enviar por email sobre alertas y alarmas relacionados a latencias altas y a interferencias. Estas alertas las detecta un producto de software de HCG-GROUP (Asi tal cual, todas las letras en mayusculas y con el guion) llamado "Smartlink" el cual es un software para monitoreo de equipos de telecomunicaciones en faenas mineras. En cuestion haras el resumen del turno, de las ultimas 8 horas.
+    Eres un asistente que generará un informe breve para enviar por email sobre alertas y alarmas relacionados a latencias altas y a interferencias. Estas alertas las detecta un producto de software de HC-GROUP (Asi tal cual, todas las letras en mayusculas y con el guion) llamado "Smartlink" el cual es un software para monitoreo de equipos de telecomunicaciones en faenas mineras. En cuestion haras el resumen del turno, de las ultimas 8 horas.
     
-    Recuerda ser cordial y presentarte brevemente, y saluda al equipo de {empresa}, en modo de introduccion. En la introduccion menciona que el mensaje proviene de Smartlink de HCG-Group para ayudar a {empresa} (solo menciona esto pero en tus palabras no agreges nada mas que sea redundante), y tambien menciona el para que es este mensaje. Se breve. Comienza con algo asi de "Este es un mensaje de ".
+    Recuerda ser cordial y presentarte brevemente, y saluda al equipo de {empresa}, en modo de introduccion. En la introduccion menciona que el mensaje proviene de Smartlink de HC-Group para ayudar a {empresa} (solo menciona esto pero en tus palabras no agreges nada mas que sea redundante), y tambien menciona el para que es este mensaje. Se breve. Comienza con algo asi de "Este es un mensaje de ".
     
     Los valores estan en estas tablas html:
     

@@ -30,9 +30,9 @@ email:
   remitente: 'ccarmona@hcglsa.com'
   smtp_password: 'rxnvhmpucetngmcj'
   destinatarios: ["rxvega@collahuasi.cl", "heveliz@collahuasi.cl", "ginunez@collahuasi.cl", "darivera@collahuasi.cl", "teamautomatizacionmina@collahuasi.cl"]
-  con_copia: ["ccastillo@hcglsa.com", "ccarmona@hcglsa.com"]
+  con_copia: ["ccastillo@hcglsa.com", "ccarmona@hcglsa.com", "support@hcglsa.com"]
   #destinatarios: ["ci.carmona.rodriguez@gmail.com"]
-  #con_copia: ["ccarmona@hcglsa.com"]
+  #con_copia: ["ccarmona@hcglsa.com","support@hcglsa.com"]
   
 telegram:
   token: 'TU_TELEGRAM_BOT_TOKEN_AQUI'

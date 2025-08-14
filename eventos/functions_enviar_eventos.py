@@ -15,17 +15,17 @@ from openai import OpenAI
 from functions_eventos import DB_API_URL, api_request, mensaje_chat_gpt
 
 def generar_destinatario(destinatario):
-    if numero == "+56977566595":
+    if destinatario == "+56977566595":
         return "Cristobal"
-    elif numero == "120363027104819888@g.us":
+    elif destinatario == "120363027104819888@g.us":
         return "Collahuasi"
-    elif numero == "+56971083001":
+    elif destinatario == "+56971083001":
         return "Ricardo"
-    elif numero == "+56982280571":
+    elif destinatario == "+56982280571":
         return "Hector Veliz"
-    elif numero == "+56976426949":
+    elif destinatario == "+56976426949":
         return "Daniel"
-    elif numero == "+56939496396":
+    elif destinatario == "+56939496396":
         return "equipo del turno de automatizacion de la mina"
     else:
         return "Collahuasi"  
