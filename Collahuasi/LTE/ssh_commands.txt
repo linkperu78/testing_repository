@@ -1,4 +1,0 @@
-/interface/lte/monitor lte1 once
-/interface print detail
-/interface/lte/print detail
-/interface/lte/at-chat [find] input="AT$GPSACP"
