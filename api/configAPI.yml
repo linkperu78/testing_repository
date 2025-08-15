@@ -1,9 +1,0 @@
-database:
-  pool_name: "mypool"
-  pool_size: 50
-  user: "admin"
-  password: "audio2023"
-  host: "localhost"
-  port: 3306
-  database: "smartlinkDB"
-  pool_reset_connection: False
