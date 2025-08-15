@@ -118,82 +118,6 @@ app.use("/api/GestorHCGLink/configuration", configuration);
 app.use("/api/GestorHCGLink/estadisticas", estadisticas);
 app.use(error);
 
-async function getDataCharge() {
-  precharge.getAllSNRData();
-  precharge.getAllIPS();
-  precharge.getAllLatLngPMPSM();
-  precharge.getAllLatLngRAJANT();
-  precharge.preChargeDataKPI("latency");
-  precharge.preChargeDataKPI("quality_lap");
-  precharge.preChargeDataKPI("quality_snr");
-  precharge.preChargeDataKPI("pack_inst");
-  precharge.preChargeDataKPI("temp_inst");
-  precharge.preChargeDataKPI("wire_inst");
-  precharge.preChargeDataKPI("operability");
-  precharge.preChargeDataKPI("kpisnr");
-  precharge.getAllOperability();
-  precharge.getAllOperabilityLastDay();
-  await precharge.getAllWirelessData();
-  await precharge.getAllWiredData();
-  await precharge.getAllTempData();
-}
-
-async function getTopologyStatus() {
-  precharge.getAllTopologyData();
-  precharge.getAllPredictRXLVLData();
-}
-
-async function getDBSTATUS() {
-  precharge.getDataBaseStatus();
-}
-
-async function getCostsData() {
-  precharge.getAllRajantDataLastMinute();
-  precharge.getLastConectionHaultruck();
-  precharge.getCountLastConectionHaultruck();
-  precharge.getAllCostJRData();
-  precharge.getAllCostData();
-}
-
-async function getKpiCostData() {
-  precharge.getAllHaulTrucksDrive();
-  precharge.getCostWiredpeers();
-  precharge.getCostWirelesspeers();
-}
-
-function comprobarHora() {
-  let currentMinute = new Date().getMinutes();
-
-  if (
-    currentMinute == 1 ||
-    currentMinute == 16 ||
-    currentMinute == 31 ||
-    currentMinute == 46
-  ) {
-    getDataCharge();
-  }
-
-  if (
-    currentMinute == 8 ||
-    currentMinute == 23 ||
-    currentMinute == 38 ||
-    currentMinute == 53
-  ) {
-    getDBSTATUS();
-    getCostsData();
-    getKpiCostData();
-  }
-
-  if (
-    currentMinute == 5 ||
-    currentMinute == 20 ||
-    currentMinute == 35 ||
-    currentMinute == 50
-  ) {
-    getTopologyStatus();
-  }
-}
-
 setInterval(() => {
   precharge.getClientStatusData();
   precharge.getAllTopologyData();
@@ -211,7 +135,9 @@ setInterval(() => {
   precharge.getAllLatLngRAJANT();
   precharge.getAllWirelessData();
   precharge.getAllWiredData();
-}, 300000);
+  precharge.getCostWirelesspeers();
+  precharge.getCostWiredpeers();
+}, 60000);
 
 const httpsServer = https.createServer(credentials, app);
 
