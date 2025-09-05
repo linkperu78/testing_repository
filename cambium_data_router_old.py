@@ -21,13 +21,7 @@ def _is_num(x: Any) -> bool:
         return False
 
 def _to_float_fixed(x: Any) -> Optional[float]:
-    """
-    Devuelve float solo si x es un número "fijo":
-      - int/float válidos -> ok
-      - str numérica -> ok
-      - str JSON -> si decodifica a número -> ok; si lista/dict -> ignorar
-      - lista/dict -> ignorar
-    """
+    # Solo números "fijos": int/float o str-num. Strings JSON -> si decodifica a número, ok; si lista/dict -> None.
     if x is None:
         return None
     if isinstance(x, (int, float)):
@@ -41,14 +35,10 @@ def _to_float_fixed(x: Any) -> Optional[float]:
         except Exception:
             return None
         return float(j) if _is_num(j) else None
-    return None
+    return None  # listas/dicts -> ignorar
 
 def _extract_metric_fixed(raw: Any, key: str) -> Optional[float]:
-    """
-    Extrae la métrica 'key' (p.ej., 'H', 'V', 'rx') SOLO si termina siendo un número fijo.
-    Listas y dicts anidados se ignoran.
-    """
-    # Si viene como string intentar JSON; si no es JSON, puede ser número suelto
+    # Extrae 'H'/'V'/'rx' solo si termina en número fijo. Listas/dicts anidados -> ignorar.
     if isinstance(raw, str):
         s = raw.strip()
         try:
@@ -63,8 +53,7 @@ def _extract_metric_fixed(raw: Any, key: str) -> Optional[float]:
         else:
             for k, v in raw.items():
                 if str(k).lower() == key.lower():
-                    val = v
-                    break
+                    val = v; break
         if val is None or isinstance(val, (list, dict)):
             return None
         return _to_float_fixed(val)
@@ -75,35 +64,29 @@ def _extract_metric_fixed(raw: Any, key: str) -> Optional[float]:
     return _to_float_fixed(raw)
 
 def _classify(metric: str, val: float) -> str:
-    """
-    Clasifica por umbrales:
-      SNR (H/V):  >20 óptimo; [16,20) alerta; [0,16) alarma; <0 alarma
-      RX:  [-70,0] óptimo; [-80,-70) alerta; [-90,-80) alarma; < -90 alarma
-    """
     m = metric.lower()
     if m in ("h", "v"):
         if val > 20:
             return "optimo"
-        if 16 <= val < 20:
+        if val >= 16 and val < 20:
             return "alerta"
-        if 0 <= val < 16:
+        if val >= 0 and val < 16:
             return "alarma"
-        return "alarma"
-    if m == "rx":
-        if -70 <= val <= 0:
+        return "alarma"  # negativos -> alarma
+    elif m == "rx":
+        if val >= -70 and val <= 0:
             return "optimo"
-        if -80 <= val < -70:
+        if val >= -80 and val < -70:
             return "alerta"
-        if -90 <= val < -80:
+        if val >= -90 and val < -80:
             return "alarma"
-        return "alarma"
+        return "alarma"  # < -90 peor que alarma estándar
     return "optimo"
 
-def _pct_of_total(malos: int, total: int) -> float:
-    """Porcentaje de no óptimos respecto del total de mediciones."""
-    if total > 0:
-        return round((malos / total) * 100.0, 2)
-    return 0.0
+def _safe_pct(malos: int, buenos: int) -> float:
+    if buenos > 0:
+        return round((malos / buenos) * 100.0, 2)
+    return 100.0 if malos > 0 else 0.0
 
 # --------------------- Endpoints ---------------------
 
@@ -171,6 +154,7 @@ def get_cambium_by_column(
     return fetch_data_with_single_filter_and_datetime("cambium_data", column, filter_operator, filter_value, start_date, end_date, limit, offset)
 
 
+
 # --------------------- 1) Stats por IP ---------------------
 @router.get("/get_metric_stats_by_ip", summary="Estadísticas por IP (SNR_H / SNR_V / RX) filtrando PMP-SM")
 def get_metric_stats_by_ip(
@@ -212,30 +196,34 @@ def get_metric_stats_by_ip(
         stats: Dict[str, Dict[str, Any]] = {}
         inv: Dict[str, Dict[str, Any]] = {}
         processed = 0
+        mkey = metric
         mkey_l = metric.lower()
 
         for ip, fecha, raw, tag, marca, rol, tipo in cursor.fetchall():
+            # guarda inventario por IP (primer valor no nulo)
             inv.setdefault(ip, {"tag": tag, "marca": marca, "rol": rol, "tipo": tipo})
-            val = _extract_metric_fixed(raw, metric)
+
+            val = _extract_metric_fixed(raw, mkey)
             if val is None:
                 processed += 1
                 continue
 
-            v = float(val)
-            cat = _classify(metric, v)
+            cat = _classify(mkey, float(val))
             s = stats.setdefault(ip, {
                 "total_mediciones": 0, "sum": 0.0, "min": None, "max": None,
-                "alertas": 0, "alarmas": 0
+                "alertas": 0, "alarmas": 0, "buenos": 0
             })
 
             s["total_mediciones"] += 1
-            s["sum"] += v
-            s["min"] = v if s["min"] is None else min(s["min"], v)
-            s["max"] = v if s["max"] is None else max(s["max"], v)
+            s["sum"] += float(val)
+            s["min"] = float(val) if s["min"] is None else min(s["min"], float(val))
+            s["max"] = float(val) if s["max"] is None else max(s["max"], float(val))
             if cat == "alerta":
                 s["alertas"] += 1
             elif cat == "alarma":
                 s["alarmas"] += 1
+            else:
+                s["buenos"] += 1
 
             processed += 1
 
@@ -244,7 +232,8 @@ def get_metric_stats_by_ip(
         for ip, s in stats.items():
             avg = (s["sum"] / s["total_mediciones"]) if s["total_mediciones"] > 0 else None
             malos = s["alertas"] + s["alarmas"]
-            total = s["total_mediciones"]
+            buenos = s["buenos"]
+            pref = mkey_l  # 'h'/'v'/'rx'
 
             row = {
                 "ip": ip,
@@ -253,20 +242,17 @@ def get_metric_stats_by_ip(
                 "rol": inv.get(ip, {}).get("rol"),
                 "tipo": inv.get(ip, {}).get("tipo"),
                 "total_mediciones": s["total_mediciones"],
-                f"promedio_{mkey_l}": None if avg is None else round(avg, 3),
-                f"min_{mkey_l}": None if s["min"] is None else round(s["min"], 3),
-                f"max_{mkey_l}": None if s["max"] is None else round(s["max"], 3),
-                f"total_alertas_{mkey_l}": s["alertas"],
-                f"total_alarmas_{mkey_l}": s["alarmas"],
-                f"porcentaje_no_optimos_{mkey_l}": _pct_of_total(malos, total),
+                f"promedio_{pref}": None if avg is None else round(avg, 3),
+                f"min_{pref}": None if s["min"] is None else round(s["min"], 3),
+                f"max_{pref}": None if s["max"] is None else round(s["max"], 3),
+                f"total_alertas_{pref}": s["alertas"],
+                f"total_alarmas_{pref}": s["alarmas"],
+                f"porcentaje_no_optimos_{pref}": _safe_pct(malos, buenos),
             }
             out.append(row)
 
         # ordenar por max desc
-        out.sort(
-            key=lambda d: (d.get(f"max_{mkey_l}") if d.get(f"max_{mkey_l}") is not None else -1e18),
-            reverse=True
-        )
+        out.sort(key=lambda d: (d.get(f"max_{mkey_l}") if d.get(f"max_{mkey_l}") is not None else -1e18), reverse=True)
 
         return {
             "column": column,
@@ -322,6 +308,8 @@ def get_metric_stats_summary(
         smax = None
         alertas = 0
         alarmas = 0
+        buenos = 0
+        mkey_l = metric.lower()
 
         for ip, fecha, raw in cursor.fetchall():
             val = _extract_metric_fixed(raw, metric)
@@ -339,12 +327,13 @@ def get_metric_stats_summary(
                 alertas += 1
             elif cat == "alarma":
                 alarmas += 1
+            else:
+                buenos += 1
 
         avg = (ssum / cnt) if cnt > 0 else None
         malos = alertas + alarmas
 
-        mkey_l = metric.lower()
-        return {
+        result = {
             "column": column,
             "metric": metric,
             "total_ips": len(ips_set),
@@ -354,8 +343,9 @@ def get_metric_stats_summary(
             f"min_{mkey_l}": None if smin is None else round(smin, 3),
             f"total_alertas_{mkey_l}": alertas,
             f"total_alarmas_{mkey_l}": alarmas,
-            f"porcentaje_no_optimos_{mkey_l}": _pct_of_total(malos, cnt),
+            f"porcentaje_no_optimos_{mkey_l}": _safe_pct(malos, buenos),
         }
+        return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error en metric summary: {str(e)}")
     finally:
